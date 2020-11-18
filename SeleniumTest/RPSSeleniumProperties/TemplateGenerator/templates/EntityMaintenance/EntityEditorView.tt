@@ -1,0 +1,29 @@
+﻿
+    public partial class <#= Model.ViewType #> : View
+    {
+        public <#= Model.ViewType #>(<#= Model.ScreenName #> screen) : base()
+        {
+            this.WebDriver = screen.WebDriver;
+            this.Screen = screen;
+           
+        }
+
+         public void InitializeControls()
+        {
+<# foreach(var control in Model.Controls){ #>
+            <#= control.GenerateObjectInitialization() #> 
+<# } #>
+
+        }
+<# foreach(var control in Model.Controls){ #>
+        <#= control.GenerateObjectDefinition() #> 
+<# } #>
+        public new <#= Model.ScreenName #> Screen { get; set; }
+        public <#= Model.ViewType #> Wait(int seconds)
+        {
+            Thread.Sleep(seconds * 1000);
+            return this;
+        }
+      
+    }
+ 

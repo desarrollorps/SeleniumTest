@@ -1,0 +1,33 @@
+﻿<#@ template language="C#" #>    
+<#@ import namespace="System.Linq" #>
+namespace SeleniumGeneratedClasses.<#= Model.Version #>.<#= Model.Customer #>.<#= Model.Package #>.Services.<#= Model.Service #>
+{
+    public partial class <#= Model.Name #>:Screen
+    {
+        public <#=Model.Name #>():base()
+        {
+            this.URL = "<#= Model.FullType #>";
+            InitViews();
+           
+           
+        }       
+        protected void InitViews()
+        {
+<# foreach(var view in Model.Views){ #>
+            <#= view.GenerateObjectInitialization() #> 
+<# } #>
+<# foreach(var view in Model.Views){ #>
+            <#= view.GenerateObjectInitializeInternals() #> 
+<# } #>           
+        }
+      
+<# foreach(var view in Model.Views){ #>
+            <#= view.GenerateObjectDefinition() #> 
+<# } #>
+    }
+<# foreach(var view in Model.Views){ #>
+            <#= view.GenerateFullClassDefinition() #> 
+<# } #>
+
+
+}

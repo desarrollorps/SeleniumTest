@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CodeDom" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SeleniumHelper\SeleniumHelper.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TemplateGenerator\templates\EntityMaintenance\EntityEditorView.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EntityEditorView.cs</LastGenOutput>
+    </None>
+    <None Update="TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EntityMaintenanceScreen.cs</LastGenOutput>
+    </None>
+    <None Update="TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreenView.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EntityMaintenanceScreenView.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="TemplateGenerator\templates\EntityMaintenance\EntityEditorView.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EntityEditorView.tt</DependentUpon>
+    </Compile>
+    <Compile Update="TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EntityMaintenanceScreen.tt</DependentUpon>
+    </Compile>
+    <Compile Update="TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreenView.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EntityMaintenanceScreenView.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>
