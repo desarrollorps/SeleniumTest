@@ -15,9 +15,18 @@ namespace RPSSeleniumProperties.Interactables
 
         
 
-        public string Read()
+        public T Read(out string value)
         {
-            throw new NotImplementedException();
+            var driver = this.WebDriver;
+            return Read(driver, out value);
+            
+        }
+        public T Read(IWebDriver driver,out string value)
+        {
+            var element = this.GetElement(driver, "input");
+            value = element.GetAttribute("value");
+            return this.View;
+
         }
 
         public T Write(string text)
@@ -30,16 +39,11 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Write(string text, IWebDriver driver)
         {
-            if (!string.IsNullOrEmpty(ID))
-            {
-                var element = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.Id(this.ID)));
-                element.SendKeys(text);
-            }
-            else
-            {
-                var element = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector(this.CSSSelector)));
-                element.SendKeys(text);
-            }
+            var element = this.GetElement(driver, "input");
+            //new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] input")));
+            element.Click();
+            element.Clear();
+            element.SendKeys(Keys.Home + text + Keys.Tab);
             return this.View;
         }
 

@@ -1,4 +1,5 @@
-﻿using RPSSeleniumProperties;
+﻿using OpenQA.Selenium;
+using RPSSeleniumProperties;
 using System;
 
 namespace RPStestSelenium

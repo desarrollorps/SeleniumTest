@@ -8,20 +8,20 @@
             this.Screen = screen;
                 
         }
-        public void InitializeControls()
+          public void InitializeControls()
         {
-    <# foreach(var control in Model.Controls){ #>
-            <#= control.GenerateObjectInitialization() #> 
-    <# } #>
+<# foreach(var control in Model.Controls){ #>
+<# foreach(var s in control.GenerateObjectInitialization()){ #>
+            <#= s #>
+<# } #> 
+<# } #>
 
         }
-
-                
-    <# foreach(var control in Model.Controls){ #>
-            <#= control.GenerateObjectDefinition() #> 
-    <# } #>
+<# foreach(var control in Model.Controls){ #>
+        <#= control.GenerateObjectDefinition() #> 
+<# } #>
         
-        public new <#= Model.ScreenName #> Screen { get; set; }
+        public <#= Model.ScreenName #> Screen { get; set; }
         public <#= Model.ViewType #> Wait(int seconds)
         {
             Thread.Sleep(seconds * 1000);

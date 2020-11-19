@@ -26,15 +26,15 @@ namespace RPSSeleniumProperties.TemplateGenerator
             }
         }
 
-        public override string GenerateObjectInitialization()
+        public override List<string> GenerateObjectInitialization()
         {
             if (string.IsNullOrEmpty(NewViewType))
             {
-                return $"{this.ObjectName} = RPSControlFactory.CreateRPSButton<{ViewType}>( \"{this.ID}\",\"{CssSelector}\",this);";
+                return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSButton<{ViewType}>( \"{this.ID}\",\"{CssSelector}\",\"{XpathSelector}\",this);" };
             }
             else
             {
-                return $"{this.ObjectName} = RPSControlFactory.CreateRPSButtonToView<{ViewType},{NewViewType}>(\"{this.ID}\",\"{CssSelector}\", this,{Constants.ScreenProperty}.{NewViewProperty});";
+                return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSButtonToView<{ViewType},{NewViewType}>(\"{this.ID}\",\"{CssSelector}\",\"{XpathSelector}\", this,{Constants.ScreenProperty}.{NewViewProperty});" };
             }
         }
     }
@@ -49,9 +49,9 @@ namespace RPSSeleniumProperties.TemplateGenerator
             return $"public IRPSButton<{ViewType},{NewViewType}> {this.ObjectName} {{ get; set; }}";
 
         }
-        public override string GenerateObjectInitialization()
+        public override List<string> GenerateObjectInitialization()
         {
-            return $"{this.ObjectName} = RPSControlFactory.RPSNewButton<{ViewType},{NewViewType}>( this,{Constants.ScreenProperty}.{NewViewProperty});";
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.RPSNewButton<{ViewType},{NewViewType}>( this,{Constants.ScreenProperty}.{NewViewProperty});" };
         }
     }
     public class RPSDeleteButtonTemplate : RPSButtonTemplate
@@ -65,9 +65,9 @@ namespace RPSSeleniumProperties.TemplateGenerator
             return $"public IRPSButton<{ViewType}> {this.ObjectName} {{ get; set; }}";
 
         }
-        public override string GenerateObjectInitialization()
+        public override List<string> GenerateObjectInitialization()
         {
-            return $"{this.ObjectName} = RPSControlFactory.RPSDeleteButton<{ViewType}>( this);";
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.RPSDeleteButton<{ViewType}>( this);" };
         }
     }
     public class RPSSaveButtonTemplate : RPSButtonTemplate
@@ -82,9 +82,9 @@ namespace RPSSeleniumProperties.TemplateGenerator
            
         }
 
-        public override string GenerateObjectInitialization()
+        public override List<string> GenerateObjectInitialization()
         {
-            return $"{this.ObjectName} = RPSControlFactory.RPSSaveButton<{ViewType}>( this);";
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.RPSSaveButton<{ViewType}>( this);" };
         }
     }
     public class RPSBackButtonTemplate : RPSButtonTemplate
@@ -98,9 +98,26 @@ namespace RPSSeleniumProperties.TemplateGenerator
             return $"public IRPSButton<{ViewType},{NewViewType}> {this.ObjectName} {{ get; set; }}";
 
         }
-        public override string GenerateObjectInitialization()
+        public override List<string> GenerateObjectInitialization()
         {
-            return $"{this.ObjectName} = RPSControlFactory.RPSBackButton<{ViewType},{NewViewType}>( this,{Constants.ScreenProperty}.{NewViewProperty});";
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.RPSBackButton<{ViewType},{NewViewType}>( this,{Constants.ScreenProperty}.{NewViewProperty});" };
+        }
+    }
+
+    public class RPSConsultButtonTemplate : RPSButtonTemplate
+    {
+        public RPSConsultButtonTemplate() : base()
+        {
+            this.ObjectName = "ConsultButton";
+        }
+        public override string GenerateObjectDefinition()
+        {
+            return $"public IRPSButton<{ViewType}> {this.ObjectName} {{ get; set; }}";
+
+        }
+        public override List<string> GenerateObjectInitialization()
+        {
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.RPSConsultButton<{ViewType}>( this);" };
         }
     }
 

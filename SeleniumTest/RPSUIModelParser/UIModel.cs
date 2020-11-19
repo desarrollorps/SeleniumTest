@@ -110,12 +110,14 @@ namespace RPSUIModelParser
             //List<EntityManagementVM> managementlist = new List<EntityManagementVM>();
             viewlist.ForEach(v =>
             {
+                v.LoadCollectionViews();
                 v.LoadVMElements();
                 var vm = viewmodelList.Where(d => d.CurrentState != null && d.CurrentState.ID == v.State.ID /*&& !string.IsNullOrEmpty(d.RelatedEntity)*/).FirstOrDefault();
                 if (vm != null)
                 {
                     vm.View = v;
                     v.VMs.Add(vm);
+                    
                     /*EntityManagementVM management = new EntityManagementVM();
                     management.MainName = name;
                     management.View = v;
@@ -124,6 +126,7 @@ namespace RPSUIModelParser
                     management.EntityName = vm.RelatedEntity.Split('/')[1];
                     managementlist.Add(management);*/
                 }
+                
                 v.PropertyEditors.ForEach(prop =>
                 {
                     foreach(var m in viewmodelList)
@@ -146,6 +149,20 @@ namespace RPSUIModelParser
                     var parentvm = viewmodelList.Where(d => d.ID == parent).FirstOrDefault();
                     v.Parent = parentvm;
                     parentvm.Children.Add(v);
+                }
+            }
+            foreach(var view in viewlist)
+            {
+                foreach(var mo in view.VMs)
+                {
+                    if (mo.MainModel != null)
+                    {
+                        var vmodel = viewmodelList.Where(vm => vm.ID == mo.MainModel.ID).FirstOrDefault();
+                        if (vmodel != null)
+                        {
+                            mo.MainModel = vmodel;
+                        }
+                    }
                 }
             }
             return viewlist;

@@ -1,7 +1,17 @@
 ﻿<#@ template language="C#" #>    
 <#@ import namespace="System.Linq" #>
-namespace SeleniumGeneratedClasses.<#= Model.Version #>.<#= Model.Customer #>.<#= Model.Package #>.Services.<#= Model.Service #>
+using RPSSeleniumProperties;
+using RPSSeleniumProperties.Interactables;
+using RPSSeleniumProperties.Interfaces;
+using RPSSeleniumProperties.Interfaces.Interactables;
+using RPSSeleniumProperties.viewmodels;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading;
+namespace SeleniumGeneratedClasses.<#= Model.Customer #>.<#= Model.Package #>.Services.<#= Model.Service #>
 {
+    //RPS VERSION <#= Model.Version #>
     public partial class <#= Model.Name #>:Screen
     {
         public <#=Model.Name #>():base()

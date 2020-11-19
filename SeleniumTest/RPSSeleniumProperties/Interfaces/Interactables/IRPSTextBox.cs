@@ -9,6 +9,6 @@ namespace RPSSeleniumProperties.Interfaces.Interactables
     {
         T Write(string text);
         T Write(string text, IWebDriver driver);
-        string Read();
+        T Read(out string value);
     }
 }

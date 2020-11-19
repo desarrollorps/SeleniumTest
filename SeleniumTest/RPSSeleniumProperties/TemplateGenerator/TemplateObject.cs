@@ -18,8 +18,10 @@ namespace RPSSeleniumProperties.TemplateGenerator
         public string ObjectName { get; set; }
         public string ID { get; set; }
         public string CssSelector { get; set; }
+        public string XpathSelector { get; set; }
+        public bool Required { get; set; }
         public virtual string GenerateObjectDefinition() { return ""; }
-        public virtual string GenerateObjectInitialization() { return ""; }
+        public virtual List<string> GenerateObjectInitialization() { return new List<string> { "" }; }
         
     }
 }

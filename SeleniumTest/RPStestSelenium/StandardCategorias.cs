@@ -46,7 +46,7 @@ namespace RPStestSelenium
 
         }
         public IRPSButton<ConsultView,EditView> Nuevo { get; set; }
-        public new StandardCategorias Screen { get; set; }
+        public StandardCategorias Screen { get; set; }
         public ConsultView Wait(int seconds)
         {
             Thread.Sleep(seconds * 1000);
@@ -64,8 +64,8 @@ namespace RPStestSelenium
 
         public void InitializeButtons()
         {
-            CodCategoria = RPSControlFactory.CreateRPSTextBox<EditView>("", "[id='0c5f8780-71d3-431f-af3b-4aa7482223af'] input", true, this);
-            Description = RPSControlFactory.CreateRPSTextBox<EditView>("", "[id='0f00a49f-6101-4d79-a5d5-a97b73292dde'] input", true, this);
+            CodCategoria = RPSControlFactory.CreateRPSTextBox<EditView>("", "[id='0c5f8780-71d3-431f-af3b-4aa7482223af'] input","", true, this);
+            Description = RPSControlFactory.CreateRPSTextBox<EditView>("", "[id='0f00a49f-6101-4d79-a5d5-a97b73292dde'] input","", true, this);
             Save = RPSControlFactory.RPSSaveButton<EditView>( this);
             Delete = RPSControlFactory.RPSDeleteButton<EditView>( this);
             Back = RPSControlFactory.RPSBackButton<EditView, ConsultView>(this, Screen.Main);
@@ -76,7 +76,7 @@ namespace RPStestSelenium
             Thread.Sleep(seconds * 1000);
             return this;
         }
-        public new StandardCategorias Screen { get; set; }
+        public  StandardCategorias Screen { get; set; }
         public IRPSTextBox<EditView> CodCategoria { get; set; }
         public IRPSTextBox<EditView> Description { get; set; }
         public IRPSButton<EditView> Save { get; set; }

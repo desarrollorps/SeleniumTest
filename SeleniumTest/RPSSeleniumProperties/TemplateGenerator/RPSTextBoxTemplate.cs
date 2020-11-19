@@ -15,9 +15,9 @@ namespace RPSSeleniumProperties.TemplateGenerator
             return $"public IRPSTextBox<{ViewType}> {this.ObjectName} {{ get; set; }}";
 
         }
-        public override string GenerateObjectInitialization()
+        public override List<string> GenerateObjectInitialization()
         {
-            return $"{this.ObjectName} = RPSControlFactory.CreateRPSTextBox<{ViewType}>(\"{ID}\",\"{CssSelector}\", this);";
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSTextBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
         }
     }
 }

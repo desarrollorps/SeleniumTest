@@ -12,7 +12,7 @@ namespace RPSSeleniumProperties.TemplateGenerator
 
         public string ObjectName { get; set; }        
         public virtual string GenerateObjectDefinition() { return $"public {ViewType} {ObjectName} {{get; set; }}"; }
-        public virtual string GenerateObjectInitialization() { return $"{ObjectName}  = new {ViewType}();"; }
+        public virtual string GenerateObjectInitialization() { return $"{ObjectName}  = new {ViewType}(this);"; }
         public virtual string GenerateObjectInitializeInternals() { return $"{ObjectName}.InitializeControls();"; }
         public virtual string GenerateFullClassDefinition() { return Template.TransformText(); }
             

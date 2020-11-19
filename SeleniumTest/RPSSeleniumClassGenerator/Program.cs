@@ -9,7 +9,7 @@ namespace RPSSeleniumClassGenerator
         static void Main(string[] args)
         {
             string from = @"D:\BasoaCustomization\Version2020\ToolTest\Source\CuGeneral\CuGeneral\CuGeneral.UIHTML5\components\ShoppingCart";
-            string to = "";
+            string to = @"D:\BasoaCustomizationsGitHub\SeleniumTest\TestProject";
             if (args.Length != 2 && string.IsNullOrEmpty(from))
             {
                 Console.WriteLine("Welcome to Selenium class generator");
@@ -40,12 +40,25 @@ namespace RPSSeleniumClassGenerator
             }
             var files = Directory.GetFiles(Path.GetDirectoryName(from), "*.uimodel", SearchOption.AllDirectories);
             List<RPSUIModelParser.UIModel> models = new List<RPSUIModelParser.UIModel>();
-            List<string> modelStrings = new List<string>();
+            
             foreach(var file in files)
             {
                 var model = new RPSUIModelParser.UIModel(file);
                 models.Add(model);
-                modelStrings.Add(UIModelToString.GenerateCS(model));
+                
+            }
+            foreach(var model in models)
+            {
+                var text = UIModelToString.GenerateCS(model);
+                CSFile file = new CSFile();
+                file.FolderPath = to;
+                file.Content = text;
+                file.FileName = model.Name + ".cs";
+                file.Package = model.Package;
+                file.Service = model.Service;
+                file.Version = model.Version;
+                file.Customer = model.Customer;
+                file.Save();
             }
 
             Console.ReadLine();

@@ -16,7 +16,7 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+    #line 1 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class EntityMaintenanceScreen : EntityMaintenanceScreenBase
     {
@@ -27,51 +27,60 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance
         public virtual string TransformText()
         {
             this.Write("    \r\n");
-            this.Write("namespace SeleniumGeneratedClasses.");
+            this.Write(@"using RPSSeleniumProperties;
+using RPSSeleniumProperties.Interactables;
+using RPSSeleniumProperties.Interfaces;
+using RPSSeleniumProperties.Interfaces.Interactables;
+using RPSSeleniumProperties.viewmodels;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading;
+namespace SeleniumGeneratedClasses.");
             
-            #line 3 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Version));
-            
-            #line default
-            #line hidden
-            this.Write(".");
-            
-            #line 3 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 12 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Customer));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 3 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 12 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Package));
             
             #line default
             #line hidden
             this.Write(".Services.");
             
-            #line 3 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 12 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Service));
             
             #line default
             #line hidden
-            this.Write("\r\n{\r\n    public partial class ");
+            this.Write("\r\n{\r\n    //RPS VERSION ");
             
-            #line 5 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 14 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Version));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n    public partial class ");
+            
+            #line 15 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(":Screen\r\n    {\r\n        public ");
             
-            #line 7 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 17 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("():base()\r\n        {\r\n            this.URL = \"");
             
-            #line 9 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 19 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.FullType));
             
             #line default
@@ -79,83 +88,83 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance
             this.Write("\";\r\n            InitViews();\r\n           \r\n           \r\n        }       \r\n       " +
                     " protected void InitViews()\r\n        {\r\n");
             
-            #line 16 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 26 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
  foreach(var view in Model.Views){ 
             
             #line default
             #line hidden
             this.Write("            ");
             
-            #line 17 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 27 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(view.GenerateObjectInitialization()));
             
             #line default
             #line hidden
             this.Write(" \r\n");
             
-            #line 18 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 28 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
  } 
             
             #line default
             #line hidden
             
-            #line 19 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 29 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
  foreach(var view in Model.Views){ 
             
             #line default
             #line hidden
             this.Write("            ");
             
-            #line 20 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 30 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(view.GenerateObjectInitializeInternals()));
             
             #line default
             #line hidden
             this.Write(" \r\n");
             
-            #line 21 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 31 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
  } 
             
             #line default
             #line hidden
             this.Write("           \r\n        }\r\n      \r\n");
             
-            #line 24 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 34 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
  foreach(var view in Model.Views){ 
             
             #line default
             #line hidden
             this.Write("            ");
             
-            #line 25 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 35 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(view.GenerateObjectDefinition()));
             
             #line default
             #line hidden
             this.Write(" \r\n");
             
-            #line 26 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 36 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
  } 
             
             #line default
             #line hidden
             this.Write("    }\r\n");
             
-            #line 28 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 38 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
  foreach(var view in Model.Views){ 
             
             #line default
             #line hidden
             this.Write("            ");
             
-            #line 29 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 39 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(view.GenerateFullClassDefinition()));
             
             #line default
             #line hidden
             this.Write(" \r\n");
             
-            #line 30 "C:\Users\biarunxa\source\repos\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
+            #line 40 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\EntityMaintenanceScreen.tt"
  } 
             
             #line default

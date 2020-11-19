@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPSSeleniumProperties", "RP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPStestSelenium", "RPStestSelenium\RPStestSelenium.csproj", "{964D42D1-A5FD-479F-855E-9AC6AE4B6E65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPSSeleniumClassGenerator", "RPSSeleniumClassGenerator\RPSSeleniumClassGenerator.csproj", "{BFB12E65-C0DF-40BB-B726-588BEFD43CFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPSSeleniumClassGenerator", "RPSSeleniumClassGenerator\RPSSeleniumClassGenerator.csproj", "{BFB12E65-C0DF-40BB-B726-588BEFD43CFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPSUIModelParser", "RPSUIModelParser\RPSUIModelParser.csproj", "{1ED8C2EA-60F5-42A0-9421-326E8C6985F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPSUIModelParser", "RPSUIModelParser\RPSUIModelParser.csproj", "{1ED8C2EA-60F5-42A0-9421-326E8C6985F2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "..\TestProject\TestProject.csproj", "{F0D16E23-126E-482A-BF2B-8A3007359F90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{1ED8C2EA-60F5-42A0-9421-326E8C6985F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1ED8C2EA-60F5-42A0-9421-326E8C6985F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1ED8C2EA-60F5-42A0-9421-326E8C6985F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0D16E23-126E-482A-BF2B-8A3007359F90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0D16E23-126E-482A-BF2B-8A3007359F90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0D16E23-126E-482A-BF2B-8A3007359F90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0D16E23-126E-482A-BF2B-8A3007359F90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

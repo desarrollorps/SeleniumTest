@@ -6,6 +6,7 @@ using System.Linq;
 using RPSSeleniumProperties.TemplateGenerator.templates;
 using RPSUIModelParser;
 using RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance;
+using RPSSeleniumProperties.Interactables;
 
 namespace RPSSeleniumClassGenerator
 {
@@ -25,7 +26,7 @@ namespace RPSSeleniumClassGenerator
                 foreach (var view in model.UIComponents)
                 {
                     
-                    var generator = CreateGenerator(view,model.Service,model.Package,model.Version,model.Customer);
+                    var generator = CreateGenerator(view,model.ScreenName,model.Service,model.Package,model.Version,model.Customer);
                     if (generator != null)
                     {
                         TemplateView v = new TemplateView() { ViewType = view.Name, ObjectName = view.Name, Template = generator };
@@ -41,6 +42,34 @@ namespace RPSSeleniumClassGenerator
                 return "";
             }
         }
+        public static TemplateObject SectionToTemplate(Sections section, ComunicatorView view)
+        {
+            var sectioneditor = new RPSSectionTemplate { CssSelector =$"ul li[rpsid='{section.ID}']", ObjectName = section.Name, ViewType = view.Name };
+            return sectioneditor;
+        }
+        public static TemplateObject CollectionToTemplate(CollectionEditor col, ComunicatorView view)
+        {
+            var childview = view.VMs[0].Children.Where(d => d.View != null).Select(d => d.View).FirstOrDefault();
+            CollectionInit param = new CollectionInit();
+            var desc = col.DescriptorViews.FirstOrDefault();
+            if (desc!= null)
+            {
+                param.IDDescriptor = desc.ID;
+            }
+            var grid = col.GridViews.FirstOrDefault();
+            if(grid != null)
+            {
+                param.IDGrid = grid.ID;
+            }
+            var editor = new RPSColletionEditorTemplate
+            {
+                ViewType = view.Name,
+                ObjectName = col.Name,
+                NewViewType = childview.Name,
+                NewViewProperty = childview.Name, Parameters = param
+            };
+            return editor;
+        }
         public static TemplateObject EditorToTemplate(PropertyEditor property,ComunicatorView view)
         {
             switch(property.type)
@@ -48,10 +77,12 @@ namespace RPSSeleniumClassGenerator
                 case "RPS.UI.Model.TextEditor, RPSUIModel":
                 case "RPS.UI.Model.AmountEditor, RPSUIModel":
                 case "RPS.UI.Model.PriceEditor, RPSUIModel":
-                case "RPS.UI.Model.DateTimeEditor":
-                    return new RPSTextBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = property.vmProperty.Name };                    
+                case "RPS.UI.Model.DateTimeEditor, RPSUIModel":
+                    return new RPSTextBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };                    
                 case "RPS.UI.Model.Button, RPSUIModel":
-                    return new RPSButtonTemplate { ID = property.id, ViewType = view.Name, ObjectName = property.vmProperty.Name };
+                    return new RPSButtonTemplate { ID = property.id, ViewType = view.Name, ObjectName = property.Name };
+                case "RPS.UI.Model.LookupEditor, RPSUIModel":
+                    return new RPSComboBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
                 default: 
                     return null;
             }
@@ -61,15 +92,30 @@ namespace RPSSeleniumClassGenerator
             string viewtype = view.type;
             if (viewtype == "RPS.UI.Model.QueryViewDefinition, RPSUIModel")
             {
+                var list = new List<TemplateObject>();
                 //Esta tendra el control de nuevo
                 if (view.VMs[0].Children.Count > 0)
                 {
-                    return new List<TemplateObject> { new RPSNewButtonTemplate() { ViewType = view.Name } };
+
+                    var main = view.VMs[0].MainModel;
+                    if (main != null)
+                    {
+                        
+                        list.Add(new RPSNewButtonTemplate() { ViewType = view.Name, NewViewType = main.View.Name, NewViewProperty = main.View.Name });
+                        list.Add(new RPSConsultButtonTemplate() { ViewType = view.Name, NewViewType = main.View.Name, NewViewProperty = main.View.Name });
+                    }
+                    else
+                    {
+
+                    }
+                    
+
                 }
                 else
                 {
-                    return new List<TemplateObject>();
+                   
                 }
+                return list;
             }
             else if (viewtype == "RPS.UI.Model.MainEntityViewDefinition, RPSUIModel")
             {
@@ -82,12 +128,22 @@ namespace RPSSeleniumClassGenerator
                 };
                 if (view.VMs[0].Children.Count > 0)
                 {
-                    list.Add(new RPSNewButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Children[0].View.Name });
+                    var main = view.VMs[0].MainModel;
+                    if (main != null)
+                    {
+
+                        list.Add(new RPSNewButtonTemplate() { ViewType = view.Name, NewViewType = main.View.Name, NewViewProperty = main.View.Name });
+                        list.Add(new RPSConsultButtonTemplate() { ViewType = view.Name, NewViewType = main.View.Name, NewViewProperty = main.View.Name });
+                    }
+                    else
+                    {
+
+                    }
                 }
                 if (view.VMs[0].Parent != null)
                 {
-                    list.Add(new RPSDeleteButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name });
-                    list.Add(new RPSBackButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name });
+                    list.Add(new RPSDeleteButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name, NewViewProperty = view.VMs[0].Parent.View.Name });
+                    list.Add(new RPSBackButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name, NewViewProperty = view.VMs[0].Parent.View.Name });
                 }
                 return list;
             }
@@ -102,12 +158,22 @@ namespace RPSSeleniumClassGenerator
                 };
                 if (view.VMs[0].Children.Count > 0)
                 {
-                    list.Add(new RPSNewButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Children[0].View.Name });
+                    var main = view.VMs[0].MainModel;
+                    if (main != null)
+                    {
+
+                        list.Add(new RPSNewButtonTemplate() { ViewType = view.Name, NewViewType = main.View.Name, NewViewProperty = main.View.Name });
+                        list.Add(new RPSConsultButtonTemplate() { ViewType = view.Name, NewViewType = main.View.Name, NewViewProperty = main.View.Name });
+                    }
+                    else
+                    {
+
+                    }
                 }
                 if (view.VMs[0].Parent != null)
                 {
-                    list.Add(new RPSDeleteButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name });
-                    list.Add(new RPSBackButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name });
+                    list.Add(new RPSDeleteButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name, NewViewProperty = view.VMs[0].Parent.View.Name });
+                    list.Add(new RPSBackButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name, NewViewProperty = view.VMs[0].Parent.View.Name });
                 }
                 return list;
             }
@@ -116,7 +182,7 @@ namespace RPSSeleniumClassGenerator
                 return new List<TemplateObject> { };
             }
         }
-        public static ITemplateGenerator CreateGenerator(ComunicatorView view, string Service, string Package, string Version, string Customer)
+        public static ITemplateGenerator CreateGenerator(ComunicatorView view,string screenname, string Service, string Package, string Version, string Customer)
         {
             string viewtype = view.type;
             if  (viewtype == "RPS.UI.Model.QueryViewDefinition, RPSUIModel")
@@ -127,7 +193,7 @@ namespace RPSSeleniumClassGenerator
                 te.Model.Package = Package;
                 te.Model.Version = Version;
                 te.Model.Customer = Customer;
-                te.Model.ScreenName = view.Name;
+                te.Model.ScreenName = screenname;
                 te.Model.ViewType = view.Name;
                 te.Model.Controls.AddRange(AddDefaultTemplateControls(view));
                 foreach(var c in view.PropertyEditors)
@@ -137,6 +203,16 @@ namespace RPSSeleniumClassGenerator
                     {
                         te.Model.Controls.Add(ctr);
                     }
+                }
+                foreach(var col in view.Collections)
+                {
+                    var collection = CollectionToTemplate(col, view);
+                    te.Model.Controls.Add(collection);
+                }
+                foreach(var sec in view.Sections)
+                {
+                    var section = SectionToTemplate(sec,view);
+                    te.Model.Controls.Add(section);
                 }
                 return te;
             }
@@ -148,7 +224,7 @@ namespace RPSSeleniumClassGenerator
                 te.Model.Package = Package;
                 te.Model.Version = Version;
                 te.Model.Customer = Customer;
-                te.Model.ScreenName = view.Name;
+                te.Model.ScreenName = screenname;
                 te.Model.ViewType = view.Name;
                 te.Model.ParentViewType = view.VMs[0].Parent.View.Name;
                 te.Model.Controls.AddRange(AddDefaultTemplateControls(view));
@@ -160,6 +236,16 @@ namespace RPSSeleniumClassGenerator
                         te.Model.Controls.Add(ctr);
                     }
                 }
+                foreach (var col in view.Collections)
+                {
+                    var collection = CollectionToTemplate(col, view);
+                    te.Model.Controls.Add(collection);
+                }
+                foreach (var sec in view.Sections)
+                {
+                    var section = SectionToTemplate(sec, view);
+                    te.Model.Controls.Add(section);
+                }
                 return te;
             }
             else if (viewtype == "RPS.UI.Model.EntityViewDefinition, RPSUIModel")
@@ -170,7 +256,7 @@ namespace RPSSeleniumClassGenerator
                 te.Model.Package = Package;
                 te.Model.Version = Version;
                 te.Model.Customer = Customer;
-                te.Model.ScreenName = view.Name;
+                te.Model.ScreenName = screenname;
                 te.Model.ViewType = view.Name;
                 te.Model.ParentViewType = view.VMs[0].Parent.View.Name;
                 te.Model.Controls.AddRange(AddDefaultTemplateControls(view));
@@ -181,6 +267,16 @@ namespace RPSSeleniumClassGenerator
                     {
                         te.Model.Controls.Add(ctr);
                     }
+                }
+                foreach (var col in view.Collections)
+                {
+                    var collection = CollectionToTemplate(col, view);
+                    te.Model.Controls.Add(collection);
+                }
+                foreach (var sec in view.Sections)
+                {
+                    var section = SectionToTemplate(sec, view);
+                    te.Model.Controls.Add(section);
                 }
                 return te;
             }
