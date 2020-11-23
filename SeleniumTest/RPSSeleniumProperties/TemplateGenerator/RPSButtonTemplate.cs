@@ -70,6 +70,22 @@ namespace RPSSeleniumProperties.TemplateGenerator
             return new List<string> { $"{this.ObjectName} = RPSControlFactory.RPSDeleteButton<{ViewType}>( this);" };
         }
     }
+    public class RPSConfirmButtonTemplate : RPSButtonTemplate
+    {
+        public RPSConfirmButtonTemplate() : base()
+        {
+            this.ObjectName = "ConfirmDeleteButton";
+        }
+        public override string GenerateObjectDefinition()
+        {
+            return $"public IRPSButton<{ViewType}> {this.ObjectName} {{ get; set; }}";
+
+        }
+        public override List<string> GenerateObjectInitialization()
+        {
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.RPSConfirmDeleteButton<{ViewType}>( this);" };
+        }
+    }
     public class RPSSaveButtonTemplate : RPSButtonTemplate
     {
         public RPSSaveButtonTemplate():base()

@@ -15,7 +15,7 @@ namespace TestProject
             RPSEnvironment.DefaultPassword = "admin";
             RPSEnvironment.DefaultCodCompany = "DEMOS";
             CuShoppingCart cart = new CuShoppingCart();
-            /*cart.NavigateToScreen<CuShoppingCartQueryView>().
+            cart.NavigateToScreen<CuShoppingCartQueryView>().
                 NewButton.Click().
                 CodShoppingCart.Write("001").
                 Description.Write("Test Shopping cart").
@@ -28,10 +28,11 @@ namespace TestProject
                 
                 SaveButton.Click().Wait(5).
                 DeleteButton.Click();
-            */  
-            /*
+              
+            
             string originalAddress = "";
-            cart.NavigateToScreen<CuShoppingCartQueryView>().
+            CuShoppingCart cart2 = new CuShoppingCart();
+            cart2.NavigateToScreen<CuShoppingCartQueryView>().
             ConsultButton.Click().
             Wait(5).
             CuShoppingCartConsult.DescriptorView.Click(0).
@@ -41,14 +42,16 @@ namespace TestProject
             Wait(5).
             Address.Write(originalAddress).
             SaveButton.Click();
-            */
-            cart.NavigateToScreen<CuShoppingCartQueryView>().
+            cart2.Dispose();
+
+            CuShoppingCart cart3 = new CuShoppingCart();
+            cart3.NavigateToScreen<CuShoppingCartQueryView>().
             ConsultButton.Click().
             Wait(5).
             CuShoppingCartConsult.DescriptorView.Click(0).
             CuShoppingCartLineSection.Click();
             Console.ReadLine();
-            cart.Dispose();
+            cart3.Dispose();
         }
     }
 }

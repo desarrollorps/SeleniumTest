@@ -9,7 +9,7 @@ namespace RPSSeleniumClassGenerator
         static void Main(string[] args)
         {
             string from = @"D:\BasoaCustomization\Version2020\ToolTest\Source\CuGeneral\CuGeneral\CuGeneral.UIHTML5\components\ShoppingCart";
-            string to = @"D:\BasoaCustomizationsGitHub\SeleniumTest\TestProject";
+            string to = @"D:\BasoaCustomizationsGitHub\SeleniumTest\ShoppingUnitTest\ShopingTest";
             if (args.Length != 2 && string.IsNullOrEmpty(from))
             {
                 Console.WriteLine("Welcome to Selenium class generator");

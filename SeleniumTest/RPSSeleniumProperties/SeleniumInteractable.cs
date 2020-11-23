@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Support.UI;
 using RPSSeleniumProperties.Interfaces;
 using RPSSeleniumProperties.Interfaces.viewmodels;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -70,27 +71,33 @@ namespace RPSSeleniumProperties
     }
     public static class BrowserElements
     {
+        
+
         public static IWebElement GetElementCSS(IWebDriver driver,string cssselector)
         {
-            return new WebDriverWait(driver, 
+            return new WebDriverWait(driver,
                 new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(
-                drv => drv.FindElement(By.CssSelector(cssselector)));
+                ExpectedConditions.ElementToBeClickable(By.CssSelector(cssselector)));
+                //drv => drv.FindElement(By.CssSelector(cssselector)));
         }
         public static IWebElement GetElementXPATH(IWebDriver driver, string xpath)
         {
             return new WebDriverWait(driver,
                 new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(
-                drv => drv.FindElement(By.XPath(xpath)));
+                ExpectedConditions.ElementToBeClickable(By.XPath(xpath)));
+                //drv => drv.FindElement(By.XPath(xpath)));
         }
         public static ReadOnlyCollection<IWebElement> GetElementsCSS(IWebDriver driver, string cssselector)
         {
             return new WebDriverWait(driver,
                 new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(
-                drv =>
+                ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector(cssselector))
+                /*drv =>
                 {
+                    
                     var elements = drv.FindElements(By.CssSelector(cssselector));
                     if (elements.Count > 0)
                     {
@@ -100,15 +107,17 @@ namespace RPSSeleniumProperties
                     {
                         return null;
                     }
-                });
+                }*/);
         }
         public static ReadOnlyCollection<IWebElement> GetElementsXPATH(IWebDriver driver, string xpath)
         {
             return new WebDriverWait(driver,
                 new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(
-                drv =>
+                ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath(xpath))
+                /*drv =>
                 {
+
                     var elements = drv.FindElements(By.XPath(xpath));
                     if (elements.Count > 0)
                     {
@@ -118,7 +127,8 @@ namespace RPSSeleniumProperties
                     {
                         return null;
                     }
-                });
+                }
+                */);
                 
         }
     }

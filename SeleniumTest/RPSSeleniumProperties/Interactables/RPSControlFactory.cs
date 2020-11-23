@@ -92,6 +92,12 @@ namespace RPSSeleniumProperties.Interactables
             return RPSControlFactory.CreateRPSButton<T>("", "[id='kendoToolbar'] a[title='Eliminar']","", view);
             
         }
+        ////div[contains(@class, 'rps-window rps-flex-container k-window-content k-content')]//rps-text-button/div[text()='Si']
+        public static IRPSButton<T> RPSConfirmDeleteButton<T>(T view) where T : class, IView
+        {
+            return RPSControlFactory.CreateRPSButton<T>("", "", "//div[contains(@class,'rps-window rps-flex-container k-window-content k-content')]//rps-text-button/div[text()='Si']", view);
+
+        }
         public static IRPSButton<T> RPSConsultButton<T>(T view) where T : class, IView
         {
             return RPSControlFactory.CreateRPSButton<T>("", "", "//rps-text-with-icon-button/div[text()[normalize-space()='Consultar']]", view);

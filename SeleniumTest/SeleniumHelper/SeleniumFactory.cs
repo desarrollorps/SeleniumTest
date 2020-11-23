@@ -17,7 +17,9 @@ namespace SeleniumHelper
         {
             if (type == DriverType.Chrome)
             {
-                return new ChromeDriver(SeleniumFactoryConfig.ChromeDriverPath);
+                var options = new ChromeOptions();
+                options.AddArgument("headless");
+                return new ChromeDriver(SeleniumFactoryConfig.ChromeDriverPath, options);
             }
             return null;
         }

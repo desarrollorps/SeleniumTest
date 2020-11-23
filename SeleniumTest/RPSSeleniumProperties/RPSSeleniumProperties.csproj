@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
+    <PackageReference Include="Selenium.Support" Version="4.0.0-alpha05" />
     <PackageReference Include="System.CodeDom" Version="5.0.0" />
   </ItemGroup>
 

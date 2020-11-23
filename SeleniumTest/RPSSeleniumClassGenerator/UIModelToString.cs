@@ -143,6 +143,7 @@ namespace RPSSeleniumClassGenerator
                 if (view.VMs[0].Parent != null)
                 {
                     list.Add(new RPSDeleteButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name, NewViewProperty = view.VMs[0].Parent.View.Name });
+                    list.Add(new RPSConfirmButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name, NewViewProperty = view.VMs[0].Parent.View.Name });
                     list.Add(new RPSBackButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name, NewViewProperty = view.VMs[0].Parent.View.Name });
                 }
                 return list;
@@ -173,6 +174,7 @@ namespace RPSSeleniumClassGenerator
                 if (view.VMs[0].Parent != null)
                 {
                     list.Add(new RPSDeleteButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name, NewViewProperty = view.VMs[0].Parent.View.Name });
+                    list.Add(new RPSConfirmButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name, NewViewProperty = view.VMs[0].Parent.View.Name });
                     list.Add(new RPSBackButtonTemplate() { ViewType = view.Name, NewViewType = view.VMs[0].Parent.View.Name, NewViewProperty = view.VMs[0].Parent.View.Name });
                 }
                 return list;
