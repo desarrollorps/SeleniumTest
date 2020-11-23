@@ -3,19 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeleniumTest", "SeleniumTest\SeleniumTest.csproj", "{9674AA84-461A-40B4-9299-FAE987B53FC5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeleniumHelper", "SeleniumHelper\SeleniumHelper.csproj", "{C3800288-9183-4D00-9533-1DAF46320CD1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPSSeleniumProperties", "RPSSeleniumProperties\RPSSeleniumProperties.csproj", "{3EC6854F-24A4-47DD-BA46-E7DB04672244}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPStestSelenium", "RPStestSelenium\RPStestSelenium.csproj", "{964D42D1-A5FD-479F-855E-9AC6AE4B6E65}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPSSeleniumClassGenerator", "RPSSeleniumClassGenerator\RPSSeleniumClassGenerator.csproj", "{BFB12E65-C0DF-40BB-B726-588BEFD43CFD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPSUIModelParser", "RPSUIModelParser\RPSUIModelParser.csproj", "{1ED8C2EA-60F5-42A0-9421-326E8C6985F2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "..\TestProject\TestProject.csproj", "{F0D16E23-126E-482A-BF2B-8A3007359F90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopingTest", "..\ShoppingUnitTest\ShopingTest\ShopingTest.csproj", "{75EC0AF7-0C1B-449A-A2FD-31AE066C1BA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,34 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9674AA84-461A-40B4-9299-FAE987B53FC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9674AA84-461A-40B4-9299-FAE987B53FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9674AA84-461A-40B4-9299-FAE987B53FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9674AA84-461A-40B4-9299-FAE987B53FC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C3800288-9183-4D00-9533-1DAF46320CD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C3800288-9183-4D00-9533-1DAF46320CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C3800288-9183-4D00-9533-1DAF46320CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C3800288-9183-4D00-9533-1DAF46320CD1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3EC6854F-24A4-47DD-BA46-E7DB04672244}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3EC6854F-24A4-47DD-BA46-E7DB04672244}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EC6854F-24A4-47DD-BA46-E7DB04672244}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EC6854F-24A4-47DD-BA46-E7DB04672244}.Release|Any CPU.Build.0 = Release|Any CPU
-		{964D42D1-A5FD-479F-855E-9AC6AE4B6E65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{964D42D1-A5FD-479F-855E-9AC6AE4B6E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{964D42D1-A5FD-479F-855E-9AC6AE4B6E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{964D42D1-A5FD-479F-855E-9AC6AE4B6E65}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BFB12E65-C0DF-40BB-B726-588BEFD43CFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BFB12E65-C0DF-40BB-B726-588BEFD43CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFB12E65-C0DF-40BB-B726-588BEFD43CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFB12E65-C0DF-40BB-B726-588BEFD43CFD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1ED8C2EA-60F5-42A0-9421-326E8C6985F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1ED8C2EA-60F5-42A0-9421-326E8C6985F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1ED8C2EA-60F5-42A0-9421-326E8C6985F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1ED8C2EA-60F5-42A0-9421-326E8C6985F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F0D16E23-126E-482A-BF2B-8A3007359F90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F0D16E23-126E-482A-BF2B-8A3007359F90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F0D16E23-126E-482A-BF2B-8A3007359F90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F0D16E23-126E-482A-BF2B-8A3007359F90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75EC0AF7-0C1B-449A-A2FD-31AE066C1BA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75EC0AF7-0C1B-449A-A2FD-31AE066C1BA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75EC0AF7-0C1B-449A-A2FD-31AE066C1BA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75EC0AF7-0C1B-449A-A2FD-31AE066C1BA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

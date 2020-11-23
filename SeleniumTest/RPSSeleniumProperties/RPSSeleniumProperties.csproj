@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SeleniumHelper\SeleniumHelper.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="TemplateGenerator\templates\EntityMaintenance\EntityEditorView.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>EntityEditorView.cs</LastGenOutput>

@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RPSSeleniumProperties\RPSSeleniumProperties.csproj" />
-    <ProjectReference Include="..\RPSUIModelParser\RPSUIModelParser.csproj" />
   </ItemGroup>
 
 </Project>
