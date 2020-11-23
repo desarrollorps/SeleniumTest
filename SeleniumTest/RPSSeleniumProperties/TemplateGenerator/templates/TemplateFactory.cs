@@ -6,10 +6,10 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates
 {
     public class TemplateFactory
     {
-        public static EntityMaintenance.EntityMaintenanceScreen CreateEntityMaintenanceScreen()
+        public static EntityMaintenance.Screen CreateEntityMaintenanceScreen()
         {
-            var en = new EntityMaintenance.EntityMaintenanceScreen();
-            en.Model = new EntityMaintenance.EntityMaintenanceScreenVM();
+            var en = new EntityMaintenance.Screen();
+            en.Model = new EntityMaintenance.ScreenVM();
             return en;
         }
     }

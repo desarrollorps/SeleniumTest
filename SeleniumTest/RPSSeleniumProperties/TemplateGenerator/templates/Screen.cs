@@ -4,14 +4,14 @@ using System.Text;
 
 namespace RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance
 {
-    public partial class EntityMaintenanceScreen: ITemplateGenerator
+    public partial class Screen: ITemplateGenerator
     {
 
-        public EntityMaintenanceScreenVM Model { get; set; }
+        public ScreenVM Model { get; set; }
     }
-    public class EntityMaintenanceScreenVM
+    public class ScreenVM
     {
-        public EntityMaintenanceScreenVM()
+        public ScreenVM()
         {
             Views = new List<TemplateView>();
         }

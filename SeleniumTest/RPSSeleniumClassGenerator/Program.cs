@@ -8,7 +8,7 @@ namespace RPSSeleniumClassGenerator
     {
         static void Main(string[] args)
         {
-            string from = @"D:\BasoaCustomization\Version2020\ToolTest\Source\CuGeneral\CuGeneral\CuGeneral.UIHTML5\components\ShoppingCart";
+            string from = @"D:\BasoaCustomization\Version2020\Ausolan\Source\General\CuGeneral\CuGeneralUIHTML5\components\Ausolan\General";
             string to = @"D:\BasoaCustomizationsGitHub\SeleniumTest\ShoppingUnitTest\ShopingTest";
             if (args.Length != 2 && string.IsNullOrEmpty(from))
             {
@@ -43,12 +43,14 @@ namespace RPSSeleniumClassGenerator
             
             foreach(var file in files)
             {
+                Console.WriteLine($"Procesando fichero {file}");
                 var model = new RPSUIModelParser.UIModel(file);
                 models.Add(model);
                 
             }
             foreach(var model in models)
             {
+                Console.WriteLine($"Generando codigo para modelo {model.FullPath}");
                 var text = UIModelToString.GenerateCS(model);
                 CSFile file = new CSFile();
                 file.FolderPath = to;
@@ -60,7 +62,7 @@ namespace RPSSeleniumClassGenerator
                 file.Customer = model.Customer;
                 file.Save();
             }
-
+            Console.WriteLine("Generacion terminadad Ok");
             Console.ReadLine();
 
         }

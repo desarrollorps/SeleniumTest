@@ -17,7 +17,7 @@ namespace RPSUIModelParser
                 return;
             var refs = container.Descendants().OfType<JObject>().Where(o => IsRefObject(o)).ToList();
             var norefs = container.Descendants().OfType<JObject>().Where(o => !IsRefObject(o)).ToList();
-            Console.WriteLine(JsonConvert.SerializeObject(refs));
+           // Console.WriteLine(JsonConvert.SerializeObject(refs));
             foreach (var refObj in refs)
             {
                 var path = GetRefObjectValue(refObj);
