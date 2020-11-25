@@ -78,12 +78,12 @@ namespace RPSSeleniumProperties.TemplateGenerator
         }
         public override string GenerateObjectDefinition()
         {
-            return $"public IRPSButton<{ViewType}> {this.ObjectName} {{ get; set; }}";
+            return $"public IRPSButton<{ViewType},{NewViewType}> {this.ObjectName} {{ get; set; }}";
 
         }
         public override List<string> GenerateObjectInitialization()
         {
-            return new List<string> { $"{this.ObjectName} = RPSControlFactory.RPSConfirmDeleteButton<{ViewType}>( this);" };
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.RPSConfirmDeleteButton<{ViewType},{NewViewType}>( this,{Constants.ScreenProperty}.{NewViewProperty});" };
         }
     }
     public class RPSSaveButtonTemplate : RPSButtonTemplate
@@ -94,7 +94,7 @@ namespace RPSSeleniumProperties.TemplateGenerator
         }
         public override string GenerateObjectDefinition()
         {
-            return $"public IRPSButton<{ViewType}> {this.ObjectName} {{ get; set; }}";
+            return $"public IRPSSaveButton<{ViewType}> {this.ObjectName} {{ get; set; }}";
            
         }
 

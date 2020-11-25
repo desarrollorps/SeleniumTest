@@ -19,5 +19,7 @@ namespace RPSSeleniumProperties.Interfaces.Interactables
         
         string GetSelected();
         bool HasSelectedItem();
+        T Exists(IWebDriver driver);
+        T Exists();
     }
 }

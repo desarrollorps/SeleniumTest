@@ -9,6 +9,7 @@ namespace RPSSeleniumProperties
         static RPSEnvironment()
         {
             DefaultWaitSeconds = 60;
+            Visible = true;
         }
 
         public static string RPSBaseURL { get; set; }        
@@ -16,5 +17,6 @@ namespace RPSSeleniumProperties
         public static string DefaultPassword { get; set; }
         public static string DefaultCodCompany { get; set; }
         public static int DefaultWaitSeconds { get; set; }
+        public static bool Visible { get; set; }
     }
 }

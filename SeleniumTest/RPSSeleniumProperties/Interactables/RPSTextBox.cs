@@ -23,7 +23,7 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Read(IWebDriver driver,out string value)
         {
-            var element = this.GetElement(driver, "input");
+            var element = this.GetElement(driver, new string[] { "input","textarea" });
             value = element.GetAttribute("value");
             return this.View;
 
@@ -39,12 +39,22 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Write(string text, IWebDriver driver)
         {
-            var element = this.GetElement(driver, "input");
+            var element = this.GetElement(driver, new string[] { "input", "textarea" });
             //new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] input")));
             element.Click();
             element.Clear();
             element.SendKeys(Keys.Home + text + Keys.Tab);
             return this.View;
+        }
+
+        public T Exists(IWebDriver driver)
+        {
+            return this.Exists(driver, "");
+        }
+        public T Exists()
+        {
+            var driver = this.WebDriver;
+            return this.Exists(driver);
         }
 
     }

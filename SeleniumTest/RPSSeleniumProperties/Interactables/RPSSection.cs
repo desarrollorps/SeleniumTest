@@ -23,5 +23,14 @@ namespace RPSSeleniumProperties.Interactables
 
             return this.View;
         }
+        public T Exists(IWebDriver driver)
+        {
+            return this.Exists(driver, "");
+        }
+        public T Exists()
+        {
+            var driver = this.WebDriver;
+            return this.Exists(driver);
+        }
     }
 }

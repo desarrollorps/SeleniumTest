@@ -19,6 +19,14 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Screen.cs</LastGenOutput>
     </None>
+    <None Update="TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SeleniumConfig.cs</LastGenOutput>
+    </None>
+    <None Update="TemplateGenerator\templates\UnitTest\CRUDUnitTest.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CRUDUnitTest.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +43,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Screen.tt</DependentUpon>
+    </Compile>
+    <Compile Update="TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SeleniumConfig.tt</DependentUpon>
+    </Compile>
+    <Compile Update="TemplateGenerator\templates\UnitTest\CRUDUnitTest.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRUDUnitTest.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 

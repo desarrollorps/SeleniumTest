@@ -9,7 +9,7 @@ namespace RPSSeleniumClassGenerator
         static void Main(string[] args)
         {
             string from = @"D:\BasoaCustomization\Version2020\Ausolan\Source\General\CuGeneral\CuGeneralUIHTML5\components\Ausolan\General";
-            string to = @"D:\BasoaCustomizationsGitHub\SeleniumTest\ShoppingUnitTest\ShopingTest";
+            string to = @"D:\BasoaCustomizationsGitHub\AusolanUnitTests\Ausolan.Tests\";
             if (args.Length != 2 && string.IsNullOrEmpty(from))
             {
                 Console.WriteLine("Welcome to Selenium class generator");
@@ -48,6 +48,8 @@ namespace RPSSeleniumClassGenerator
                 models.Add(model);
                 
             }
+            SeleniumConfigToStrign configfile = new SeleniumConfigToStrign();
+            configfile.GenerateCS(to);
             foreach(var model in models)
             {
                 Console.WriteLine($"Generando codigo para modelo {model.FullPath}");
@@ -61,6 +63,9 @@ namespace RPSSeleniumClassGenerator
                 file.Version = model.Version;
                 file.Customer = model.Customer;
                 file.Save();
+                UIModelToString.GenerateUnitTestCS(model, to);
+                Console.WriteLine($"");
+
             }
             Console.WriteLine("Generacion terminadad Ok");
             Console.ReadLine();

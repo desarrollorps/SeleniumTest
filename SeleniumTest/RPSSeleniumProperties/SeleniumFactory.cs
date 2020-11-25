@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,8 +19,27 @@ namespace SeleniumHelper
             if (type == DriverType.Chrome)
             {
                 var options = new ChromeOptions();
-                options.AddArgument("headless");
-                return new ChromeDriver(SeleniumFactoryConfig.ChromeDriverPath, options);
+                if (!RPSSeleniumProperties.RPSEnvironment.Visible)
+                {
+                    options.AddArgument("headless");
+                }
+                if (!string.IsNullOrEmpty(SeleniumFactoryConfig.ChromeDriverPath))
+                {
+                    return new ChromeDriver(SeleniumFactoryConfig.ChromeDriverPath, options);
+                }
+                else
+                {
+                    return new ChromeDriver(options);
+                }
+            }else if (type == DriverType.Edge)
+            {
+                var options = new EdgeOptions();
+                options.UseChromium = true;
+                if (!RPSSeleniumProperties.RPSEnvironment.Visible)
+                {
+                    options.AddArgument("headless");
+                }
+                return new EdgeDriver(options);
             }
             return null;
         }

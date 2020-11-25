@@ -7,6 +7,8 @@ using RPSSeleniumProperties.TemplateGenerator.templates;
 using RPSUIModelParser;
 using RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance;
 using RPSSeleniumProperties.Interactables;
+using RPSSeleniumProperties.TemplateGenerator.templates.UnitTest;
+using System.IO;
 
 namespace RPSSeleniumClassGenerator
 {
@@ -32,15 +34,54 @@ namespace RPSSeleniumClassGenerator
                         TemplateView v = new TemplateView() { ViewType = view.Name, ObjectName = view.Name, Template = generator };
                         screen.Model.Views.Add(v);
                     }
-                    
+                 
                 }
                 return screen.TransformText();
-                
+            throw new NotImplementedException();
             /*}
             else
             {
                 return "";
             }*/
+        }
+        public static void GenerateUnitTestCS(RPSUIModelParser.UIModel model, string destfolder)
+        {
+            if (model.UIComponents.Any(d => d.VMs.Any(v => v.MainModel != null)))
+            {
+                DirectoryInfo d = new DirectoryInfo(destfolder);
+                string fullpath = Path.Combine(destfolder, "UnitTest", model.Customer, model.Package, model.Service, $"{model.Name }.cs");
+                if (!File.Exists(fullpath))
+                {
+                    DirectoryInfo d1 = new DirectoryInfo(Path.GetDirectoryName(fullpath));
+                    if (!d1.Exists)
+                    {
+                        d1.Create();
+                    }
+                    Console.WriteLine($"Generating {fullpath}");
+                    /*if (model.UIComponents.Any(d => d.type.Contains("RPS.UI.Model.MainEntityViewDefinition")))
+                    {*/
+                    CRUDUnitTestVM vm = new CRUDUnitTestVM();
+                    vm.FileNameNoExtension = model.Name;
+                    vm.UsingToSeleniumGeneratedClasses = $"SeleniumGeneratedClasses.{model.Customer}.{model.Package}.Services.{model.Service}";
+                    vm.Namespace = $"UnitTest.{model.Customer}.{model.Package}.Services.{model.Service}";
+                    vm.SeleniumConfigNamespace = d.Name;
+
+
+                    CRUDUnitTest UT = new CRUDUnitTest();
+                    UT.Model = vm;
+                    string test = UT.TransformText();
+                    File.WriteAllText(fullpath, test);
+                }
+                else
+                {
+                    Console.WriteLine($"Skipped {fullpath} it already exists");
+                }
+                /*}
+                else
+                {
+                    return "";
+                }*/
+            }
         }
         public static TemplateObject SectionToTemplate(Sections section, ComunicatorView view)
         {
@@ -78,10 +119,59 @@ namespace RPSSeleniumClassGenerator
                 return null;
             }
         }
+        public static TemplateObject ViewEditorToTemplate(ViewEditor ed, ComunicatorView view)
+        {
+            if (view.VMs[0].Children.Count > 0)
+            {
+
+                var main = view.VMs[0].MainModel;
+                if (main != null && main.View != null)
+                {
+                    CollectionInit param = new CollectionInit();
+                    param.IDDescriptor = ed.ID;
+                    var editor = new RPSColletionEditorTemplate
+                    {
+                        ViewType = view.Name,
+                        ObjectName = "MainConsult",
+                        NewViewType = main.View.Name,
+                        NewViewProperty = main.View.Name,
+                        Parameters = param
+                    };
+                    return editor;
+                }
+                else
+                {
+                    var relatedView = view.VMs[0].View;
+                    if (relatedView != null)
+                    {
+                        CollectionInit param = new CollectionInit();
+                        param.IDDescriptor = ed.ID;
+                        var editor = new RPSColletionEditorTemplate
+                        {
+                            ViewType = view.Name,
+                            ObjectName = "MainConsult",
+                            NewViewType = relatedView.Name,
+                            NewViewProperty = relatedView.Name,
+                            Parameters = param
+                        };
+                        return editor;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }                                                                
+            }
+            else
+            {
+                return null;
+            }
+        }
         public static TemplateObject EditorToTemplate(PropertyEditor property,ComunicatorView view)
         {
             switch(property.type)
             {
+                case "RPS.UI.Model.DecimalEditor, RPSUIModel":
                 case "RPS.UI.Model.TextEditor, RPSUIModel":
                 case "RPS.UI.Model.AmountEditor, RPSUIModel":
                 case "RPS.UI.Model.PriceEditor, RPSUIModel":
@@ -91,6 +181,8 @@ namespace RPSSeleniumClassGenerator
                     return new RPSButtonTemplate { ID = property.id, ViewType = view.Name, ObjectName = property.Name };
                 case "RPS.UI.Model.LookupEditor, RPSUIModel":
                     return new RPSComboBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                case "RPS.UI.Model.CheckBoxEditor, RPSUIModel":
+                    return new RPSCheckboxTemplate { ID = property.id, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
                 default: 
                     return null;
             }
@@ -111,6 +203,18 @@ namespace RPSSeleniumClassGenerator
                         
                         list.Add(new RPSNewButtonTemplate() { ViewType = view.Name, NewViewType = main.View.Name, NewViewProperty = main.View.Name });
                         list.Add(new RPSConsultButtonTemplate() { ViewType = view.Name, NewViewType = main.View.Name, NewViewProperty = main.View.Name });
+
+                        /*if (view.VMs[0].type == "RPS.UI.Model.CrudScreenVMDefinition, RPSUIModel")
+                        {
+                            CollectionInit param = new CollectionInit();
+                            param.CSSSelectorDescriptor = "rps-descriptor-view";
+                            list.Add(new RPSColletionEditorTemplate() { 
+                                ViewType = view.Name, 
+                                NewViewType = main.View.Name, 
+                                NewViewProperty = main.View.Name, 
+                                ObjectName = "MainConsult",
+                                Parameters = param });
+                        }*/
                     }
                     else
                     {
@@ -123,6 +227,7 @@ namespace RPSSeleniumClassGenerator
                 {
                    
                 }
+                
                 return list;
             }
             else if (viewtype == "RPS.UI.Model.CrudViewDefinition, RPSUIModel")
@@ -242,7 +347,7 @@ namespace RPSSeleniumClassGenerator
                     }
                     else
                     {
-                        Console.WriteLine("There is a null control");
+                        Console.WriteLine($"There is a null control {c.id}-{c.type}");
                     }
                 }
                 foreach(var col in view.Collections)
@@ -253,7 +358,7 @@ namespace RPSSeleniumClassGenerator
                         te.Model.Controls.Add(collection);
                     }
                     else {
-                        Console.WriteLine("There is a null collection");
+                        Console.WriteLine($"There is a null collection {col.ID}-{col.type}");
                     }
                 }
                 foreach(var sec in view.Sections)
@@ -265,9 +370,22 @@ namespace RPSSeleniumClassGenerator
                         te.Model.Controls.Add(section);
                     }
                     else {
-                    Console.WriteLine("There is a null section");
+                    Console.WriteLine($"There is a null section {sec.ID}");
+                    }
                 }
+                foreach(var ed in view.ViewEditor)
+                {
+                    var editor = ViewEditorToTemplate(ed, view); 
+                    if (editor != null)
+                    {
+                    te.Model.Controls.Add(editor);
+                    }
+                else
+                {
+                    Console.WriteLine($"There is a null vieweditor {ed.ID}");
                 }
+
+            }
                 return te;
            /* }
             else if (viewtype == "RPS.UI.Model.MainEntityViewDefinition, RPSUIModel")

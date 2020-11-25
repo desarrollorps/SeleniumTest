@@ -48,6 +48,8 @@ namespace RPSUIModelParser
         public List<CollectionEditor> Collections { get; set; }
         [JsonIgnore]
         public List<Sections> Sections { get; set; }
+        [JsonIgnore]
+        public List<ViewEditor> ViewEditor { get; set; }
         public void LoadCollectionViews()
         {
             //a partir del contenido buscamos objetos con el type = RPS.UI.Model.CollectionEditor, RPSUIModel y serializamos el obleto en un collection view por cada uno
@@ -70,8 +72,31 @@ namespace RPSUIModelParser
                 Collections.Add(editor);
             }
         }
+        public void LoadViewEditors()
+        {
+            this.ViewEditor = new List<ViewEditor>();
+            var root = JsonConvert.DeserializeObject<JToken>(content, new JsonSerializerSettings
+            {
+                DateParseHandling = DateParseHandling.None,
+
+                MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+
+            });
+            var vmelements = this.GetViewEditors(root);
+            foreach (var editor in vmelements)
+            {
+                var ed = editor.ToObject<ViewEditor>();
+                this.ViewEditor.Add(ed);
+            }
+        }
         public void LoadVMElements()
         {
+            string[] avoidLoad = new string[]
+            {
+                "RPS.UI.Model.ViewEditor, RPSUIModel",
+                "RPS.UI.Model.DescriptorView, RPSUIModel",
+                "RPS.UI.Model.CollectionEditor, RPSUIModel"
+            };
             PropertyEditors = new List<PropertyEditor>();
             Sections = new List<Sections>();
             var root = JsonConvert.DeserializeObject<JToken>(content, new JsonSerializerSettings
@@ -90,17 +115,20 @@ namespace RPSUIModelParser
                 string id = control["$id"].Value<string>();
                 string name = control["Name"].Value<string>();
                 bool isreadonly = false;
-                if (control.ContainsKey("IsReadOnly"))
+                if (!avoidLoad.Any(d => d == type))
                 {
-                    isreadonly = control["IsReadOnly"].Value<bool>(); ;
-                }
-                string idproperty = "";
-                idproperty = vmelement["VMElement"]["$id"].Value<string>();
-                if (!this.Collections.Any(d => d.GridViews.Any(g => g.PropertyEditors.Any(p => p.id == id))))
-                {
+                    if (control.ContainsKey("IsReadOnly"))
+                    {
+                        isreadonly = control["IsReadOnly"].Value<bool>(); ;
+                    }
+                    string idproperty = "";
+                    idproperty = vmelement["VMElement"]["$id"].Value<string>();
+                    if (!this.Collections.Any(d => d.GridViews.Any(g => g.PropertyEditors.Any(p => p.id == id))))
+                    {
 
-                    PropertyEditor prop = new PropertyEditor() { id = id, Name = name, IsReadOnly = isreadonly, type = type, vmid = idproperty };
-                    PropertyEditors.Add(prop);
+                        PropertyEditor prop = new PropertyEditor() { id = id, Name = name, IsReadOnly = isreadonly, type = type, vmid = idproperty };
+                        PropertyEditors.Add(prop);
+                    }
                 }
             }
             var sections = this.GetSections(root);
@@ -119,6 +147,18 @@ namespace RPSUIModelParser
             var refs = container.Descendants().OfType<JObject>().Where(
                 o => o.ContainsKey("VMElement")
                 && (o.Parent as JProperty) != null ? (o.Parent as JProperty).Name == "Binding" : false
+                ).Distinct().ToList();
+
+            return refs;
+        }
+        public List<JObject> GetViewEditors(JToken root)
+        {
+            List<TargetStateVM> states = new List<TargetStateVM>();
+            if (!(root is JContainer container))
+                return null;
+            var refs = container.Descendants().OfType<JObject>().Where(
+                o => o.ContainsKey("type")
+                &&   o["$type"].Value<string>() == "RPS.UI.Model.ViewEditor, RPSUIModel"
                 ).Distinct().ToList();
 
             return refs;
@@ -210,6 +250,11 @@ namespace RPSUIModelParser
         public string vmid { get; set; }
         public bool IsReadOnly { get; set; }
         public Property vmProperty { get; set; }
+    }
+    public class ViewEditor
+    {
+        public string ID { get; set; }
+        public string Name { get; set; }
     }
     public class Sections
     {

@@ -1,4 +1,5 @@
-﻿using RPSSeleniumProperties.Interfaces;
+﻿using OpenQA.Selenium;
+using RPSSeleniumProperties.Interfaces;
 using RPSSeleniumProperties.Interfaces.Interactables;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,14 @@ namespace RPSSeleniumProperties.Interactables
     {
         public N NewView;
         public IRPSDescriptorView<T,N> DescriptorView { get; set; }
-        
+        public T Exists(IWebDriver driver)
+        {
+            return this.Exists(driver, "");
+        }
+        public T Exists()
+        {
+            var driver = this.WebDriver;
+            return this.Exists(driver);
+        }
     }
 }

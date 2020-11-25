@@ -1,0 +1,33 @@
+﻿using <#= Model.SeleniumConfigNamespace#>;
+using Xunit;
+using System;
+using <#= Model.UsingToSeleniumGeneratedClasses #>;
+namespace <#= Model.Namespace #>
+{
+    public class <#= Model.FileNameNoExtension #>_New
+    {
+        [Fact]        
+        public void New_UT()
+        {
+            throw new NotImplementedException();
+            
+        }
+    }
+    public class <#= Model.FileNameNoExtension #>_Update
+    {
+        [Fact]        
+        public void Update_UT()
+        {
+            throw new NotImplementedException();
+
+        }
+    }
+    public class <#= Model.FileNameNoExtension #>_Delete
+    {
+        [Fact]        
+        public void Delete_UT()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

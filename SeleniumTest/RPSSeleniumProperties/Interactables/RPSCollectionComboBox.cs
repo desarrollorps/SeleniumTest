@@ -1,4 +1,5 @@
-﻿using RPSSeleniumProperties.Interfaces;
+﻿using OpenQA.Selenium;
+using RPSSeleniumProperties.Interfaces;
 using RPSSeleniumProperties.Interfaces.Interactables;
 using RPSSeleniumProperties.Interfaces.viewmodels;
 using System;
@@ -43,6 +44,14 @@ namespace RPSSeleniumProperties.Interactables
         }
 
         public T Write()
+        {
+            throw new NotImplementedException();
+        }
+        public T Exists(IWebDriver driver)
+        {
+            throw new NotImplementedException();
+        }
+        public T Exists()
         {
             throw new NotImplementedException();
         }

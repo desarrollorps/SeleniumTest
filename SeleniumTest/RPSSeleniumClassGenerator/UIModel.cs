@@ -111,6 +111,7 @@ namespace RPSUIModelParser
             viewlist.ForEach(v =>
             {
                 v.LoadCollectionViews();
+                v.LoadViewEditors();
                 v.LoadVMElements();
                 var vm = viewmodelList.Where(d => d.CurrentState != null && d.CurrentState.ID == v.State.ID /*&& !string.IsNullOrEmpty(d.RelatedEntity)*/).FirstOrDefault();
                 if (vm != null)

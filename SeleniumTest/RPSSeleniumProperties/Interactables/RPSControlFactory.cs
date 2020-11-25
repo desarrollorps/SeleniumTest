@@ -55,6 +55,23 @@ namespace RPSSeleniumProperties.Interactables
             view.ViewModel.Properties.Add(property);
             return control;
         }
+
+        public static IRPSCheckbox<T> CreateRPSCheckBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
+        {
+            RPSCheckbox<T> control = new RPSCheckbox<T>();
+            control.ID = id;
+            control.CSSSelector = cssSelector;
+            control.XPathSelector = xpath;
+            control.View = view;
+            control.WebDriver = view.WebDriver;
+            var property = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.Boolean, Required = required };
+            control.ViewModelProperty = property;
+
+            property.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(property);
+            return control;
+        }
+
         public static IRPSComboBox<T> CreateRPSComboBox<T>(string id, string cssSelector,string xpath, bool required, T view) where T : class, IView
         {
             RPSComboBox<T> control = new RPSComboBox<T>();
@@ -83,7 +100,7 @@ namespace RPSSeleniumProperties.Interactables
         {
             return RPSControlFactory.CreateRPSButtonToView<T, N>(
                 "",
-                "rps-breadcrumb a[href*='general.category']","",
+                "rps-breadcrumb a:last-of-type","",
                 view,
                newView);
         }
@@ -93,9 +110,9 @@ namespace RPSSeleniumProperties.Interactables
             
         }
         ////div[contains(@class, 'rps-window rps-flex-container k-window-content k-content')]//rps-text-button/div[text()='Si']
-        public static IRPSButton<T> RPSConfirmDeleteButton<T>(T view) where T : class, IView
+        public static IRPSButton<T,N> RPSConfirmDeleteButton<T,N>(T view,N newView) where T : class, IView where N : class, IView
         {
-            return RPSControlFactory.CreateRPSButton<T>("", "", "//div[contains(@class,'rps-window rps-flex-container k-window-content k-content')]//rps-text-button/div[text()='Si']", view);
+            return RPSControlFactory.CreateRPSButtonToView<T,N>("", "", "//div[contains(@class,'rps-window rps-flex-container k-window-content k-content')]//rps-text-button/div[text()='Si']", view,newView);
 
         }
         public static IRPSButton<T> RPSConsultButton<T>(T view) where T : class, IView
@@ -103,9 +120,21 @@ namespace RPSSeleniumProperties.Interactables
             return RPSControlFactory.CreateRPSButton<T>("", "", "//rps-text-with-icon-button/div[text()[normalize-space()='Consultar']]", view);
 
         }
-        public static IRPSButton<T> RPSSaveButton<T>(T view) where T : class, IView
+        public static IRPSSaveButton<T> RPSSaveButton<T>(T view) where T : class, IView
         {
-            return RPSControlFactory.CreateRPSButton<T>("", "[id='kendoToolbar'] a[title='Guardar']","", view);
+            RPSSaveButton<T> button = new RPSSaveButton<T>();
+            button.ID = "";
+            button.CSSSelector = "[id = 'kendoToolbar'] a[title = 'Guardar']";
+            button.XPathSelector = "";
+            button.View = view;
+            
+            button.WebDriver = view.WebDriver;
+            var prop = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.Command };
+            button.ViewModelProperty = prop;
+
+            prop.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(prop);
+            return button;            
 
         }
         #endregion

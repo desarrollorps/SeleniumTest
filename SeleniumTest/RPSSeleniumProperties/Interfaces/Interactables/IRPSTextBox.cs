@@ -10,5 +10,7 @@ namespace RPSSeleniumProperties.Interfaces.Interactables
         T Write(string text);
         T Write(string text, IWebDriver driver);
         T Read(out string value);
+        T Exists(IWebDriver driver);
+        T Exists();
     }
 }

@@ -13,6 +13,7 @@ namespace RPSSeleniumProperties.Interfaces
         IViewModelProperty ViewModelProperty { get; }
         IWebDriver WebDriver { get; }
         T View { get; }
+        
     }
     public enum ControlType
     {

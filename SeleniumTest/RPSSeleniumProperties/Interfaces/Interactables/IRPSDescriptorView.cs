@@ -13,5 +13,7 @@ namespace RPSSeleniumProperties.Interfaces.Interactables
         N Click(IWebDriver driver, string text);
         N Click(int index);
         N Click(IWebDriver driver, int index);
+        T Exists(IWebDriver driver);
+        T Exists();
     }
 }

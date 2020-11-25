@@ -9,5 +9,7 @@ namespace RPSSeleniumProperties.Interfaces.Interactables
     {
         T Click();
         T Click(IWebDriver driver);
+        T Exists(IWebDriver driver);
+        T Exists();
     }
 }

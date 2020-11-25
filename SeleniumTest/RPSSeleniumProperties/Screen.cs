@@ -26,10 +26,10 @@ namespace RPSSeleniumProperties
         protected string _codCompany;
         public string CodCompany { get => string.IsNullOrEmpty(this._codCompany) ? RPSEnvironment.DefaultCodCompany : this._codCompany; set => this._codCompany = value; }
 
-        public virtual T NavigateToScreen<T>() where T:class,IView
+        public virtual T NavigateToScreen<T>(string detailedUrl = "") where T:class,IView
         {
 
-            WebDriver.Navigate().GoToUrl(GetFullUrl());
+            WebDriver.Navigate().GoToUrl(GetFullUrl(detailedUrl));
             //Aqui hay que hacer el Login.
             var loggin = ILoginFactory.Create(this.WebDriver);
             loggin.User.Write(this.CodUser,this.WebDriver);
@@ -40,9 +40,16 @@ namespace RPSSeleniumProperties
             return value as T;
         }
         
-        protected string GetFullUrl()
+        protected string GetFullUrl(string detailedURL)
         {
-            return $"{RPSEnvironment.RPSBaseURL}app/{this.CodCompany}/{this.URL}";
+            if (string.IsNullOrEmpty(detailedURL))
+            {
+                return $"{RPSEnvironment.RPSBaseURL}app/{this.CodCompany}/{this.URL}";
+            }
+            else
+            {
+                return $"{RPSEnvironment.RPSBaseURL}app/{this.CodCompany}/{this.URL}/{detailedURL}";
+            }
         }
         public IView CreateView<T>(string Name) where T:View
         {

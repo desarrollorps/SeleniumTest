@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,5 +14,7 @@ namespace RPSSeleniumProperties.Interfaces.Interactables
         bool IsSelected(int index);
         List<string> GetSelected();
         bool HasSelectedItems();
+        T Exists(IWebDriver driver);
+        T Exists();
     }
 }
