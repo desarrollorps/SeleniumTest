@@ -21,10 +21,10 @@ namespace SeleniumHelper
                 var options = new ChromeOptions();
                 if (!RPSSeleniumProperties.RPSEnvironment.Visible)
                 {
-                    options.AddArgument("headless");
+                    options.AddArgument("--headless");
                 }
-                options.AddArgument("no-sandbox");
-                options.AddArgument("disable-dev-shm-usage");
+                options.AddArgument("--no-sandbox");
+                options.AddArgument("--disable-dev-shm-usage");
                 if (!string.IsNullOrEmpty(SeleniumFactoryConfig.ChromeDriverPath))
                 {
                     return new ChromeDriver(SeleniumFactoryConfig.ChromeDriverPath, options);
