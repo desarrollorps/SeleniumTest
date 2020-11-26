@@ -23,6 +23,8 @@ namespace SeleniumHelper
                 {
                     options.AddArgument("headless");
                 }
+                options.AddArgument("no-sandbox");
+                options.AddArgument("disable-dev-shm-usage");
                 if (!string.IsNullOrEmpty(SeleniumFactoryConfig.ChromeDriverPath))
                 {
                     return new ChromeDriver(SeleniumFactoryConfig.ChromeDriverPath, options);
