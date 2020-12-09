@@ -74,14 +74,20 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.Grids
             
             #line default
             #line hidden
-            this.Write(" : class, IView\r\n    {\r\n        public ");
+            this.Write(" : class, IView\r\n    {\r\n        public  ");
             
             #line 3 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.CollectionName));
             
             #line default
             #line hidden
-            this.Write("Grid<");
+            
+            #line 3 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.GridName));
+            
+            #line default
+            #line hidden
+            this.Write("<");
             
             #line 3 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ViewType));

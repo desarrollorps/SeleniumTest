@@ -1,6 +1,6 @@
 ﻿    public partial class <#= Model.CollectionName #>CollectionEditor<<#= Model.ViewType #>,<#= Model.NewVieType #>>:RPSCollectionEditor<<#= Model.ViewType #>,<#= Model.NewVieType #>> where <#= Model.ViewType #> : class, IView where <#= Model.NewVieType #> : class, IView
     {
-        public <#= Model.CollectionName #>Grid<<#= Model.ViewType #>,<#= Model.NewVieType #>> <#= Model.GridName #> {get;set;}
+        public  <#= Model.CollectionName #><#= Model.GridName #><<#= Model.ViewType #>,<#= Model.NewVieType #>> <#= Model.GridName #> {get;set;}
     }
     public partial class <#= Model.CollectionName #><#= Model.GridName #> <<#= Model.ViewType #>,<#= Model.NewVieType #>> :  RPSGridView<<#= Model.ViewType #>,<#= Model.NewVieType #>> where <#= Model.ViewType #> : class, IView where <#= Model.NewVieType #> : class, IView
     {
