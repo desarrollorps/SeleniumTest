@@ -1,10 +1,10 @@
 ﻿    public partial class <#= Model.CollectionName #>CollectionEditor<<#= Model.ViewType #>,<#= Model.NewVieType #>>:RPSCollectionEditor<<#= Model.ViewType #>,<#= Model.NewVieType #>> where <#= Model.ViewType #> : class, IView where <#= Model.NewVieType #> : class, IView
     {
-        public <#= Model.GridName #>Grid<<#= Model.ViewType #>,<#= Model.NewVieType #>> <#= Model.GridName #> {get;set;}
+        public <#= Model.CollectionName #>Grid<<#= Model.ViewType #>,<#= Model.NewVieType #>> <#= Model.GridName #> {get;set;}
     }
-    public partial class <#= Model.GridName #>Grid<<#= Model.ViewType #>,<#= Model.NewVieType #>> :  RPSGridView<<#= Model.ViewType #>,<#= Model.NewVieType #>> where <#= Model.ViewType #> : class, IView where <#= Model.NewVieType #> : class, IView
+    public partial class <#= Model.CollectionName #><#= Model.GridName #> <<#= Model.ViewType #>,<#= Model.NewVieType #>> :  RPSGridView<<#= Model.ViewType #>,<#= Model.NewVieType #>> where <#= Model.ViewType #> : class, IView where <#= Model.NewVieType #> : class, IView
     {
-        public <#= Model.GridName #>(<#= Model.ViewType #> currentView,<#= Model.NewVieType #> newView) : base()
+        public <#= Model.CollectionName #><#= Model.GridName #>(<#= Model.ViewType #> currentView,<#= Model.NewVieType #> newView)
         {
             this.WebDriver = currentView.WebDriver;
             this.NewView = newView;
@@ -25,7 +25,7 @@
         <#= control.GenerateObjectDefinition() #> 
 <# } #>
         
-        public <#= Model.GridName #> Wait(int seconds)
+        public <#= Model.CollectionName #><#= Model.GridName #> <<#= Model.ViewType #>,<#= Model.NewVieType #>>  Wait(int seconds)
         {
             Thread.Sleep(seconds * 1000);
             return this;
