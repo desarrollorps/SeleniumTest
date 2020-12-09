@@ -19,6 +19,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Screen.cs</LastGenOutput>
     </None>
+    <None Update="TemplateGenerator\templates\Grids\CollectionEditor.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CollectionEditor.cs</LastGenOutput>
+    </None>
     <None Update="TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>SeleniumConfig.cs</LastGenOutput>
@@ -43,6 +47,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Screen.tt</DependentUpon>
+    </Compile>
+    <Compile Update="TemplateGenerator\templates\Grids\CollectionEditor.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CollectionEditor.tt</DependentUpon>
     </Compile>
     <Compile Update="TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.cs">
       <DesignTime>True</DesignTime>

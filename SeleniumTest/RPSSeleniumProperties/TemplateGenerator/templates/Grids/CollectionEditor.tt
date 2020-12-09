@@ -1,0 +1,34 @@
+﻿    public partial class <#= Model.CollectionName #>CollectionEditor<<#= Model.ViewType #>,<#= Model.NewVieType #>>:RPSCollectionEditor<<#= Model.ViewType #>,<#= Model.NewVieType #>> where <#= Model.ViewType #> : class, IView where <#= Model.NewVieType #> : class, IView
+    {
+        public <#= Model.GridName #>Grid<<#= Model.ViewType #>,<#= Model.NewVieType #>> <#= Model.GridName #> {get;set;}
+    }
+    public partial class <#= Model.GridName #>Grid<<#= Model.ViewType #>,<#= Model.NewVieType #>> :  RPSGridView<<#= Model.ViewType #>,<#= Model.NewVieType #>> where <#= Model.ViewType #> : class, IView where <#= Model.NewVieType #> : class, IView
+    {
+        public <#= Model.GridName #>(<#= Model.ViewType #> currentView,<#= Model.NewVieType #> newView) : base()
+        {
+            this.WebDriver = currentView.WebDriver;
+            this.NewView = newView;
+            this.CurrentView = currentView;
+           
+        }
+
+        public void InitializeControls()
+        {
+<# foreach(var control in Model.Controls){ #>
+<# foreach(var s in control.GenerateObjectInitialization()){ #>
+            <#= s #>
+<# } #> 
+<# } #>
+
+        }
+<# foreach(var control in Model.Controls){ #>
+        <#= control.GenerateObjectDefinition() #> 
+<# } #>
+        
+        public <#= Model.GridName #> Wait(int seconds)
+        {
+            Thread.Sleep(seconds * 1000);
+            return this;
+        }
+      
+    }

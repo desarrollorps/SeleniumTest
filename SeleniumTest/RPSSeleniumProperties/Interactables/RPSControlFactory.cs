@@ -3,6 +3,7 @@ using RPSSeleniumProperties.Interfaces.Interactables;
 using RPSSeleniumProperties.viewmodels;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace RPSSeleniumProperties.Interactables
@@ -172,6 +173,34 @@ namespace RPSSeleniumProperties.Interactables
             }
             return container;
         }
+        public static C RPSCreateCollectionWithGrid<C,T, N>(CollectionInit parameters, T view, N newView) where T : class, IView where N : class, IView where C:class, IRPSCollectionEditor<T,N>
+        {
+            Type myclass = typeof(C).MakeGenericType(typeof(T), typeof(N));
+            ConstructorInfo cinfo = myclass.GetConstructor(new Type[] { });
+            RPSCollectionEditor<T, N> container = (RPSCollectionEditor<T, N>)cinfo.Invoke(new object[] { });
+            container.View = view;
+            container.NewView = newView;
+            container.WebDriver = view.WebDriver;
+
+            if (!string.IsNullOrEmpty(parameters.IDDescriptor) || !string.IsNullOrEmpty(parameters.CSSSelectorDescriptor) || !string.IsNullOrEmpty(parameters.XPathDescriptor))
+            {
+                container.DescriptorView = new RPSDescriptorView<T, N>()
+                {
+                    ID = parameters.IDDescriptor,
+                    CSSSelector = parameters.CSSSelectorDescriptor,
+                    XPathSelector = parameters.XPathDescriptor,
+                    View = view,
+                    NewView = newView,
+                    WebDriver = view.WebDriver
+                };
+            }
+            var grid = myclass.GetProperty(parameters.GridName);
+            ConstructorInfo ginfo = grid.GetType().GetConstructor(new Type[] { });
+            var gridInstance = ginfo.Invoke(new object[] { });
+            /*inicializamos el grid*/
+            grid.SetValue(container, gridInstance);
+            return container as C;
+        }
         #endregion
     }
     public class CollectionInit
@@ -181,7 +210,8 @@ namespace RPSSeleniumProperties.Interactables
         public string XPathDescriptor { get; set; }
         public string IDGrid { get; set; }
         public string CSSSelectorGrid { get; set; }
-        public string XPathGrid { get; set; }
+        public string XPathGrid { get; set; }      
+        public string GridName { get; set; }
 
     }
 }

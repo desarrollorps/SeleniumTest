@@ -28,4 +28,7 @@
         }
       
     }
+    <# foreach(var col in Model.CollectionClasses){ #>
+            <#= col.TransformText() #> 
+    <# } #>
  

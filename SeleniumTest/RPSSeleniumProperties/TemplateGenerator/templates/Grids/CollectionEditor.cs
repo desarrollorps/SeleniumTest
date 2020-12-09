@@ -7,7 +7,7 @@
 //     se vuelve a generar el código.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance
+namespace RPSSeleniumProperties.TemplateGenerator.templates.Grids
 {
     using System;
     
@@ -15,9 +15,9 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
+    #line 1 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class View : ViewBase
+    public partial class CollectionEditor : CollectionEditorBase
     {
 #line hidden
         /// <summary>
@@ -25,121 +25,220 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\n    public partial class ");
+            this.Write("    public partial class ");
             
-            #line 2 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
+            #line 1 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.CollectionName));
+            
+            #line default
+            #line hidden
+            this.Write("CollectionEditor<");
+            
+            #line 1 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ViewType));
             
             #line default
             #line hidden
-            this.Write(" : View\r\n    {\r\n        public ");
+            this.Write(",");
             
-            #line 4 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
+            #line 1 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.NewVieType));
+            
+            #line default
+            #line hidden
+            this.Write(">:RPSCollectionEditor<");
+            
+            #line 1 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.ViewType));
+            
+            #line default
+            #line hidden
+            this.Write(",");
+            
+            #line 1 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.NewVieType));
+            
+            #line default
+            #line hidden
+            this.Write("> where ");
+            
+            #line 1 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ViewType));
+            
+            #line default
+            #line hidden
+            this.Write(" : class, IView where ");
+            
+            #line 1 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.NewVieType));
+            
+            #line default
+            #line hidden
+            this.Write(" : class, IView\r\n    {\r\n        public ");
+            
+            #line 3 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.GridName));
+            
+            #line default
+            #line hidden
+            this.Write("Grid<");
+            
+            #line 3 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ViewType));
+            
+            #line default
+            #line hidden
+            this.Write(",");
+            
+            #line 3 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.NewVieType));
+            
+            #line default
+            #line hidden
+            this.Write("> ");
+            
+            #line 3 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.GridName));
+            
+            #line default
+            #line hidden
+            this.Write(" {get;set;}\r\n    }\r\n    public partial class ");
+            
+            #line 5 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.GridName));
+            
+            #line default
+            #line hidden
+            this.Write("Grid<");
+            
+            #line 5 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ViewType));
+            
+            #line default
+            #line hidden
+            this.Write(",");
+            
+            #line 5 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.NewVieType));
+            
+            #line default
+            #line hidden
+            this.Write("> :  RPSGridView<");
+            
+            #line 5 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ViewType));
+            
+            #line default
+            #line hidden
+            this.Write(",");
+            
+            #line 5 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.NewVieType));
+            
+            #line default
+            #line hidden
+            this.Write("> where ");
+            
+            #line 5 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ViewType));
+            
+            #line default
+            #line hidden
+            this.Write(" : class, IView where ");
+            
+            #line 5 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.NewVieType));
+            
+            #line default
+            #line hidden
+            this.Write(" : class, IView\r\n    {\r\n        public ");
+            
+            #line 7 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.GridName));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 4 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ScreenName));
+            #line 7 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ViewType));
             
             #line default
             #line hidden
-            this.Write(" screen) : base()\r\n        {\r\n            this.WebDriver = screen.WebDriver;\r\n   " +
-                    "         this.Screen = screen;\r\n           \r\n        }\r\n\r\n         public void I" +
-                    "nitializeControls()\r\n        {\r\n");
+            this.Write(" currentView,");
             
-            #line 13 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
+            #line 7 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.NewVieType));
+            
+            #line default
+            #line hidden
+            this.Write(" newView) : base()\r\n        {\r\n            this.WebDriver = currentView.WebDriver" +
+                    ";\r\n            this.NewView = newView;\r\n            this.CurrentView = currentVi" +
+                    "ew;\r\n           \r\n        }\r\n\r\n        public void InitializeControls()\r\n       " +
+                    " {\r\n");
+            
+            #line 17 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
  foreach(var control in Model.Controls){ 
             
             #line default
             #line hidden
             
-            #line 14 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
+            #line 18 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
  foreach(var s in control.GenerateObjectInitialization()){ 
             
             #line default
             #line hidden
             this.Write("            ");
             
-            #line 15 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
+            #line 19 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(s));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 16 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
+            #line 20 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
  } 
             
             #line default
             #line hidden
             this.Write(" \r\n");
             
-            #line 17 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
+            #line 21 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n        }\r\n");
             
-            #line 20 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
+            #line 24 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
  foreach(var control in Model.Controls){ 
             
             #line default
             #line hidden
             this.Write("        ");
             
-            #line 21 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
+            #line 25 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(control.GenerateObjectDefinition()));
             
             #line default
             #line hidden
             this.Write(" \r\n");
             
-            #line 22 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
+            #line 26 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("        public ");
+            this.Write("        \r\n        public ");
             
-            #line 23 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ScreenName));
-            
-            #line default
-            #line hidden
-            this.Write(" Screen { get; set; }\r\n        public ");
-            
-            #line 24 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.ViewType));
+            #line 28 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.GridName));
             
             #line default
             #line hidden
             this.Write(" Wait(int seconds)\r\n        {\r\n            Thread.Sleep(seconds * 1000);\r\n       " +
-                    "     return this;\r\n        }\r\n      \r\n    }\r\n    ");
-            
-            #line 31 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
- foreach(var col in Model.CollectionClasses){ 
-            
-            #line default
-            #line hidden
-            this.Write("            ");
-            
-            #line 32 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(col.TransformText()));
-            
-            #line default
-            #line hidden
-            this.Write(" \r\n    ");
-            
-            #line 33 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write(" ");
+                    "     return this;\r\n        }\r\n      \r\n    }");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -151,7 +250,7 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class ViewBase
+    public class CollectionEditorBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

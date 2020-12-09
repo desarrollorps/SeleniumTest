@@ -94,6 +94,7 @@ namespace RPSSeleniumClassGenerator
             if (childview != null)
             {
                 CollectionInit param = new CollectionInit();
+             
                 var desc = col.DescriptorViews.FirstOrDefault();
                 if (desc != null)
                 {
@@ -103,6 +104,8 @@ namespace RPSSeleniumClassGenerator
                 if (grid != null)
                 {
                     param.IDGrid = grid.ID;
+                    param.GridName = grid.Name;
+                   
                 }
                 var editor = new RPSColletionEditorTemplate
                 {
@@ -356,6 +359,25 @@ namespace RPSSeleniumClassGenerator
                     if (collection != null)
                     {
                         te.Model.Controls.Add(collection);
+                    if (!string.IsNullOrEmpty((collection as RPSColletionEditorTemplate).Parameters.GridName))
+                    {
+                        RPSSeleniumProperties.TemplateGenerator.templates.Grids.CollectionEditor coltemplate = new RPSSeleniumProperties.TemplateGenerator.templates.Grids.CollectionEditor();
+                        coltemplate.Model = new RPSSeleniumProperties.TemplateGenerator.templates.Grids.CollectionEditorVM();
+                        coltemplate.Model.CollectionName = col.Name;
+                        coltemplate.Model.Customer = te.Model.Customer;
+
+                        coltemplate.Model.GridName = (collection as RPSColletionEditorTemplate).Parameters.GridName;
+                        coltemplate.Model.NewVieType = (collection as RPSColletionEditorTemplate).NewViewType;
+                        coltemplate.Model.Package = te.Model.Package;
+                        coltemplate.Model.ScreenName = te.Model.ScreenName;
+                        coltemplate.Model.Service = te.Model.Service;
+                        coltemplate.Model.Version = te.Model.Version;
+                        coltemplate.Model.ViewType = (collection as RPSColletionEditorTemplate).ViewType;
+                        te.Model.CollectionClasses.Add(coltemplate);
+                    }
+
+
+
                     }
                     else {
                         Console.WriteLine($"There is a null collection {col.ID}-{col.type}");
