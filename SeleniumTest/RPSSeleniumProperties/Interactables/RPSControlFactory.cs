@@ -219,6 +219,26 @@ namespace RPSSeleniumProperties.Interactables
             }
             return container as C;
         }
+
+        public static C RPSCreateCollectionWithGrid<C, T>(CollectionInit parameters, T view) where T : class, IView where C : class, IRPSCollectionEditor<T>
+        {
+            Type myclass = typeof(C).MakeGenericType(typeof(T));
+            ConstructorInfo cinfo = myclass.GetConstructor(new Type[] { });
+            RPSCollectionEditor<T> container = (RPSCollectionEditor<T>)cinfo.Invoke(new object[] { });
+            container.View = view;
+           
+            container.WebDriver = view.WebDriver;
+            
+            var grid = myclass.GetProperties(BindingFlags.Public).Where(p => p.PropertyType is RPSGridView<T>).FirstOrDefault();
+            if (grid != null)
+            {
+                ConstructorInfo ginfo = grid.GetType().GetConstructor(new Type[] { });
+                var gridInstance = ginfo.Invoke(new object[] { });
+                /*inicializamos el grid*/
+                grid.SetValue(container, gridInstance);
+            }
+            return container as C;
+        }
         #endregion
     }
     public class CollectionInit

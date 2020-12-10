@@ -10,6 +10,11 @@ namespace RPSSeleniumProperties.Interfaces.Interactables
         N NewView { get; }
 
         T CurrentView { get; }
-    }    
+    }
+
+    public interface IRPSGridView<T> : ISeleniumInteractable<T> where T : class,IView
+    {        
+        T CurrentView { get; }
+    }
 
 }

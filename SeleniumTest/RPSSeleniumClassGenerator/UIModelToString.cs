@@ -137,8 +137,8 @@ namespace RPSSeleniumClassGenerator
                 {
                     ViewType = view.Name,
                     ObjectName = col.Name,
-                    NewViewType = view.Name,
-                    NewViewProperty = view.Name,
+                    NewViewType = "",
+                    NewViewProperty = "",
                     Parameters = param
                 };
                 return editor;

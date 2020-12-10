@@ -13,12 +13,19 @@ namespace RPSSeleniumProperties.TemplateGenerator
         public override string GenerateObjectDefinition()
         {
             if (string.IsNullOrEmpty(Parameters.IDGrid) && string.IsNullOrEmpty(Parameters.CSSSelectorGrid) && string.IsNullOrEmpty(Parameters.XPathGrid))
-            {
+            { 
                 return $"public IRPSCollectionEditor<{ViewType},{NewViewType}> {this.ObjectName} {{ get; set; }}";
             }
             else
             {
-                return $"public {this.ObjectName}CollectionEditor<{ViewType},{NewViewType}> {this.ObjectName} {{ get; set; }}";
+                if (string.IsNullOrEmpty(this.NewViewType))
+                {
+                    return $"public {this.ObjectName}CollectionEditor<{ViewType}> {this.ObjectName} {{ get; set; }}";
+                }
+                else
+                {
+                    return $"public {this.ObjectName}CollectionEditor<{ViewType},{NewViewType}> {this.ObjectName} {{ get; set; }}";
+                }
             }
             
         }
@@ -34,10 +41,20 @@ namespace RPSSeleniumProperties.TemplateGenerator
             }
             else
             {
-                List<string> definition = new List<string>();
-                definition.Add($"CollectionInit params_{this.ObjectName} = new CollectionInit(){{IDDescriptor = \"{Parameters.IDDescriptor}\",CSSSelectorDescriptor = \"{Parameters.CSSSelectorDescriptor}\",XPathDescriptor = \"{Parameters.XPathDescriptor}\",IDGrid=\"{Parameters.IDGrid}\",CSSSelectorGrid=\"{Parameters.CSSSelectorGrid}\",XPathGrid=\"{Parameters.XPathGrid}\"}};");
-                definition.Add($"{this.ObjectName} = RPSControlFactory.RPSCreateCollectionWithGrid<{this.ObjectName}CollectionEditor<{ViewType},{NewViewType}>,{ViewType},{NewViewType}>( params_{this.ObjectName},this,{Constants.ScreenProperty}.{NewViewProperty});");
-                return definition;
+                if (string.IsNullOrEmpty(this.NewViewType))
+                {
+                    List<string> definition = new List<string>();
+                    definition.Add($"CollectionInit params_{this.ObjectName} = new CollectionInit(){{IDDescriptor = \"{Parameters.IDDescriptor}\",CSSSelectorDescriptor = \"{Parameters.CSSSelectorDescriptor}\",XPathDescriptor = \"{Parameters.XPathDescriptor}\",IDGrid=\"{Parameters.IDGrid}\",CSSSelectorGrid=\"{Parameters.CSSSelectorGrid}\",XPathGrid=\"{Parameters.XPathGrid}\"}};");
+                    definition.Add($"{this.ObjectName} = RPSControlFactory.RPSCreateCollectionWithGrid<{this.ObjectName}CollectionEditor<{ViewType}>,{ViewType}>( params_{this.ObjectName},this);");
+                    return definition;
+                }
+                else
+                {
+                    List<string> definition = new List<string>();
+                    definition.Add($"CollectionInit params_{this.ObjectName} = new CollectionInit(){{IDDescriptor = \"{Parameters.IDDescriptor}\",CSSSelectorDescriptor = \"{Parameters.CSSSelectorDescriptor}\",XPathDescriptor = \"{Parameters.XPathDescriptor}\",IDGrid=\"{Parameters.IDGrid}\",CSSSelectorGrid=\"{Parameters.CSSSelectorGrid}\",XPathGrid=\"{Parameters.XPathGrid}\"}};");
+                    definition.Add($"{this.ObjectName} = RPSControlFactory.RPSCreateCollectionWithGrid<{this.ObjectName}CollectionEditor<{ViewType},{NewViewType}>,{ViewType},{NewViewType}>( params_{this.ObjectName},this,{Constants.ScreenProperty}.{NewViewProperty});");
+                    return definition;
+                }
             }
             
         }

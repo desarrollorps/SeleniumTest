@@ -11,4 +11,9 @@ namespace RPSSeleniumProperties.Interfaces.Interactables
         T Exists(IWebDriver driver);
         T Exists();
     }
+    public interface IRPSCollectionEditor<T> : ISeleniumInteractable<T> where T : class, IView
+    {        
+        T Exists(IWebDriver driver);
+        T Exists();
+    }
 }

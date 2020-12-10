@@ -1,4 +1,33 @@
-﻿    public partial class <#= Model.CollectionName #>CollectionEditor<<#= Model.ViewType #>,<#= Model.NewVieType #>>:RPSCollectionEditor<<#= Model.ViewType #>,<#= Model.NewVieType #>> where <#= Model.ViewType #> : class, IView where <#= Model.NewVieType #> : class, IView
+﻿<# if(string.IsNullOrEmpty(Model.NewVieType)){ #>
+public partial class <#= Model.CollectionName #>CollectionEditor<<#= Model.ViewType #>>:RPSCollectionEditor<<#= Model.ViewType #>> where <#= Model.ViewType #> : class, IView
+    {
+        public  <#= Model.CollectionName #><#= Model.GridName #><<#= Model.ViewType #>> <#= Model.GridName #> {get;set;}
+    }
+    public partial class <#= Model.CollectionName #><#= Model.GridName #> <<#= Model.ViewType #>> :  RPSGridView<<#= Model.ViewType #>> where <#= Model.ViewType #> : class, IView
+    {
+        public <#= Model.CollectionName #><#= Model.GridName #>(<#= Model.ViewType #> currentView)
+        {
+            this.WebDriver = currentView.WebDriver;
+            this.NewView = newView;
+            this.CurrentView = currentView;
+           
+        }
+
+        public void InitializeControls()
+        {
+<# foreach(var control in Model.Controls){ #>
+<# foreach(var s in control.GenerateObjectInitialization()){ #>
+            <#= s #>
+<# } #> 
+<# } #>
+
+        }
+<# foreach(var control in Model.Controls){ #>
+        <#= control.GenerateObjectDefinition() #> 
+<# } #>                     
+    }
+<# }else{ #>
+    public partial class <#= Model.CollectionName #>CollectionEditor<<#= Model.ViewType #>,<#= Model.NewVieType #>>:RPSCollectionEditor<<#= Model.ViewType #>,<#= Model.NewVieType #>> where <#= Model.ViewType #> : class, IView where <#= Model.NewVieType #> : class, IView
     {
         public  <#= Model.CollectionName #><#= Model.GridName #><<#= Model.ViewType #>,<#= Model.NewVieType #>> <#= Model.GridName #> {get;set;}
     }
@@ -23,12 +52,6 @@
         }
 <# foreach(var control in Model.Controls){ #>
         <#= control.GenerateObjectDefinition() #> 
-<# } #>
-        
-        public <#= Model.CollectionName #><#= Model.GridName #> <<#= Model.ViewType #>,<#= Model.NewVieType #>>  Wait(int seconds)
-        {
-            Thread.Sleep(seconds * 1000);
-            return this;
-        }
-      
+<# } #>                     
     }
+<# } #>
