@@ -9,7 +9,7 @@ public partial class <#= Model.CollectionName #>CollectionEditor<<#= Model.ViewT
         {
             this.WebDriver = currentView.WebDriver;          
             this.CurrentView = currentView;
-           
+            InitializeControls();
         }
 
         public void InitializeControls()
@@ -37,7 +37,7 @@ public partial class <#= Model.CollectionName #>CollectionEditor<<#= Model.ViewT
             this.WebDriver = currentView.WebDriver;
             this.NewView = newView;
             this.CurrentView = currentView;
-           
+            InitializeControls();
         }
 
         public void InitializeControls()

@@ -41,10 +41,11 @@ namespace RPSSeleniumProperties.Interactables
 
         public T Write(int row, string text, IWebDriver driver)
         {
-            var element = this.GetElements(driver, new string[] { "input", "textarea" })[row];
+            var element = this.GetElements(driver, "")[row];
             element.Click();
-            element.Clear();
-            element.SendKeys(Keys.Home + text + Keys.Tab);
+            var input = this.GetElements(driver, new string[] { "input", "textarea" })[row];
+            input.Clear();
+            input.SendKeys(Keys.Home + text + Keys.Tab);
             return this.View;
         }
     }

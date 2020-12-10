@@ -141,8 +141,8 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.Grids
             #line default
             #line hidden
             this.Write(" currentView)\r\n        {\r\n            this.WebDriver = currentView.WebDriver;    " +
-                    "      \r\n            this.CurrentView = currentView;\r\n           \r\n        }\r\n\r\n " +
-                    "       public void InitializeControls()\r\n        {\r\n");
+                    "      \r\n            this.CurrentView = currentView;\r\n            InitializeContr" +
+                    "ols();\r\n        }\r\n\r\n        public void InitializeControls()\r\n        {\r\n");
             
             #line 17 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
  foreach(var control in Model.Controls){ 
@@ -362,9 +362,17 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.Grids
             
             #line default
             #line hidden
-            this.Write(" newView)\r\n        {\r\n            this.WebDriver = currentView.WebDriver;\r\n      " +
-                    "      this.NewView = newView;\r\n            this.CurrentView = currentView;\r\n    " +
-                    "       \r\n        }\r\n\r\n        public void InitializeControls()\r\n        {\r\n");
+            this.Write(@" newView)
+        {
+            this.WebDriver = currentView.WebDriver;
+            this.NewView = newView;
+            this.CurrentView = currentView;
+            InitializeControls();
+        }
+
+        public void InitializeControls()
+        {
+");
             
             #line 45 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
  foreach(var control in Model.Controls){ 
