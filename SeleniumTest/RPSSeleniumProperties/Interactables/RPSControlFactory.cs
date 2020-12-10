@@ -212,8 +212,8 @@ namespace RPSSeleniumProperties.Interactables
             var grid = myclass.GetProperties( BindingFlags.Public).Where(p=>p.PropertyType is RPSGridView<T,N>).FirstOrDefault();
             if (grid != null)
             {
-                ConstructorInfo ginfo = grid.GetType().GetConstructor(new Type[] { });
-                var gridInstance = ginfo.Invoke(new object[] { });
+                ConstructorInfo ginfo = grid.GetType().GetConstructor(new Type[] {typeof(T),typeof(N) });
+                var gridInstance = ginfo.Invoke(new object[] {view,newView });
                 /*inicializamos el grid*/
                 grid.SetValue(container, gridInstance);
             }
@@ -232,8 +232,8 @@ namespace RPSSeleniumProperties.Interactables
             var grid = myclass.GetProperties(BindingFlags.Public).Where(p => p.PropertyType is RPSGridView<T>).FirstOrDefault();
             if (grid != null)
             {
-                ConstructorInfo ginfo = grid.GetType().GetConstructor(new Type[] { });
-                var gridInstance = ginfo.Invoke(new object[] { });
+                ConstructorInfo ginfo = grid.GetType().GetConstructor(new Type[] {typeof(T) });
+                var gridInstance = ginfo.Invoke(new object[] { view });
                 /*inicializamos el grid*/
                 grid.SetValue(container, gridInstance);
             }
