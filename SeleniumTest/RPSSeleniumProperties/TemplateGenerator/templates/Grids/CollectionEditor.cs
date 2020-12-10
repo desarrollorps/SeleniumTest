@@ -280,14 +280,7 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.Grids
             
             #line default
             #line hidden
-            this.Write("> ");
-            
-            #line 31 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.GridName));
-            
-            #line default
-            #line hidden
-            this.Write(" {get;set;}\r\n    }\r\n    public partial class ");
+            this.Write("> GridView {get;set;}\r\n    }\r\n    public partial class ");
             
             #line 33 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.CollectionName));

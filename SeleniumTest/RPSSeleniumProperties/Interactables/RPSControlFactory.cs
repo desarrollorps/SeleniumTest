@@ -209,7 +209,7 @@ namespace RPSSeleniumProperties.Interactables
                     WebDriver = view.WebDriver
                 };
             }
-            var grid = myclass.GetProperties( BindingFlags.Public).Where(p=>p.PropertyType is RPSGridView<T,N>).FirstOrDefault();
+            var grid = myclass.GetProperty("GridView");
             if (grid != null)
             {
                 ConstructorInfo ginfo = grid.GetType().GetConstructor(new Type[] {typeof(T),typeof(N) });
@@ -228,8 +228,8 @@ namespace RPSSeleniumProperties.Interactables
             container.View = view;
            
             container.WebDriver = view.WebDriver;
-            
-            var grid = myclass.GetProperties(BindingFlags.Public).Where(p => p.PropertyType is RPSGridView<T>).FirstOrDefault();
+
+            var grid = myclass.GetProperty("GridView");
             if (grid != null)
             {
                 ConstructorInfo ginfo = grid.GetType().GetConstructor(new Type[] {typeof(T) });
