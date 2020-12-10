@@ -182,7 +182,13 @@ namespace RPSSeleniumProperties
     public static class BrowserElements
     {
         
-
+        public static IWebElement GetElement(IWebDriver driver, IWebElement element)
+        {
+            return new WebDriverWait(driver,
+                new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
+                Until(
+                ExpectedConditions.ElementToBeClickable(element));
+        }
         public static IWebElement GetElementCSS(IWebDriver driver,string cssselector)
         {
             return new WebDriverWait(driver,

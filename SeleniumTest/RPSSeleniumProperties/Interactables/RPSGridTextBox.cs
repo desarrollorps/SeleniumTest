@@ -43,9 +43,8 @@ namespace RPSSeleniumProperties.Interactables
         {
             var element = this.GetElements(driver, "")[row];
             element.Click();
-            var input = this.GetElements(driver, new string[] { "input", "textarea" })[row];
-            var id = input.GetAttribute("id");
-            var inpt = BrowserElements.GetElementCSS(driver, $"[id = '{id}']");
+            var input = this.GetElements(driver, new string[] { "input"})[row];            
+            var inpt = BrowserElements.GetElement(driver,input);
             inpt.Click();
             inpt.Clear();
             inpt.SendKeys(Keys.Home + text + Keys.Tab);
