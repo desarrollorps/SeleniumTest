@@ -212,7 +212,7 @@ namespace RPSSeleniumProperties.Interactables
             var grid = myclass.GetProperty("GridView");
             if (grid != null)
             {
-                ConstructorInfo ginfo = grid.GetType().GetConstructor(new Type[] {typeof(T),typeof(N) });
+                ConstructorInfo ginfo = grid.PropertyType.GetConstructor(new Type[] {typeof(T),typeof(N) });
                 var gridInstance = ginfo.Invoke(new object[] {view,newView });
                 /*inicializamos el grid*/
                 grid.SetValue(container, gridInstance);
@@ -232,7 +232,7 @@ namespace RPSSeleniumProperties.Interactables
             var grid = myclass.GetProperty("GridView");
             if (grid != null)
             {
-                ConstructorInfo ginfo = grid.GetType().GetConstructor(new Type[] {typeof(T) });
+                ConstructorInfo ginfo = grid.PropertyType.GetConstructor(new Type[] {typeof(T) });
                 var gridInstance = ginfo.Invoke(new object[] { view });
                 /*inicializamos el grid*/
                 grid.SetValue(container, gridInstance);
