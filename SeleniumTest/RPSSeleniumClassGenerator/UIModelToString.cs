@@ -104,7 +104,7 @@ namespace RPSSeleniumClassGenerator
                 if (grid != null)
                 {
                     param.IDGrid = grid.ID;
-                    param.GridName = grid.Name;
+                   
                    
                 }
                 var editor = new RPSColletionEditorTemplate
@@ -119,7 +119,29 @@ namespace RPSSeleniumClassGenerator
             }
             else
             {
-                return null;
+                CollectionInit param = new CollectionInit();
+
+                var desc = col.DescriptorViews.FirstOrDefault();
+                if (desc != null)
+                {
+                    param.IDDescriptor = desc.ID;
+                }
+                var grid = col.GridViews.FirstOrDefault();
+                if (grid != null)
+                {
+                    param.IDGrid = grid.ID;
+
+
+                }
+                var editor = new RPSColletionEditorTemplate
+                {
+                    ViewType = view.Name,
+                    ObjectName = col.Name,
+                    NewViewType = view.Name,
+                    NewViewProperty = view.Name,
+                    Parameters = param
+                };
+                return editor;
             }
         }
         public static TemplateObject ViewEditorToTemplate(ViewEditor ed, ComunicatorView view)
@@ -187,6 +209,26 @@ namespace RPSSeleniumClassGenerator
                 case "RPS.UI.Model.CheckBoxEditor, RPSUIModel":
                     return new RPSCheckboxTemplate { ID = property.id, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
                 default: 
+                    return null;
+            }
+        }
+        public static TemplateObject EditorToGridTemplate(string gridID,PropertyEditor property, ComunicatorView view)
+        {
+            switch (property.type)
+            {
+                case "RPS.UI.Model.DecimalEditor, RPSUIModel":
+                case "RPS.UI.Model.TextEditor, RPSUIModel":
+                case "RPS.UI.Model.AmountEditor, RPSUIModel":
+                case "RPS.UI.Model.PriceEditor, RPSUIModel":
+                case "RPS.UI.Model.DateTimeEditor, RPSUIModel":
+                    return new RPSGridTextBoxTemplate { CssSelector ="#"+gridID+ " #c"+property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                case "RPS.UI.Model.Button, RPSUIModel":
+                    return new RPSButtonTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name };
+                case "RPS.UI.Model.LookupEditor, RPSUIModel":
+                    return new RPSComboBoxTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                case "RPS.UI.Model.CheckBoxEditor, RPSUIModel":
+                    return new RPSCheckboxTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                default:
                     return null;
             }
         }
@@ -359,25 +401,30 @@ namespace RPSSeleniumClassGenerator
                     if (collection != null)
                     {
                         te.Model.Controls.Add(collection);
-                    if (!string.IsNullOrEmpty((collection as RPSColletionEditorTemplate).Parameters.GridName))
-                    {
-                        RPSSeleniumProperties.TemplateGenerator.templates.Grids.CollectionEditor coltemplate = new RPSSeleniumProperties.TemplateGenerator.templates.Grids.CollectionEditor();
-                        coltemplate.Model = new RPSSeleniumProperties.TemplateGenerator.templates.Grids.CollectionEditorVM();
-                        coltemplate.Model.CollectionName = col.Name;
-                        coltemplate.Model.Customer = te.Model.Customer;
+                        foreach(var gv in col.GridViews)
+                        {
+                            RPSSeleniumProperties.TemplateGenerator.templates.Grids.CollectionEditor coltemplate = new RPSSeleniumProperties.TemplateGenerator.templates.Grids.CollectionEditor();
+                            coltemplate.Model = new RPSSeleniumProperties.TemplateGenerator.templates.Grids.CollectionEditorVM();
+                            coltemplate.Model.CollectionName = col.Name;
+                            coltemplate.Model.Customer = te.Model.Customer;
 
-                        coltemplate.Model.GridName = (collection as RPSColletionEditorTemplate).Parameters.GridName;
-                        coltemplate.Model.NewVieType = (collection as RPSColletionEditorTemplate).NewViewType;
-                        coltemplate.Model.Package = te.Model.Package;
-                        coltemplate.Model.ScreenName = te.Model.ScreenName;
-                        coltemplate.Model.Service = te.Model.Service;
-                        coltemplate.Model.Version = te.Model.Version;
-                        coltemplate.Model.ViewType = (collection as RPSColletionEditorTemplate).ViewType;
-                        te.Model.CollectionClasses.Add(coltemplate);
-                    }
-
-
-
+                            coltemplate.Model.GridName = gv.Name;
+                            coltemplate.Model.NewVieType = (collection as RPSColletionEditorTemplate).NewViewType;
+                            coltemplate.Model.Package = te.Model.Package;
+                            coltemplate.Model.ScreenName = te.Model.ScreenName;
+                            coltemplate.Model.Service = te.Model.Service;
+                            coltemplate.Model.Version = te.Model.Version;
+                            coltemplate.Model.ViewType = (collection as RPSColletionEditorTemplate).ViewType;
+                            foreach (var editor in gv.PropertyEditors)
+                            {
+                                var ctr = EditorToGridTemplate(gv.ID,editor, view);
+                                if (ctr != null)
+                                {
+                                    coltemplate.Model.Controls.Add(ctr);
+                                }
+                            }
+                            te.Model.CollectionClasses.Add(coltemplate);
+                        }                        
                     }
                     else {
                         Console.WriteLine($"There is a null collection {col.ID}-{col.type}");
@@ -400,14 +447,14 @@ namespace RPSSeleniumClassGenerator
                     var editor = ViewEditorToTemplate(ed, view); 
                     if (editor != null)
                     {
-                    te.Model.Controls.Add(editor);
+                        te.Model.Controls.Add(editor);
                     }
-                else
-                {
-                    Console.WriteLine($"There is a null vieweditor {ed.ID}");
-                }
+                    else
+                    {
+                        Console.WriteLine($"There is a null vieweditor {ed.ID}");
+                    }
 
-            }
+                }
                 return te;
            /* }
             else if (viewtype == "RPS.UI.Model.MainEntityViewDefinition, RPSUIModel")

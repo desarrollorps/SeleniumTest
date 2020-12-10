@@ -157,7 +157,7 @@ namespace RPSUIModelParser
             if (!(root is JContainer container))
                 return null;
             var refs = container.Descendants().OfType<JObject>().Where(
-                o => o.ContainsKey("type")
+                o => o.ContainsKey("$type")
                 &&   o["$type"].Value<string>() == "RPS.UI.Model.ViewEditor, RPSUIModel"
                 ).Distinct().ToList();
 

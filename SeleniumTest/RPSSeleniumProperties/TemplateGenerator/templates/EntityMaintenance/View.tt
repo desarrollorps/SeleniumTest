@@ -28,7 +28,7 @@
         }
       
     }
-    <# foreach(var col in Model.CollectionClasses){ #>
-            <#= col.TransformText() #> 
-    <# } #>
+<# foreach(var col in Model.CollectionClasses){ #>
+    <#= col.TransformText() #> 
+<# } #>
  

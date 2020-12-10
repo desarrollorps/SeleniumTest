@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using System.Linq;
 
 namespace RPSSeleniumProperties.Interactables
 {
@@ -56,7 +57,21 @@ namespace RPSSeleniumProperties.Interactables
             view.ViewModel.Properties.Add(property);
             return control;
         }
+        public static IRPSGridTextBox<T> CreateRPSGridTextBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
+        {
+            RPSGridTextBox<T> control = new RPSGridTextBox<T>();
+            control.ID = id;
+            control.CSSSelector = cssSelector;
+            control.XPathSelector = xpath;
+            control.View = view;
+            control.WebDriver = view.WebDriver;
+            var property = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.String, Required = required };
+            control.ViewModelProperty = property;
 
+            property.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(property);
+            return control;
+        }
         public static IRPSCheckbox<T> CreateRPSCheckBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
         {
             RPSCheckbox<T> control = new RPSCheckbox<T>();
@@ -194,11 +209,14 @@ namespace RPSSeleniumProperties.Interactables
                     WebDriver = view.WebDriver
                 };
             }
-            var grid = myclass.GetProperty(parameters.GridName);
-            ConstructorInfo ginfo = grid.GetType().GetConstructor(new Type[] { });
-            var gridInstance = ginfo.Invoke(new object[] { });
-            /*inicializamos el grid*/
-            grid.SetValue(container, gridInstance);
+            var grid = myclass.GetProperties( BindingFlags.Public).Where(p=>p.PropertyType is RPSGridView<T,N>).FirstOrDefault();
+            if (grid != null)
+            {
+                ConstructorInfo ginfo = grid.GetType().GetConstructor(new Type[] { });
+                var gridInstance = ginfo.Invoke(new object[] { });
+                /*inicializamos el grid*/
+                grid.SetValue(container, gridInstance);
+            }
             return container as C;
         }
         #endregion
@@ -211,7 +229,7 @@ namespace RPSSeleniumProperties.Interactables
         public string IDGrid { get; set; }
         public string CSSSelectorGrid { get; set; }
         public string XPathGrid { get; set; }      
-        public string GridName { get; set; }
+      
 
     }
 }

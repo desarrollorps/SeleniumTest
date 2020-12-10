@@ -118,21 +118,21 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance
             #line default
             #line hidden
             this.Write(" Wait(int seconds)\r\n        {\r\n            Thread.Sleep(seconds * 1000);\r\n       " +
-                    "     return this;\r\n        }\r\n      \r\n    }\r\n    ");
+                    "     return this;\r\n        }\r\n      \r\n    }\r\n");
             
             #line 31 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
  foreach(var col in Model.CollectionClasses){ 
             
             #line default
             #line hidden
-            this.Write("            ");
+            this.Write("    ");
             
             #line 32 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.TransformText()));
             
             #line default
             #line hidden
-            this.Write(" \r\n    ");
+            this.Write(" \r\n");
             
             #line 33 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
  } 

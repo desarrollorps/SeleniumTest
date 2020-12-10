@@ -140,6 +140,24 @@ namespace RPSUIModelParser
                         }
                     }
                 });
+                v.Collections.ForEach(col =>
+                {
+                    col.GridViews.ForEach(gv =>
+                    {
+                        gv.PropertyEditors.ForEach(prop =>
+                        {
+                            foreach (var m in viewmodelList)
+                            {
+                                var p = m.Elements.Where(d => d.ID == prop.vmid).FirstOrDefault();
+                                if (p != null)
+                                {
+                                    prop.vmProperty = p;
+                                    break;
+                                }
+                            }
+                        });
+                    });
+                });
             });
             string[] ids = viewmodelList.Select(d => d.ID).ToArray();
             foreach(var v in viewmodelList)
