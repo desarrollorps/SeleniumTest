@@ -42,6 +42,7 @@ namespace RPSSeleniumProperties.Interactables
         public T Write(int row, string text, IWebDriver driver)
         {
             var element = this.GetElements(driver, "div:first-child")[row];
+            
             element.Click();
             var input = this.GetElements(driver, new string[] { "input"})[row];            
             var inpt = BrowserElements.GetElement(driver,input);

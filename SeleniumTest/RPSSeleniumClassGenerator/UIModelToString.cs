@@ -221,7 +221,7 @@ namespace RPSSeleniumClassGenerator
                 case "RPS.UI.Model.AmountEditor, RPSUIModel":
                 case "RPS.UI.Model.PriceEditor, RPSUIModel":
                 case "RPS.UI.Model.DateTimeEditor, RPSUIModel":
-                    return new RPSGridTextBoxTemplate { CssSelector ="#"+gridID+ " div[role='row'] [col-id='c" + property.vmProperty.Name+"']", ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                    return new RPSGridTextBoxTemplate { CssSelector ="#"+gridID+ " .ag-row[role='row'] [col-id='c" + property.vmProperty.Name+"']", ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
                 case "RPS.UI.Model.Button, RPSUIModel":
                    // return new RPSButtonTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name };
                 case "RPS.UI.Model.LookupEditor, RPSUIModel":
