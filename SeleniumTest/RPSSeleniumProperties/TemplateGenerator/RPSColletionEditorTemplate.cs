@@ -36,7 +36,7 @@ namespace RPSSeleniumProperties.TemplateGenerator
             {
                 List<string> definition = new List<string>();
                 definition.Add($"CollectionInit params_{this.ObjectName} = new CollectionInit(){{IDDescriptor = \"{Parameters.IDDescriptor}\",CSSSelectorDescriptor = \"{Parameters.CSSSelectorDescriptor}\",XPathDescriptor = \"{Parameters.XPathDescriptor}\",IDGrid=\"{Parameters.IDGrid}\",CSSSelectorGrid=\"{Parameters.CSSSelectorGrid}\",XPathGrid=\"{Parameters.XPathGrid}\",GridName=\"{Parameters.GridName}\"}};");
-                definition.Add($"{this.ObjectName} = RPSControlFactory.RPSCreateCollectionWithGrid<{this.ObjectName}CollectionEditor,{ViewType},{NewViewType}>( params_{this.ObjectName},this,{Constants.ScreenProperty}.{NewViewProperty});");
+                definition.Add($"{this.ObjectName} = RPSControlFactory.RPSCreateCollectionWithGrid<{this.ObjectName}CollectionEditor<{ViewType},{NewViewType}>,{ViewType},{NewViewType}>( params_{this.ObjectName},this,{Constants.ScreenProperty}.{NewViewProperty});");
                 return definition;
             }
             
