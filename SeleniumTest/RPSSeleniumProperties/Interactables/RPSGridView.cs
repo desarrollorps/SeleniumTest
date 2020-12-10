@@ -12,6 +12,17 @@ namespace RPSSeleniumProperties.Interactables
         public N NewView { get; set; }
 
         public T CurrentView { get; set; }
+        public T AddInlineRow(IWebDriver driver)
+        {
+            var element = this.GetElement(".ag-pinned-left-header .fa-plus-circle");
+            element.Click();
+            return CurrentView;
+        }
+        public T AddInlineRow()
+        {
+            var driver = this.WebDriver;
+            return AddInlineRow(driver);
+        }
       
     }
     
