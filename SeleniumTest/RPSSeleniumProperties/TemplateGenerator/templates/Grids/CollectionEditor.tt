@@ -7,8 +7,7 @@ public partial class <#= Model.CollectionName #>CollectionEditor<<#= Model.ViewT
     {
         public <#= Model.CollectionName #><#= Model.GridName #>(<#= Model.ViewType #> currentView)
         {
-            this.WebDriver = currentView.WebDriver;
-            this.NewView = newView;
+            this.WebDriver = currentView.WebDriver;          
             this.CurrentView = currentView;
            
         }

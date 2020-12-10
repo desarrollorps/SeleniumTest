@@ -190,7 +190,7 @@ namespace RPSSeleniumProperties.Interactables
         }
         public static C RPSCreateCollectionWithGrid<C,T, N>(CollectionInit parameters, T view, N newView) where T : class, IView where N : class, IView where C:class, IRPSCollectionEditor<T,N>
         {
-            Type myclass = typeof(C).MakeGenericType(typeof(T), typeof(N));
+            Type myclass = typeof(C);
             ConstructorInfo cinfo = myclass.GetConstructor(new Type[] { });
             RPSCollectionEditor<T, N> container = (RPSCollectionEditor<T, N>)cinfo.Invoke(new object[] { });
             container.View = view;
@@ -222,7 +222,7 @@ namespace RPSSeleniumProperties.Interactables
 
         public static C RPSCreateCollectionWithGrid<C, T>(CollectionInit parameters, T view) where T : class, IView where C : class, IRPSCollectionEditor<T>
         {
-            Type myclass = typeof(C).MakeGenericType(typeof(T));
+            Type myclass = typeof(C);
             ConstructorInfo cinfo = myclass.GetConstructor(new Type[] { });
             RPSCollectionEditor<T> container = (RPSCollectionEditor<T>)cinfo.Invoke(new object[] { });
             container.View = view;

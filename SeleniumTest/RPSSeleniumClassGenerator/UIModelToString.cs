@@ -223,11 +223,11 @@ namespace RPSSeleniumClassGenerator
                 case "RPS.UI.Model.DateTimeEditor, RPSUIModel":
                     return new RPSGridTextBoxTemplate { CssSelector ="#"+gridID+ " #c"+property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
                 case "RPS.UI.Model.Button, RPSUIModel":
-                    return new RPSButtonTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name };
+                   // return new RPSButtonTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name };
                 case "RPS.UI.Model.LookupEditor, RPSUIModel":
-                    return new RPSComboBoxTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                    //return new RPSComboBoxTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
                 case "RPS.UI.Model.CheckBoxEditor, RPSUIModel":
-                    return new RPSCheckboxTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                    //return new RPSCheckboxTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
                 default:
                     return null;
             }
@@ -421,6 +421,10 @@ namespace RPSSeleniumClassGenerator
                                 if (ctr != null)
                                 {
                                     coltemplate.Model.Controls.Add(ctr);
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"There is a null control {editor.id}-{editor.type} in grid {gv.ID} of collection {col.Name}");
                                 }
                             }
                             te.Model.CollectionClasses.Add(coltemplate);
