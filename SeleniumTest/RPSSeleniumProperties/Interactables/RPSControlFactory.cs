@@ -214,6 +214,8 @@ namespace RPSSeleniumProperties.Interactables
             {
                 ConstructorInfo ginfo = grid.PropertyType.GetConstructor(new Type[] {typeof(T),typeof(N) });
                 var gridInstance = ginfo.Invoke(new object[] {view,newView });
+                var idpro = gridInstance.GetType().GetProperty("ID");
+                idpro.SetValue(gridInstance, parameters.IDGrid);
                 /*inicializamos el grid*/
                 grid.SetValue(container, gridInstance);
             }
@@ -234,6 +236,8 @@ namespace RPSSeleniumProperties.Interactables
             {
                 ConstructorInfo ginfo = grid.PropertyType.GetConstructor(new Type[] {typeof(T) });
                 var gridInstance = ginfo.Invoke(new object[] { view });
+                var idpro = gridInstance.GetType().GetProperty("ID");
+                idpro.SetValue(gridInstance, parameters.IDGrid);
                 /*inicializamos el grid*/
                 grid.SetValue(container, gridInstance);
             }
