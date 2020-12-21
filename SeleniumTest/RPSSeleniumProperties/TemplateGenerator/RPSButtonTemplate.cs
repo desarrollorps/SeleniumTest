@@ -103,6 +103,23 @@ namespace RPSSeleniumProperties.TemplateGenerator
             return new List<string> { $"{this.ObjectName} = RPSControlFactory.RPSSaveButton<{ViewType}>( this);" };
         }
     }
+    public class RPSAcceptButtonTemplate : RPSButtonTemplate
+    {
+        public RPSAcceptButtonTemplate() : base()
+        {
+            this.ObjectName = "AcceptButton";
+        }
+        public override string GenerateObjectDefinition()
+        {
+            return $"public IRPSAcceptButton<{ViewType},{NewViewType}> {this.ObjectName} {{ get; set; }}";
+
+        }
+
+        public override List<string> GenerateObjectInitialization()
+        {
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.RPSAcceptButton<{ViewType},{NewViewType}>( this,{Constants.ScreenProperty}.{NewViewProperty});" };
+        }
+    }
     public class RPSBackButtonTemplate : RPSButtonTemplate
     {
         public RPSBackButtonTemplate():base()

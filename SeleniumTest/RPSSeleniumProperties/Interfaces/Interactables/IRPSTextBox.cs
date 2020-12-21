@@ -13,4 +13,9 @@ namespace RPSSeleniumProperties.Interfaces.Interactables
         T Exists(IWebDriver driver);
         T Exists();
     }
+    public interface IRPSTimeTextBox<T> : IRPSTextBox<T> where T : class, IView
+    {
+        T SelectTimeType(IWebDriver driver, int index);
+        T SelectTimeType(int index);
+    }
 }

@@ -53,6 +53,21 @@ namespace RPSSeleniumProperties.Interactables
             return NewView as N;
         }
     }
+    public class RPSAcceptButton<T,N>:RPSButton<T,N>, IRPSAcceptButton<T,N> where T : class, IView where N:class,IView
+    {
+        public new N Click()
+        {
+            base.Click();
+
+            return NewView as N;
+        }
+
+        public new N Click(IWebDriver driver)
+        {
+            base.Click(driver);
+            return NewView as N;
+        }
+    }
     public class RPSSaveButton<T>:RPSButton<T>, IRPSSaveButton<T> where T : class, IView
     {
      

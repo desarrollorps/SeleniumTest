@@ -57,6 +57,13 @@ namespace SeleniumGeneratedClasses.");
             
             #line default
             #line hidden
+            this.Write(".");
+            
+            #line 12 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\Screen.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
             this.Write("\r\n{\r\n    //RPS VERSION ");
             
             #line 14 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\Screen.tt"
@@ -169,7 +176,7 @@ namespace SeleniumGeneratedClasses.");
             
             #line default
             #line hidden
-            this.Write("\r\n\r\n}");
+            this.Write("    \r\n\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

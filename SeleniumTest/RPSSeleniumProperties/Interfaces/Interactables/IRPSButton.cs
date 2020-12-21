@@ -18,6 +18,10 @@ namespace RPSSeleniumProperties.Interfaces.Interactables
         new N Click();
         new N Click(IWebDriver driver);
     }
+    public interface IRPSAcceptButton<T,N>:IRPSButton<T,N> where T : class, IView where N : class, IView
+    {
+
+    }
     public interface IRPSSaveButton<T>: IRPSButton<T> where T : class, IView
     {
 

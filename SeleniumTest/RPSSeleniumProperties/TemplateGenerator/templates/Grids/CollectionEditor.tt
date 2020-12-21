@@ -1,5 +1,5 @@
 ﻿<# if(string.IsNullOrEmpty(Model.NewVieType)){ #>
-public partial class <#= Model.CollectionName #>CollectionEditor<<#= Model.ViewType #>>:RPSCollectionEditor<<#= Model.ViewType #>> where <#= Model.ViewType #> : class, IView
+    public partial class <#= Model.CollectionName #>CollectionEditor<<#= Model.ViewType #>>:RPSCollectionEditor<<#= Model.ViewType #>> where <#= Model.ViewType #> : class, IView
     {
         public  <#= Model.CollectionName #><#= Model.GridName #><<#= Model.ViewType #>> <#= Model.GridName #> {get;set;}
     }

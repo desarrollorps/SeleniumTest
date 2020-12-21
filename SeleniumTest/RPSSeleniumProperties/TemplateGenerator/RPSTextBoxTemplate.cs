@@ -36,4 +36,38 @@ namespace RPSSeleniumProperties.TemplateGenerator
             return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridTextBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this.CurrentView);" };
         }
     }
+    public class RPSFormattedTextBoxTemplate : TemplateObject
+    {
+        public RPSFormattedTextBoxTemplate() : base()
+        {
+
+        }
+        public override string GenerateObjectDefinition()
+        {
+            return $"public IRPSTextBox<{ViewType}> {this.ObjectName} {{ get; set; }}";
+
+        }
+        public override List<string> GenerateObjectInitialization()
+        {
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSFormattedTextBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
+        }
+    }
+
+    public class RPSTimeTextBoxTemplate : TemplateObject
+    {
+        public RPSTimeTextBoxTemplate() : base()
+        {
+
+        }
+        public override string GenerateObjectDefinition()
+        {
+            return $"public IRPSTimeTextBox<{ViewType}> {this.ObjectName} {{ get; set; }}";
+
+        }
+        public override List<string> GenerateObjectInitialization()
+        {
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSTimeTextBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
+        }
+    }
+
 }

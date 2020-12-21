@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-namespace SeleniumGeneratedClasses.<#= Model.Customer #>.<#= Model.Package #>.Services.<#= Model.Service #>
+namespace SeleniumGeneratedClasses.<#= Model.Customer #>.<#= Model.Package #>.Services.<#= Model.Service #>.<#= Model.Name #>
 {
     //RPS VERSION <#= Model.Version #>
     public partial class <#= Model.Name #>:Screen
@@ -38,6 +38,6 @@ namespace SeleniumGeneratedClasses.<#= Model.Customer #>.<#= Model.Package #>.Se
 <# foreach(var view in Model.Views){ #>
             <#= view.GenerateFullClassDefinition() #> 
 <# } #>
-
+    
 
 }

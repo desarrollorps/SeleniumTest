@@ -18,10 +18,45 @@ namespace RPSSeleniumProperties.Interactables
             element.Click();
             return CurrentView;
         }
+        public N AddItem(IWebDriver driver)
+        {
+            var element = this.GetElement(".rps-stack-panel-item span.fa-plus");
+            element.Click();
+            return NewView;
+        }
+        public T DeleteItem(IWebDriver driver, int index)
+        {
+            var elements = this.GetElements(driver,".ag-pinned-left-cols-container .rps-grid-remove-command");
+            var element = elements[index];
+            element.Click();
+            return CurrentView;
+        }
+        public N NavigateToItem(IWebDriver driver, int index)
+        {
+            var elements = this.GetElements(driver,".ag-pinned-left-cols-container .rps-grid-navigate-command");
+            var element = elements[index];
+            element.Click();
+            return NewView;
+        }
         public T AddInlineRow()
         {
             var driver = this.WebDriver;
             return AddInlineRow(driver);
+        }
+        public N AddItem()
+        {
+            var driver = this.WebDriver;
+            return AddItem(driver);
+        }
+        public T DeleteItem(int index)
+        {
+            var driver = this.WebDriver;
+            return DeleteItem(driver, index);
+        }
+        public N NavigateToItem(int index)
+        {
+            var driver = this.WebDriver;
+            return NavigateToItem(driver, index);
         }
       
     }
@@ -39,6 +74,18 @@ namespace RPSSeleniumProperties.Interactables
         {
             var driver = this.WebDriver;
             return AddInlineRow(driver);
+        }
+        public T DeleteItem(IWebDriver driver, int index)
+        {
+            var elements = this.GetElements(driver, ".ag-pinned-left-cols-container .rps-grid-remove-command");
+            var element = elements[index];
+            element.Click();
+            return CurrentView;
+        }
+        public T DeleteItem(int index)
+        {
+            var driver = this.WebDriver;
+            return DeleteItem(driver, index);
         }
 
     }

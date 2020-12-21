@@ -20,7 +20,7 @@ namespace RPSSeleniumProperties.Interactables
 
         public N Click(IWebDriver driver, string text)
         {
-            var elements = GetElements(driver, "a h3,h4");
+            var elements = GetElements(driver, "rps-descriptor-view a h3,h4");
             foreach(var el in elements)
             {
                 if(el.Text.ToUpper() == text)
@@ -41,7 +41,7 @@ namespace RPSSeleniumProperties.Interactables
 
         public N Click(IWebDriver driver, int index)
         {
-            var element = GetElements(driver, "a");
+            var element = GetElements(driver, "rps-descriptor-view a");
             element[index].Click();
 
             return this.NewView;

@@ -47,8 +47,8 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance
             #line default
             #line hidden
             this.Write(" screen) : base()\r\n        {\r\n            this.WebDriver = screen.WebDriver;\r\n   " +
-                    "         this.Screen = screen;\r\n           \r\n        }\r\n\r\n         public void I" +
-                    "nitializeControls()\r\n        {\r\n");
+                    "         this.Screen = screen;\r\n           \r\n        }\r\n\r\n        public void In" +
+                    "itializeControls()\r\n        {\r\n");
             
             #line 13 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
  foreach(var control in Model.Controls){ 
@@ -118,7 +118,7 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance
             #line default
             #line hidden
             this.Write(" Wait(int seconds)\r\n        {\r\n            Thread.Sleep(seconds * 1000);\r\n       " +
-                    "     return this;\r\n        }\r\n      \r\n    }\r\n");
+                    "     return this;\r\n        }\r\n      \r\n    \r\n");
             
             #line 31 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\EntityMaintenance\View.tt"
  foreach(var col in Model.CollectionClasses){ 
@@ -139,7 +139,7 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance
             
             #line default
             #line hidden
-            this.Write(" ");
+            this.Write("    }\r\n ");
             return this.GenerationEnvironment.ToString();
         }
     }

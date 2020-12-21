@@ -31,7 +31,7 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.Grids
             
             #line default
             #line hidden
-            this.Write("public partial class ");
+            this.Write("    public partial class ");
             
             #line 2 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\Grids\CollectionEditor.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.CollectionName));
