@@ -1,7 +1,7 @@
 ﻿using <#= Model.SeleniumConfigNamespace#>;
 using Xunit;
 using System;
-using <#= Model.UsingToSeleniumGeneratedClasses #>;
+using <#= Model.UsingToSeleniumGeneratedClasses #>.<#= Model.FileNameNoExtension #> ;
 namespace <#= Model.Namespace #>
 {
     public class <#= Model.FileNameNoExtension #>_New
@@ -9,7 +9,11 @@ namespace <#= Model.Namespace #>
         [Fact]        
         public void New_UT()
         {
-            throw new NotImplementedException();
+            var config = SeleniumConfig.Current;
+            using (var screen = new <#= Model.FileNameNoExtension #>())
+            {
+                throw new NotImplementedException();
+            }
             
         }
     }
@@ -18,7 +22,11 @@ namespace <#= Model.Namespace #>
         [Fact]        
         public void Update_UT()
         {
-            throw new NotImplementedException();
+            var config = SeleniumConfig.Current;
+            using (var screen = new <#= Model.FileNameNoExtension #>())
+            {
+                throw new NotImplementedException();
+            }
 
         }
     }
@@ -27,7 +35,11 @@ namespace <#= Model.Namespace #>
         [Fact]        
         public void Delete_UT()
         {
-            throw new NotImplementedException();
+            var config = SeleniumConfig.Current;
+            using (var screen = new <#= Model.FileNameNoExtension #>())
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

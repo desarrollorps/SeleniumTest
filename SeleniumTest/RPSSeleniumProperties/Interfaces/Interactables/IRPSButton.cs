@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RPSSeleniumProperties.Interfaces.Interactables
 {
-    public interface IRPSButton<T>: ISeleniumInteractable<T> where T : class, IView
+    public interface IRPSButton<T> where T : class, IView
     {      
         T Click();
         T Click(IWebDriver driver);

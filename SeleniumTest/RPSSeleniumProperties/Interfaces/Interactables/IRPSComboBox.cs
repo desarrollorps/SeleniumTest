@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RPSSeleniumProperties.Interfaces.Interactables
 {
-    public interface IRPSComboBox<T>:ISeleniumInteractable<T> where T:class,IView
+    public interface IRPSComboBox<T> where T:class,IView
     {
         T Write(string text);
         T Write(string text, IWebDriver driver);

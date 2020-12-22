@@ -39,7 +39,14 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.UnitTest
             
             #line default
             #line hidden
-            this.Write(";\r\nnamespace ");
+            this.Write(".");
+            
+            #line 4 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\UnitTest\CRUDUnitTest.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.FileNameNoExtension));
+            
+            #line default
+            #line hidden
+            this.Write(" ;\r\nnamespace ");
             
             #line 5 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\UnitTest\CRUDUnitTest.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Namespace));
@@ -54,25 +61,50 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.UnitTest
             #line default
             #line hidden
             this.Write("_New\r\n    {\r\n        [Fact]        \r\n        public void New_UT()\r\n        {\r\n   " +
-                    "         throw new NotImplementedException();\r\n            \r\n        }\r\n    }\r\n " +
-                    "   public class ");
+                    "         var config = SeleniumConfig.Current;\r\n            using (var screen = n" +
+                    "ew ");
             
-            #line 16 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\UnitTest\CRUDUnitTest.tt"
+            #line 13 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\UnitTest\CRUDUnitTest.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.FileNameNoExtension));
+            
+            #line default
+            #line hidden
+            this.Write("())\r\n            {\r\n                throw new NotImplementedException();\r\n       " +
+                    "     }\r\n            \r\n        }\r\n    }\r\n    public class ");
+            
+            #line 20 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\UnitTest\CRUDUnitTest.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.FileNameNoExtension));
             
             #line default
             #line hidden
             this.Write("_Update\r\n    {\r\n        [Fact]        \r\n        public void Update_UT()\r\n        " +
-                    "{\r\n            throw new NotImplementedException();\r\n\r\n        }\r\n    }\r\n    pub" +
-                    "lic class ");
+                    "{\r\n            var config = SeleniumConfig.Current;\r\n            using (var scre" +
+                    "en = new ");
             
-            #line 25 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\UnitTest\CRUDUnitTest.tt"
+            #line 26 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\UnitTest\CRUDUnitTest.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.FileNameNoExtension));
+            
+            #line default
+            #line hidden
+            this.Write("())\r\n            {\r\n                throw new NotImplementedException();\r\n       " +
+                    "     }\r\n\r\n        }\r\n    }\r\n    public class ");
+            
+            #line 33 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\UnitTest\CRUDUnitTest.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.FileNameNoExtension));
             
             #line default
             #line hidden
             this.Write("_Delete\r\n    {\r\n        [Fact]        \r\n        public void Delete_UT()\r\n        " +
-                    "{\r\n            throw new NotImplementedException();\r\n        }\r\n    }\r\n}");
+                    "{\r\n            var config = SeleniumConfig.Current;\r\n            using (var scre" +
+                    "en = new ");
+            
+            #line 39 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\UnitTest\CRUDUnitTest.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.FileNameNoExtension));
+            
+            #line default
+            #line hidden
+            this.Write("())\r\n            {\r\n                throw new NotImplementedException();\r\n       " +
+                    "     }\r\n        }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

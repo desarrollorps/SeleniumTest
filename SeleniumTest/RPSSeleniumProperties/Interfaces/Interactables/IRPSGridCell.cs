@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RPSSeleniumProperties.Interfaces.Interactables
 {
-    public interface IRPSGridCell<T> : ISeleniumInteractable<T> where T : class, IView
+    public interface IRPSGridCell<T>  where T : class, IView
     {
 
         T Exists(IWebDriver driver);

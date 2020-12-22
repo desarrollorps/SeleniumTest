@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RPSSeleniumProperties.Interfaces.Interactables
 {
-    public interface IRPSCollectionComboBox<T>:ISeleniumInteractable<T> where T:class,IView
+    public interface IRPSCollectionComboBox<T> where T:class,IView
     {
         T Write();
         T Clear();

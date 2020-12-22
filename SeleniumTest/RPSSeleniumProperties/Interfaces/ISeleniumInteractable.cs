@@ -8,11 +8,11 @@ namespace RPSSeleniumProperties.Interfaces
 {
     public interface ISeleniumInteractable<T> where T : class, IView
     {
-        string ID { get; }
-        string CSSSelector { get; }
-        IViewModelProperty ViewModelProperty { get; }
-        IWebDriver WebDriver { get; }
-        T View { get; }
+        public string ID { get; }
+        public string CSSSelector { get; }
+        public IViewModelProperty ViewModelProperty { get; }
+        public IWebDriver WebDriver { get; }
+        public T View { get; }
         
     }
     public enum ControlType

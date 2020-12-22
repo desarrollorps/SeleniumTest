@@ -173,7 +173,7 @@ namespace RPSSeleniumProperties.Interactables
                 var main = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(drv =>
                 {
-                    var elements = drv.FindElements(By.CssSelector($"div.k-list-container.k-popup.k-group ul li"));
+                    var elements = drv.FindElements(By.CssSelector($"div[style*='display: block'].k-list-container.k-popup ul li"));
                     if (elements.Count > 0)
                     {
                         return elements;
@@ -184,7 +184,8 @@ namespace RPSSeleniumProperties.Interactables
                     }
 
                 });
-                main[index].Click();
+                var clickable = BrowserElements.GetElement(driver, main[index]);
+                clickable.Click();
 
             }
             else
@@ -194,7 +195,7 @@ namespace RPSSeleniumProperties.Interactables
                 var main = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(drv =>
                 {
-                    var elements = drv.FindElements(By.CssSelector($"div.k-list-container.k-popup.k-group ul li"));
+                    var elements = drv.FindElements(By.CssSelector($"div[style*='display: block'].k-list-container.k-popup ul li"));
                     if (elements.Count > 0)
                     {
                         return elements;
@@ -205,7 +206,8 @@ namespace RPSSeleniumProperties.Interactables
                     }
 
                 });
-                main[index].Click();
+                var clickable = BrowserElements.GetElement(driver, main[index]);
+                clickable.Click();
             }
             return this.View;
         }
