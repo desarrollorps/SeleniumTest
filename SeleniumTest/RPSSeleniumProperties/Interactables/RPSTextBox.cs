@@ -61,6 +61,58 @@ namespace RPSSeleniumProperties.Interactables
 
     }
 
+    public class RPSEmailTextBox<T> : RPSTextBox<T>, IRPSTextBox<T> where T : class, IView
+    {
+
+
+
+
+        public T Read(out string value)
+        {
+            var driver = this.WebDriver;
+            return Read(driver, out value);
+
+        }
+        public T Read(IWebDriver driver, out string value)
+        {
+            var element = this.GetElement(driver, new string[] { "a" });
+            value = element.GetAttribute("href");
+            return this.View;
+
+        }
+
+        public T Write(string text)
+        {
+
+            var driver = this.WebDriver;
+            this.Write(text, driver);
+            return this.View;
+
+        }
+        public T Write(string text, IWebDriver driver)
+        {
+            var element = this.GetElement(driver, new string[] { "rps-editor div" });
+            //new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] input")));
+            element.Click();
+            var elementInput = this.GetElement(driver, new string[] { "input" });
+            elementInput.SendKeys(Keys.Control + "a");
+            elementInput.SendKeys(text + Keys.Tab);
+            //BrowserElements.GetElementXPATH(driver, "//body").Click();
+            return this.View;
+        }
+
+        public T Exists(IWebDriver driver)
+        {
+            return this.Exists(driver, "");
+        }
+        public T Exists()
+        {
+            var driver = this.WebDriver;
+            return this.Exists(driver);
+        }
+
+    }
+
     public class RPSFormattedTextBox<T> : RPSTextBox<T>, IRPSTextBox<T> where T : class, IView
     {
         public T Read(out string value)
@@ -113,7 +165,7 @@ namespace RPSSeleniumProperties.Interactables
         }
     }
 
-    public class RPSTimeTextBox<T> : RPSFormattedTextBox<T>, IRPSTimeTextBox<T> where T : class, IView
+    public class RPSDurationTextBox<T> : RPSFormattedTextBox<T>, IRPSDurationTextBox<T> where T : class, IView
     {
         public T Read(out string value)
         {

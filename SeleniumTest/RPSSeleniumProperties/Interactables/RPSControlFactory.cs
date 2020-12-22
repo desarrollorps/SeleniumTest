@@ -73,9 +73,24 @@ namespace RPSSeleniumProperties.Interactables
             view.ViewModel.Properties.Add(property);
             return control;
         }
-        public static IRPSTimeTextBox<T> CreateRPSTimeTextBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
+        public static IRPSTextBox<T> CreateRPSEmailTextBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
         {
-            RPSTimeTextBox<T> control = new RPSTimeTextBox<T>();
+            RPSEmailTextBox<T> control = new RPSEmailTextBox<T>();
+            control.ID = id;
+            control.CSSSelector = cssSelector;
+            control.XPathSelector = xpath;
+            control.View = view;
+            control.WebDriver = view.WebDriver;
+            var property = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.String, Required = required };
+            control.ViewModelProperty = property;
+
+            property.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(property);
+            return control;
+        }
+        public static IRPSDurationTextBox<T> CreateRPSDurationTextBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
+        {
+            RPSDurationTextBox<T> control = new RPSDurationTextBox<T>();
             control.ID = id;
             control.CSSSelector = cssSelector;
             control.XPathSelector = xpath;

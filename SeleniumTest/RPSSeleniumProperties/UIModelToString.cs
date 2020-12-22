@@ -206,32 +206,41 @@ namespace RPSSeleniumClassGenerator
             }
             switch(property.type)
             {
+                case "RPS.UI.Model.EmailEditor, RPSUIModel":
+                    return new RPSEmailTextBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = required };
                 case "RPS.UI.Model.DecimalEditor, RPSUIModel":
                 case "RPS.UI.Model.AmountEditor, RPSUIModel":
                 case "RPS.UI.Model.PriceEditor, RPSUIModel":
                 case "RPS.UI.Model.QuantityEditor, RPSUIModel":               
                 case "RPS.UI.Model.PercentageEditor, RPSUIModel":
-                    return new RPSFormattedTextBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = required };
-                case "RPS.UI.Model.TextEditor, RPSUIModel":                              
                 case "RPS.UI.Model.IntegerEditor, RPSUIModel":
+                    return new RPSFormattedTextBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = required };
+                case "RPS.UI.Model.TextEditor, RPSUIModel":                                             
                 case "RPS.UI.Model.DateTimeEditor, RPSUIModel":
+                case "RPS.UI.Model.PasswordEditor, RPSUIModel":
+                case "RPS.UI.Model.LongEditor, RPSUIModel":
+                case "RPS.UI.Model.TimeEditor, RPSUIModel":
                     return new RPSTextBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = required };                    
                 case "RPS.UI.Model.Button, RPSUIModel":
                     return new RPSButtonTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name) };
                 case "RPS.UI.Model.LookupEditor, RPSUIModel":
                     return new RPSComboBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = required };
                 case "RPS.UI.Model.EnumEditor, RPSUIModel":
+                case "RPS.UI.Model.OptionEditor, RPSUIModel":
                     return new RPSEnumComboBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = required };
                 case "RPS.UI.Model.CheckBoxEditor, RPSUIModel":
                     return new RPSCheckboxTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = required };
                 case "RPS.UI.Model.OptionValueEditor, RPSUIModel":
                     return new RPSOptionTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = required };
-                case "RPS.UI.Model.TimeEditor, RPSUIModel":
-                    return new RPSTimeTextBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = required };
+                case "RPS.UI.Model.DurationEditor, RPSUIModel":
+                    return new RPSDurationTextBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = required };
 
                 case "RPS.UI.Model.EntityDescriptor, RPSUIModel":
                 case "RPS.UI.Model.Label, RPSUIModel":
                 case "RPS.UI.Model.FormattedNumber, RPSUIModel":
+                case "RPS.UI.Model.IconEditor, RPSUIModel":
+                case "RPS.UI.Model.LookupDescriptor, RPSUIModel":
+                case "RPS.UI.Model.ImageEditor, RPSUIModel":
                     return new IgnoredObjectTemplate();
                 
                 default: 
@@ -240,6 +249,7 @@ namespace RPSSeleniumClassGenerator
         }
         public  TemplateObject EditorToGridTemplate(string gridID,PropertyEditor property, ComunicatorView view, RPSSeleniumProperties.TemplateGenerator.templates.Grids.CollectionEditorVM model)
         {
+            string selector = "#" + gridID + " .ag-row[role='row'] [col-id='c" + property.vmProperty.Name + "']";
             switch (property.type)
             {
                 case "RPS.UI.Model.DecimalEditor, RPSUIModel":
@@ -248,13 +258,21 @@ namespace RPSSeleniumClassGenerator
                 case "RPS.UI.Model.PriceEditor, RPSUIModel":
                 case "RPS.UI.Model.Integer, RPSUIModel":
                 case "RPS.UI.Model.DateTimeEditor, RPSUIModel":
-                    return new RPSGridTextBoxTemplate { CssSelector ="#"+gridID+ " .ag-row[role='row'] [col-id='c" + property.vmProperty.Name+"']", ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
+                    return new RPSGridTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
                 case "RPS.UI.Model.Button, RPSUIModel":
                    // return new RPSButtonTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name };
                 case "RPS.UI.Model.LookupEditor, RPSUIModel":
                     //return new RPSComboBoxTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
                 case "RPS.UI.Model.CheckBoxEditor, RPSUIModel":
-                    //return new RPSCheckboxTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                    return null;
+                //return new RPSCheckboxTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                case "RPS.UI.Model.EntityDescriptor, RPSUIModel":
+                case "RPS.UI.Model.Label, RPSUIModel":
+                case "RPS.UI.Model.FormattedNumber, RPSUIModel":
+                case "RPS.UI.Model.IconEditor, RPSUIModel":
+                case "RPS.UI.Model.LookupDescriptor, RPSUIModel":
+                case "RPS.UI.Model.ImageEditor, RPSUIModel":
+                    return new IgnoredObjectTemplate();
                 default:
                     return null;
             }

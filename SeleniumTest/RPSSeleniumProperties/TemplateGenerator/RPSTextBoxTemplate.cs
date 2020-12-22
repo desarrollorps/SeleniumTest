@@ -20,6 +20,23 @@ namespace RPSSeleniumProperties.TemplateGenerator
             return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSTextBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
         }
     }
+
+    public class RPSEmailTextBoxTemplate : TemplateObject
+    {
+        public RPSEmailTextBoxTemplate() : base()
+        {
+
+        }
+        public override string GenerateObjectDefinition()
+        {
+            return $"public IRPSTextBox<{ViewType}> {this.ObjectName} {{ get; set; }}";
+
+        }
+        public override List<string> GenerateObjectInitialization()
+        {
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSEmailTextBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
+        }
+    }
     public class RPSGridTextBoxTemplate : TemplateObject
     {
         public RPSGridTextBoxTemplate() : base()
@@ -53,20 +70,20 @@ namespace RPSSeleniumProperties.TemplateGenerator
         }
     }
 
-    public class RPSTimeTextBoxTemplate : TemplateObject
+    public class RPSDurationTextBoxTemplate : TemplateObject
     {
-        public RPSTimeTextBoxTemplate() : base()
+        public RPSDurationTextBoxTemplate() : base()
         {
 
         }
         public override string GenerateObjectDefinition()
         {
-            return $"public IRPSTimeTextBox<{ViewType}> {this.ObjectName} {{ get; set; }}";
+            return $"public IRPSDurationTextBox<{ViewType}> {this.ObjectName} {{ get; set; }}";
 
         }
         public override List<string> GenerateObjectInitialization()
         {
-            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSTimeTextBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSDurationTextBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
         }
     }
 
