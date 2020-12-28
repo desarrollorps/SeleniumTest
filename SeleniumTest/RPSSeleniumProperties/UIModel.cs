@@ -154,6 +154,19 @@ namespace RPSUIModelParser
                 */
 
                 vm.Elements.ForEach(d => { d.VM = vm; });
+                var linkedproperties = vm.Elements.Where(d => d.ChildLink != null).ToList();
+                foreach(var lp in linkedproperties)
+                {
+                    var linkp = viewmodels.SelectMany(d => d.Elements).Where(d => d.ID == lp.ChildLink.ID).FirstOrDefault();
+                    if (linkp != null && linkp.TargetState != null)
+                    {
+                        var s = states.Where(d => d.ID == linkp.TargetState.ID).FirstOrDefault();
+                        if (s!= null)
+                        {
+                            lp.VMToNavigate = viewmodels.Where(v=>v.ID ==  s.ViewModel.ID).FirstOrDefault();
+                        }
+                    }
+                }
                 viewmodelList.Add(vm);
             });
             states.Where(s => s.ViewModel != null).ToList().ForEach(s =>

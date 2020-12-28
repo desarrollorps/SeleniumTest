@@ -363,10 +363,21 @@ namespace RPSUIModelParser
             [JsonProperty("$type")]
             public string sType { get; set; }
             public string Name { get; set; }
+            public Link ChildLink { get; set; }
+            public State TargetState { get; set; }
         public bool IsRequired { get; set; }
             [JsonIgnore]
             public ComunicatorViewModel VM { get; set; }
-        }
+            [JsonIgnore]
+            public ComunicatorViewModel VMToNavigate { get; set; }
+    }
+    [JsonObject(IsReference = true)]
+    public class Link
+    {
+        [JsonProperty("$ref")]
+        private string reference { set { ID = value; } }
+        public string ID { get; set; }
+    }
     [JsonObject(IsReference = true)]
     public class State
         {

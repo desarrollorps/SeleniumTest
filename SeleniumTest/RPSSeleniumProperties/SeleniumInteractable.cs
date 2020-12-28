@@ -270,5 +270,19 @@ namespace RPSSeleniumProperties
             String contentValue = (String)js.ExecuteScript(script);
             return contentValue;
         }
+        public static List<string> GetPseudoElementzContent(IWebDriver driver, string cssSelector, string pseudoElement)
+        {
+
+            String script = @"var elements = document.querySelectorAll("""+cssSelector+@""");
+                              var result = []
+                              for (var i = 0; i < elements.length; i++)
+                                {
+                                    var el = elements[i];
+                                    result.push(window.getComputedStyle(el, """+pseudoElement+@""").getPropertyValue('content'));
+                                }";            
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            List<string> contentValue = (List<string>)js.ExecuteScript(script);
+            return contentValue;
+        }
     }
 }

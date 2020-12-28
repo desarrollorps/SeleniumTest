@@ -26,6 +26,21 @@ namespace RPSSeleniumProperties.Interactables
             view.ViewModel.Properties.Add(prop);
             return button;
         }
+        public static IRPSGridButton<T> CreateRPSGridButton<T>(string id, string cssSelector, string xpath, T view) where T : class, IView
+        {
+            RPSGridButton<T> button = new RPSGridButton<T>();
+            button.ID = id;
+            button.CSSSelector = cssSelector;
+            button.XPathSelector = xpath;
+            button.View = view;
+
+            var prop = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.Command };
+            button.ViewModelProperty = prop;
+            button.WebDriver = view.WebDriver;
+            prop.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(prop);
+            return button;
+        }
 
         public static IRPSOption<T> CreateRPSOption<T>(string id, string cssSelector, string xpath, T view) where T : class, IView
         {
@@ -54,6 +69,22 @@ namespace RPSSeleniumProperties.Interactables
             var prop = new ViewModelProperty{ Type = Interfaces.viewmodels.ViewModelPropertyType.Command };
             button.ViewModelProperty = prop;
            
+            prop.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(prop);
+            return button;
+        }
+        public static IRPSGridButton<T, N> CreateRPSGridButtonToView<T, N>(string id, string cssSelector, string xpath, T view, N newView) where T : class, IView where N : class, IView
+        {
+            RPSGridButton<T, N> button = new RPSGridButton<T, N>();
+            button.ID = id;
+            button.CSSSelector = cssSelector;
+            button.XPathSelector = xpath;
+            button.View = view;
+            button.NewView = newView;
+            button.WebDriver = view.WebDriver;
+            var prop = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.Command };
+            button.ViewModelProperty = prop;
+
             prop.ViewModel = view.ViewModel;
             view.ViewModel.Properties.Add(prop);
             return button;
@@ -147,6 +178,21 @@ namespace RPSSeleniumProperties.Interactables
             property.ViewModel = view.ViewModel;
             view.ViewModel.Properties.Add(property);
             return control;
+        }
+        public static IRPSColorEditor<T> CreateRPSColorEditor<T>(string id, string cssSelector, string xpath, T view) where T : class, IView
+        {
+            RPSColorEditor<T> button = new RPSColorEditor<T>();
+            button.ID = id;
+            button.CSSSelector = cssSelector;
+            button.XPathSelector = xpath;
+            button.View = view;
+
+            var prop = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.Boolean };
+            button.ViewModelProperty = prop;
+            button.WebDriver = view.WebDriver;
+            prop.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(prop);
+            return button;
         }
 
         public static IRPSComboBox<T> CreateRPSComboBox<T>(string id, string cssSelector,string xpath, bool required, T view) where T : class, IView

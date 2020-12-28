@@ -38,6 +38,40 @@ namespace RPSSeleniumProperties.TemplateGenerator
             }
         }
     }
+    public class RPSGridButtonTemplate : TemplateObject
+    {
+        public RPSGridButtonTemplate() : base()
+        {
+
+        }
+
+        public string NewViewType { get; set; }
+        public string NewViewProperty { get; set; }
+
+        public override string GenerateObjectDefinition()
+        {
+            if (string.IsNullOrEmpty(NewViewType))
+            {
+                return $"public IRPSGridButton<{ViewType}> {this.ObjectName} {{ get; set; }}";
+            }
+            else
+            {
+                return $"public IRPSGridButton<{ViewType},{NewViewType}> {this.ObjectName} {{ get; set; }}";
+            }
+        }
+
+        public override List<string> GenerateObjectInitialization()
+        {
+            if (string.IsNullOrEmpty(NewViewType))
+            {
+                return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridButton<{ViewType}>( \"{this.ID}\",\"{CssSelector}\",\"{XpathSelector}\",this);" };
+            }
+            else
+            {
+                return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridButtonToView<{ViewType},{NewViewType}>(\"{this.ID}\",\"{CssSelector}\",\"{XpathSelector}\", this,{Constants.ScreenProperty}.{NewViewProperty});" };
+            }
+        }
+    }
     public class RPSNewButtonTemplate:RPSButtonTemplate
     {
         public RPSNewButtonTemplate():base()
