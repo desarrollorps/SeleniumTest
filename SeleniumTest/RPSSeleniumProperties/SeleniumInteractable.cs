@@ -178,6 +178,25 @@ namespace RPSSeleniumProperties
                 return null;
             }
         }
+        public virtual List<string> GetPseudoElements(IWebDriver driver, string afterelement, string pseudoelement)
+        {
+            if (!string.IsNullOrEmpty(this.ID))
+            {
+                return BrowserElements.GetPseudoElementsContent(driver, $"[id = '{this.ID}'] {afterelement}".Trim(), pseudoelement);
+            }
+            else if (!string.IsNullOrEmpty(this.CSSSelector))
+            {
+                return BrowserElements.GetPseudoElementsContent(driver, $"{this.CSSSelector} {afterelement}".Trim(), pseudoelement);
+            }
+            else if (!string.IsNullOrEmpty(this.XPathSelector))
+            {
+                return BrowserElements.GetPseudoElementsContent(driver, $"{this.XPathSelector} {afterelement}".Trim(), pseudoelement);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
     public static class BrowserElements
     {
@@ -269,6 +288,23 @@ namespace RPSSeleniumProperties
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             String contentValue = (String)js.ExecuteScript(script);
             return contentValue;
+        }
+        public static List<string> GetPseudoElementsContent(IWebDriver driver, string cssSelector, string pseudoElement)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"let elements = window.querySelectorAll(\"{ cssSelector}\");");
+            sb.AppendLine($"let results = [];");
+            sb.AppendLine($"for(let i = 0; i<elements.length;i++){{");
+            sb.AppendLine($"results.push(window.getComputedStyle(elements[i],'{pseudoElement}').getPropertyValue('content));");
+            
+            sb.AppendLine($"}}");
+            sb.AppendLine($"return elements;");
+
+
+          
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            List<String> contentValues = (List<String>)js.ExecuteScript(sb.ToString());
+            return contentValues;
         }
         public static List<string> GetPseudoElementzContent(IWebDriver driver, string cssSelector, string pseudoElement)
         {

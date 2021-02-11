@@ -283,10 +283,14 @@ namespace RPSSeleniumClassGenerator
                         }
                     }
                 case "RPS.UI.Model.LookupEditor, RPSUIModel":
-                    //return new RPSComboBoxTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                    return new RPSGridComboBoxTemplate { CssSelector =selector, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                case "RPS.UI.Model.EnumEditor, RPSUIModel":
+                case "RPS.UI.Model.OptionEditor, RPSUIModel":
+                case "RPS.UI.Model.TextComboEditor, RPSUIModel":
+                    return new RPSGridEnumComboBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
                 case "RPS.UI.Model.CheckBoxEditor, RPSUIModel":
-                    return null;
-                //return new RPSCheckboxTemplate { CssSelector = "#" + gridID + " #c" + property.vmProperty.Name, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                   
+                 return new RPSGridCheckboxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
                 case "RPS.UI.Model.EntityDescriptor, RPSUIModel":
                 case "RPS.UI.Model.Label, RPSUIModel":
                 case "RPS.UI.Model.FormattedNumber, RPSUIModel":

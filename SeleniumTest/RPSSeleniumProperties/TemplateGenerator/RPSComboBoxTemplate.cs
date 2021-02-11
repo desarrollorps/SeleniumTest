@@ -36,4 +36,37 @@ namespace RPSSeleniumProperties.TemplateGenerator
             return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSEnumComboBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
         }
     }
+
+    public class RPSGridComboBoxTemplate : TemplateObject
+    {
+        public RPSGridComboBoxTemplate() : base()
+        {
+
+        }
+        public override string GenerateObjectDefinition()
+        {
+            return $"public IRPSGridComboBox<{ViewType}> {this.ObjectName} {{ get; set; }}";
+
+        }
+        public override List<string> GenerateObjectInitialization()
+        {
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridComboBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
+        }
+    }
+    public class RPSGridEnumComboBoxTemplate : TemplateObject
+    {
+        public RPSGridEnumComboBoxTemplate() : base()
+        {
+
+        }
+        public override string GenerateObjectDefinition()
+        {
+            return $"public IRPSGridComboBox<{ViewType}> {this.ObjectName} {{ get; set; }}";
+
+        }
+        public override List<string> GenerateObjectInitialization()
+        {
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridEnumComboBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
+        }
+    }
 }

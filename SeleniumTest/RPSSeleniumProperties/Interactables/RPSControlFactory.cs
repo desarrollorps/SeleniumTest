@@ -179,6 +179,22 @@ namespace RPSSeleniumProperties.Interactables
             view.ViewModel.Properties.Add(property);
             return control;
         }
+
+        public static IRPSGridCheckbox<T> CreateRPSGridCheckBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
+        {
+            RPSGridCheckbox<T> control = new RPSGridCheckbox<T>();
+            control.ID = id;
+            control.CSSSelector = cssSelector;
+            control.XPathSelector = xpath;
+            control.View = view;
+            control.WebDriver = view.WebDriver;
+            var property = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.Boolean, Required = required };
+            control.ViewModelProperty = property;
+
+            property.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(property);
+            return control;
+        }
         public static IRPSColorEditor<T> CreateRPSColorEditor<T>(string id, string cssSelector, string xpath, T view) where T : class, IView
         {
             RPSColorEditor<T> button = new RPSColorEditor<T>();
@@ -225,6 +241,37 @@ namespace RPSSeleniumProperties.Interactables
             view.ViewModel.Properties.Add(property);
             return control;
         }
+        public static IRPSGridComboBox<T> CreateRPSGridComboBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
+        {
+            RPSGridComboBox<T> control = new RPSGridComboBox<T>();
+            control.ID = id;
+            control.CSSSelector = cssSelector;
+            control.XPathSelector = xpath;
+            control.View = view;
+            control.WebDriver = view.WebDriver;
+            var property = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.String, Required = required };
+            control.ViewModelProperty = property;
+
+            property.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(property);
+            return control;
+        }
+        public static IRPSGridComboBox<T> CreateRPSGridEnumComboBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
+        {
+            RPSGridEnumComboBox<T> control = new RPSGridEnumComboBox<T>();
+            control.ID = id;
+            control.CSSSelector = cssSelector;
+            control.XPathSelector = xpath;
+            control.View = view;
+            control.WebDriver = view.WebDriver;
+            var property = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.String, Required = required };
+            control.ViewModelProperty = property;
+
+            property.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(property);
+            return control;
+        }
+
         #region RPSButtons
         public static IRPSButton<T, N> RPSNewButton<T, N>(T view, N newView) where T : class, IView where N : class, IView
         {

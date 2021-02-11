@@ -20,4 +20,20 @@ namespace RPSSeleniumProperties.TemplateGenerator
             return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSCheckBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
         }
     }
+    public class RPSGridCheckboxTemplate : TemplateObject
+    {
+        public RPSGridCheckboxTemplate() : base()
+        {
+
+        }
+        public override string GenerateObjectDefinition()
+        {
+            return $"public IRPSGridCheckbox<{ViewType}> {this.ObjectName} {{ get; set; }}";
+
+        }
+        public override List<string> GenerateObjectInitialization()
+        {
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridCheckBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
+        }
+    }
 }
