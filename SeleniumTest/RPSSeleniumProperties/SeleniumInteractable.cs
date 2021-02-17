@@ -25,12 +25,12 @@ namespace RPSSeleniumProperties
 
         public string CSSSelector { get; set; }
         public string XPathSelector { get; set; }
-        public virtual IWebElement GetElement( string afterelement)
+        public virtual SeleniumWebElement GetElement( string afterelement)
         {
             var driver = this.WebDriver;
             return GetElement(driver, afterelement);
         }
-        public virtual IWebElement GetElement(IWebDriver driver,string afterelement)
+        public virtual SeleniumWebElement GetElement(IWebDriver driver,string afterelement)
         {
             if (!string.IsNullOrEmpty(this.ID))
             {
@@ -55,7 +55,7 @@ namespace RPSSeleniumProperties
         }
         public T Exists(IWebDriver driver, string afterelement)
         {
-            IWebElement element;
+            SeleniumWebElement element;
             if (!string.IsNullOrEmpty(this.ID))
             {
                  element = BrowserElements.GetExistElementCSS(driver, $"[id = '{this.ID}'] {afterelement}".Trim());
@@ -75,7 +75,7 @@ namespace RPSSeleniumProperties
             return this.View;
 
         }
-        public virtual ReadOnlyCollection<IWebElement> GetElements(IWebDriver driver, string afterelement)
+        public virtual ReadOnlyCollection<SeleniumWebElement> GetElements(IWebDriver driver, string afterelement)
         {
             if (!string.IsNullOrEmpty(this.ID))
             {
@@ -94,7 +94,7 @@ namespace RPSSeleniumProperties
                 return null;
             }
         }
-        public virtual IWebElement GetElement(IWebDriver driver, string[] afterelements)
+        public virtual SeleniumWebElement GetElement(IWebDriver driver, string[] afterelements)
         {
             List<string> selectors = new List<string>();
             if (!string.IsNullOrEmpty(this.ID))
@@ -127,7 +127,7 @@ namespace RPSSeleniumProperties
             }
         }
 
-        public virtual ReadOnlyCollection<IWebElement> GetElements(IWebDriver driver, string[] afterelements)
+        public virtual ReadOnlyCollection<SeleniumWebElement> GetElements(IWebDriver driver, string[] afterelements)
         {
             List<string> selectors = new List<string>();
             if (!string.IsNullOrEmpty(this.ID))
@@ -201,48 +201,54 @@ namespace RPSSeleniumProperties
     public static class BrowserElements
     {
         
-        public static IWebElement GetElement(IWebDriver driver, IWebElement element)
+        public static SeleniumWebElement GetElement(IWebDriver driver, IWebElement element)
         {
-            return new WebDriverWait(driver,
-                new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
+            var w = new WebDriverWait(driver,
+                new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).//IgnoreExceptionTypes(typeof(ElementClickInterceptedException)).        
                 Until(
                 ExpectedConditions.ElementToBeClickable(element));
+            return new SeleniumWebElement(w);
         }
-        public static IWebElement GetElementCSS(IWebDriver driver,string cssselector)
+        public static SeleniumWebElement GetElementCSS(IWebDriver driver,string cssselector)
         {
-            return new WebDriverWait(driver,
+           
+            var w= new WebDriverWait(driver,
                 new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(
                 ExpectedConditions.ElementToBeClickable(By.CssSelector(cssselector)));
-                //drv => drv.FindElement(By.CssSelector(cssselector)));
+            //drv => drv.FindElement(By.CssSelector(cssselector)));
+            return new SeleniumWebElement(w);
         }
-        public static IWebElement GetElementXPATH(IWebDriver driver, string xpath)
+        public static SeleniumWebElement GetElementXPATH(IWebDriver driver, string xpath)
         {
-            return new WebDriverWait(driver,
+            var w = new WebDriverWait(driver,
                 new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(
                 ExpectedConditions.ElementToBeClickable(By.XPath(xpath)));
-                //drv => drv.FindElement(By.XPath(xpath)));
+            //drv => drv.FindElement(By.XPath(xpath)));
+            return new SeleniumWebElement(w);
         }
-        public static IWebElement GetExistElementCSS(IWebDriver driver, string cssselector)
+        public static SeleniumWebElement GetExistElementCSS(IWebDriver driver, string cssselector)
         {
-            return new WebDriverWait(driver,
+            var w = new WebDriverWait(driver,
                 new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(
                 ExpectedConditions.ElementExists(By.CssSelector(cssselector)));
             //drv => drv.FindElement(By.CssSelector(cssselector)));
+            return new SeleniumWebElement(w);
         }
-        public static IWebElement GetExistElementXPATH(IWebDriver driver, string xpath)
+        public static SeleniumWebElement GetExistElementXPATH(IWebDriver driver, string xpath)
         {
-            return new WebDriverWait(driver,
+            var w = new WebDriverWait(driver,
                 new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(
                 ExpectedConditions.ElementExists(By.XPath(xpath)));
             //drv => drv.FindElement(By.XPath(xpath)));
+            return new SeleniumWebElement(w);
         }
-        public static ReadOnlyCollection<IWebElement> GetElementsCSS(IWebDriver driver, string cssselector)
+        public static ReadOnlyCollection<SeleniumWebElement> GetElementsCSS(IWebDriver driver, string cssselector)
         {
-            return new WebDriverWait(driver,
+            var col = new WebDriverWait(driver,
                 new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(
                 ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector(cssselector))
@@ -259,10 +265,17 @@ namespace RPSSeleniumProperties
                         return null;
                     }
                 }*/);
+            List<SeleniumWebElement> we = new List<SeleniumWebElement>();
+            foreach(var c in col)
+            {
+                we.Add(new SeleniumWebElement(c));
+            }
+            ReadOnlyCollection<SeleniumWebElement> sel = new ReadOnlyCollection<SeleniumWebElement>(we);
+            return sel;
         }
-        public static ReadOnlyCollection<IWebElement> GetElementsXPATH(IWebDriver driver, string xpath)
+        public static ReadOnlyCollection<SeleniumWebElement> GetElementsXPATH(IWebDriver driver, string xpath)
         {
-            return new WebDriverWait(driver,
+            var col = new WebDriverWait(driver,
                 new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(
                 ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath(xpath))
@@ -280,7 +293,14 @@ namespace RPSSeleniumProperties
                     }
                 }
                 */);
-                
+            List<SeleniumWebElement> we = new List<SeleniumWebElement>();
+            foreach (var c in col)
+            {
+                we.Add(new SeleniumWebElement(c));
+            }
+            ReadOnlyCollection<SeleniumWebElement> sel = new ReadOnlyCollection<SeleniumWebElement>(we);
+            return sel;
+
         }
         public static string GetPseudoElementContent(IWebDriver driver, string cssSelector,string pseudoElement)
         {
@@ -292,19 +312,24 @@ namespace RPSSeleniumProperties
         public static List<string> GetPseudoElementsContent(IWebDriver driver, string cssSelector, string pseudoElement)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"let elements = window.querySelectorAll(\"{ cssSelector}\");");
-            sb.AppendLine($"let results = [];");
-            sb.AppendLine($"for(let i = 0; i<elements.length;i++){{");
-            sb.AppendLine($"results.push(window.getComputedStyle(elements[i],'{pseudoElement}').getPropertyValue('content));");
+            sb.AppendLine($"var elements = document.querySelectorAll(\"{ cssSelector}\");");
+            sb.AppendLine($"var results = [];");
+            sb.AppendLine($"for(var i = 0; i<elements.length;i++){{");
+            sb.AppendLine($"results.push(window.getComputedStyle(elements[i],'{pseudoElement}').getPropertyValue('content'));");
             
             sb.AppendLine($"}}");
-            sb.AppendLine($"return elements;");
+            sb.AppendLine($"return results;");
 
 
           
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            List<String> contentValues = (List<String>)js.ExecuteScript(sb.ToString());
-            return contentValues;
+            var contentValues = (System.Collections.ObjectModel.ReadOnlyCollection<object>)js.ExecuteScript(sb.ToString());
+            List<string> values = new List<string>();
+            foreach(var val in contentValues)
+            {
+                values.Add(val.ToString());
+            }
+            return values;
         }
         public static List<string> GetPseudoElementzContent(IWebDriver driver, string cssSelector, string pseudoElement)
         {

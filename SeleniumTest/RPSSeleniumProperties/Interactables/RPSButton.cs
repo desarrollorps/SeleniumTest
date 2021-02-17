@@ -92,7 +92,7 @@ namespace RPSSeleniumProperties.Interactables
             string errorlist = "rps-error-details-viewer li div[class*='rps-error']";
             string savenotification = "div[class*='k-animation-container'] div[class*='k-notification-wrap'] span[title='success']";
             var elements = BrowserElements.GetElementsCSS(driver, $"{savenotification},{errorlist}");
-            var attr = elements[0].GetAttribute("title");
+            var attr = elements[0].GetAttributeOnElemen("title");
             if (attr == "success")
             {
                 return true;

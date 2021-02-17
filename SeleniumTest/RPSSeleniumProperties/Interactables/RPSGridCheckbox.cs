@@ -16,6 +16,7 @@ namespace RPSSeleniumProperties.Interactables
 
         public T Check(int row,IWebDriver driver)
         {
+
             var element = GetElements(driver, "label[class='rps-checkbox-label style-checkbox']")[row];
             string content = GetPseudoElements(driver, "label[class='rps-checkbox-label style-checkbox']", ":before")[row];
             if (string.IsNullOrEmpty(content) || content == "\"\"")

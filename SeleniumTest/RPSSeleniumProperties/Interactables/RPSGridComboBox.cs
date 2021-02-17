@@ -26,13 +26,15 @@ namespace RPSSeleniumProperties.Interactables
         {
 
 
-            var combo = GetElements(driver, "div.rps-editor-editor.rps-editor-viewer.rps-semantic-state")[row];
-            combo.Click();
 
-            var element = GetElement(driver, "input");
+            var cell = this.GetElements(driver, "")[row];// new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector}")));
+            cell.Click();
+
+
+            var element = this.GetElement(driver, new string[] { "input" });
             element.Click();
-            element.Clear();
-            element.SendKeys(Keys.Tab);
+            element.ClearOnInput();
+            element.TabOnInput(); ;
 
             return this.View;
         }
@@ -61,6 +63,7 @@ namespace RPSSeleniumProperties.Interactables
         {
             try
             {
+                
                 var a = GetElements(driver, "a")[row];
                 if (a != null)
                 {
@@ -82,11 +85,14 @@ namespace RPSSeleniumProperties.Interactables
             var driver = this.WebDriver;
             return Select(row,driver, index);
         }
-        public T Select(int row,IWebDriver driver, int index)
+        public T Select(int row, IWebDriver driver, int index)
         {
+            /*
             if (!string.IsNullOrEmpty(ID))
             {
-                var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] div.rps-button-button.rps-editor-editor.k-button.k-button-icon")));
+                var cell = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}']")));
+                cell.Click();
+                var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] k-icon.k-i-arrow-60-down")));
                 combo.Click();
                 var main = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(drv =>
@@ -106,9 +112,12 @@ namespace RPSSeleniumProperties.Interactables
 
             }
             else
-            {
-                var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} div.rps-button-button.rps-editor-editor.k-button.k-button-icon")));
-                combo.Click();
+            {*/
+            var cell = this.GetElements(driver, "")[row];// new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector}")));
+                cell.Click();
+                //var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} k-icon.k-i-arrow-60-down")));
+                var comboarrow = this.GetElement(driver, " span.k-icon.k-i-arrow-60-down");
+                comboarrow.Click();
                 var main = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(drv =>
                 {
@@ -124,7 +133,10 @@ namespace RPSSeleniumProperties.Interactables
 
                 });
                 main[index].Click();
-            }
+                var elementInput = this.GetElement(driver, new string[] { "input" });
+            elementInput.TabOnInput();
+            //main[index].SendKeys(Keys.Enter);
+            //}
             return this.View;
         }
 
@@ -138,30 +150,21 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Write(int row,string text, IWebDriver driver)
         {
-            if (!string.IsNullOrEmpty(ID))
-            {
-                var combo = GetElements(driver, "div.rps-editor-editor.rps-editor-viewer.rps-semantic-state")[row];
-                combo.Click();
 
-                var element = GetElement(driver, "input");
-                element.Click();
-                element.Clear();
-                element.SendKeys(Keys.Home + text + Keys.Tab);
-            }
-            else
-            {
-                var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} div.rps-editor-editor.rps-editor-viewer.rps-semantic-state")));
-                combo.Click();
-                var element = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} input")));
-                element.Click();
-                element.Clear();
-                element.SendKeys(Keys.Home + text + Keys.Tab);
-            }
+            var cell = this.GetElements(driver, "")[row];// new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector}")));
+            cell.Click();
+
+
+                var element = this.GetElement(driver, new string[] { "input" });
+                 element.Click();
+                element.ClearOnInput();
+                element.WriteAndTabOnInput(text);
+            
             return this.View;
         }
         public T Exists(int row, IWebDriver driver)
         {
-            var combo = GetElements(driver, "div.rps-editor-editor.rps-editor-viewer.rps-semantic-state")[row];
+            var cell = this.GetElements(driver, "")[row];
             return this.View;
         }
         public T Exists(int row)
@@ -187,13 +190,16 @@ namespace RPSSeleniumProperties.Interactables
         {
 
 
-            var combo = GetElements(driver, "span.rps-editor-editor.rps-semantic-state")[row];
-            combo.Click();
+            var cell = this.GetElements(driver, "")[row];// new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector}")));
+            cell.Click();
 
-            var element = GetElement(driver, "input");
+
+            var element = this.GetElement(driver, new string[] { "input" });
             element.Click();
-            element.Clear();
-            element.SendKeys(Keys.Tab);
+            element.ClearOnInput();
+            element.TabOnInput();
+
+            
 
             return this.View;
         }
@@ -206,9 +212,10 @@ namespace RPSSeleniumProperties.Interactables
         }
         public string GetSelected(int row,IWebDriver driver)
         {
-
-            var a = GetElements(driver, "input")[row];
-            var str = a.GetProperty("value");
+            var cell = this.GetElements(driver, "")[row];
+            cell.Click();
+            var a = GetElement(driver, "input");
+            var str = a.GetValueOnInput();
             return str;
 
 
@@ -222,8 +229,10 @@ namespace RPSSeleniumProperties.Interactables
         {
             try
             {
-                var a = GetElements(driver, "input")[row];
-                var str = a.GetProperty("value");
+                var cell = this.GetElements(driver, "")[row];
+                cell.Click();
+                var a = GetElement(driver, "input");
+                var str = a.GetValueOnInput();
                 if (!string.IsNullOrEmpty(str))
                 {
                     return true;
@@ -246,49 +255,30 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Select(int row,IWebDriver driver, int index)
         {
-            if (!string.IsNullOrEmpty(ID))
+            var cell = this.GetElements(driver, "")[row];// new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector}")));
+            
+            //cell.Click();
+            cell.Click();
+            //var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} k-icon.k-i-arrow-60-down")));
+            var comboarrow = this.GetElement(driver, " span.k-icon.k-i-arrow-60-down");
+            comboarrow.Click();
+            var main = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
+            Until(drv =>
             {
-                var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] span.k-i-arrow-60-down")));
-                combo.Click();
-                var main = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
-                Until(drv =>
+                var elements = drv.FindElements(By.CssSelector($"div[style*='display: block'].k-list-container.k-popup ul li"));
+                if (elements.Count > 0)
                 {
-                    var elements = drv.FindElements(By.CssSelector($"div[style*='display: block'].k-list-container.k-popup ul li"));
-                    if (elements.Count > 0)
-                    {
-                        return elements;
-                    }
-                    else
-                    {
-                        return null;
-                    }
-
-                });
-                var clickable = BrowserElements.GetElement(driver, main[index]);
-                clickable.Click();
-
-            }
-            else
-            {
-                var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} span.k-i-arrow-60-down")));
-                combo.Click();
-                var main = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
-                Until(drv =>
+                    return elements;
+                }
+                else
                 {
-                    var elements = drv.FindElements(By.CssSelector($"div[style*='display: block'].k-list-container.k-popup ul li"));
-                    if (elements.Count > 0)
-                    {
-                        return elements;
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    return null;
+                }
 
-                });
-                var clickable = BrowserElements.GetElement(driver, main[index]);
-                clickable.Click();
-            }
+            });
+            main[index].Click();
+            var elementInput = this.GetElement(driver, new string[] { "input" });
+            elementInput.TabOnInput();
             return this.View;
         }
 
@@ -302,30 +292,20 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Write(int row,string text, IWebDriver driver)
         {
-            if (!string.IsNullOrEmpty(ID))
-            {
-                var combo = GetElements(driver, "span.rps-editor-editor.rps-semantic-state")[row];
-                combo.Click();
+            var cell = this.GetElements(driver, "")[row];// new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector}")));
+            cell.Click();
 
-                var element = GetElement(driver, "input");
-                element.Click();
-                element.Clear();
-                element.SendKeys(Keys.Home + text + Keys.Tab);
-            }
-            else
-            {
-                var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} span.rps-editor-editor.rps-semantic-state")));
-                combo.Click();
-                var element = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} input")));
-                element.Click();
-                element.Clear();
-                element.SendKeys(Keys.Home + text + Keys.Tab);
-            }
+
+            var element = this.GetElement(driver, new string[] { "input" });
+            element.Click();
+            element.ClearOnInput();
+            element.WriteAndTabOnInput(text);
+
             return this.View;
         }
         public T Exists(int row,IWebDriver driver)
         {
-            var combo = GetElements(driver, "span.rps-editor-editor.rps-semantic-state")[row];
+            var cell = this.GetElements(driver, "")[row];
             return this.View;
         }
         public T Exists(int row)

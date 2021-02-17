@@ -70,5 +70,12 @@ namespace RPSSeleniumProperties
                 WebDriver = null;
             }
         }
+
+        public T GetViewInstance<T>() where T : class, IView
+        {
+            var prop = this.GetType().GetProperties().Where(d => d.PropertyType == typeof(T)).FirstOrDefault();
+            var value = prop.GetValue(this, new object[] { });
+            return value as T;
+        }
     }
 }

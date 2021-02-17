@@ -30,8 +30,8 @@ namespace RPSSeleniumProperties.Interactables
             
                 var element = GetElement(driver, "input");
                 element.Click();
-                element.Clear();
-                element.SendKeys(Keys.Tab);
+                element.ClearOnInput();
+                element.TabOnInput();
             
             return this.View;
         }
@@ -140,17 +140,18 @@ namespace RPSSeleniumProperties.Interactables
 
                 var element = GetElement(driver, "input");
                 element.Click();
-                element.Clear();
-                element.SendKeys(Keys.Home + text + Keys.Tab);
+                element.ClearOnInput();
+                element.WriteAndTabOnInput(text);
             }
             else
             {
                 var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} div.rps-editor-editor.rps-editor-viewer.rps-semantic-state")));
                 combo.Click();
                 var element = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} input")));
-                element.Click();
-                element.Clear();
-                element.SendKeys(Keys.Home + text + Keys.Tab);
+                var el = new SeleniumWebElement(element);
+                el.Click();
+                el.ClearOnInput();
+                el.WriteAndTabOnInput(text);
             }
             return this.View;
         }
@@ -186,8 +187,8 @@ namespace RPSSeleniumProperties.Interactables
 
             var element = GetElement(driver, "input");
             element.Click();
-            element.Clear();
-            element.SendKeys(Keys.Tab);
+            element.ClearOnInput();
+            element.TabOnInput();
 
             return this.View;
         }
@@ -202,7 +203,7 @@ namespace RPSSeleniumProperties.Interactables
         {
 
             var a = GetElement(driver, "input");
-            var str = a.GetProperty("value");
+            var str = a.GetValueOnInput();
             return str;
 
 
@@ -217,7 +218,7 @@ namespace RPSSeleniumProperties.Interactables
             try
             {
                 var a = GetElement(driver, "input");
-                var str = a.GetProperty("value");
+                var str = a.GetValueOnInput();
                 if (!string.IsNullOrEmpty(str))
                 {
                     return true;
@@ -303,17 +304,18 @@ namespace RPSSeleniumProperties.Interactables
 
                 var element = GetElement(driver, "input");
                 element.Click();
-                element.Clear();
-                element.SendKeys(Keys.Home + text + Keys.Tab);
+                element.ClearOnInput();
+                element.WriteAndTabOnInput(text);
             }
             else
             {
                 var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} span.rps-editor-editor.rps-semantic-state")));
                 combo.Click();
                 var element = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} input")));
-                element.Click();
-                element.Clear();
-                element.SendKeys(Keys.Home + text + Keys.Tab);
+                var el = new SeleniumWebElement(element);
+                el.Click();
+                el.ClearOnInput();
+                el.WriteAndTabOnInput(text);
             }
             return this.View;
         }

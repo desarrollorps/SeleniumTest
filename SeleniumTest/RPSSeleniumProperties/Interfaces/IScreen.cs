@@ -11,6 +11,7 @@ namespace RPSSeleniumProperties.Interfaces
         string CodCompany { get; set; }
         string Name { get; }
         T NavigateToScreen<T>(string detailUrl = "") where T : class, IView;
+        T GetViewInstance<T>() where T : class, IView;
         IWebDriver WebDriver { get;  }
             
     }

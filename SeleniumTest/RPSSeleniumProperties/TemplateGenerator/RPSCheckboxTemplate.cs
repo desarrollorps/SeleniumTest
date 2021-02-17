@@ -33,7 +33,7 @@ namespace RPSSeleniumProperties.TemplateGenerator
         }
         public override List<string> GenerateObjectInitialization()
         {
-            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridCheckBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridCheckBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this.CurrentView);" };
         }
     }
 }

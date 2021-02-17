@@ -31,8 +31,8 @@ namespace RPSSeleniumProperties.Interactables
             var dropdown = this.GetElement("span.k-icon.k-i-arrow-60-down");
             dropdown.Click();
             var popupinput = BrowserElements.GetElementCSS(driver,"div.k-flatcolorpicker[style*='display: block'] input.k-color-value");
-            popupinput.SendKeys(Keys.Control + "a");
-            popupinput.SendKeys(color);
+            popupinput.ClearOnInput();//SendKeys(Keys.Control + "a");
+            popupinput.WriteOnInput(color);
             var btnaplicar = BrowserElements.GetElementCSS(driver, "div.k-flatcolorpicker[style*='display: block'] div.k-controls button.apply");
             btnaplicar.Click();
             return this.View;

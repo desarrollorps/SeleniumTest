@@ -24,7 +24,7 @@ namespace RPSSeleniumProperties.Interactables
         public T Read(IWebDriver driver,out string value)
         {
             var element = this.GetElement(driver, new string[] { "input","textarea" });
-            value = element.GetAttribute("value");
+            value = element.GetValueOnInput();
             return this.View;
 
         }
@@ -42,9 +42,9 @@ namespace RPSSeleniumProperties.Interactables
             var element = this.GetElement(driver, new string[] { "input", "textarea" });
             //new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] input")));
             element.Click();
-            
-            element.SendKeys(Keys.Control + "a");
-            element.SendKeys(text+Keys.Tab);
+
+            element.ClearOnInput();//.SendKeys(Keys.Control + "a");
+            element.WriteAndTabOnInput(text);//.SendKeys(text+Keys.Tab);
             //BrowserElements.GetElementXPATH(driver, "//body").Click();
             return this.View;
         }
@@ -76,7 +76,7 @@ namespace RPSSeleniumProperties.Interactables
         public T Read(IWebDriver driver, out string value)
         {
             var element = this.GetElement(driver, new string[] { "a" });
-            value = element.GetAttribute("href");
+            value = element.GetAttributeOnElemen("href");
             return this.View;
 
         }
@@ -95,8 +95,8 @@ namespace RPSSeleniumProperties.Interactables
             //new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] input")));
             element.Click();
             var elementInput = this.GetElement(driver, new string[] { "input" });
-            elementInput.SendKeys(Keys.Control + "a");
-            elementInput.SendKeys(text + Keys.Tab);
+            elementInput.ClearOnInput();//SendKeys(Keys.Control + "a");
+            elementInput.WriteAndTabOnInput(text);
             //BrowserElements.GetElementXPATH(driver, "//body").Click();
             return this.View;
         }
@@ -124,7 +124,7 @@ namespace RPSSeleniumProperties.Interactables
         public T Read(IWebDriver driver, out string value)
         {
             var element = this.GetElement(driver, new string[] { "input" });
-            value = element.GetAttribute("value");
+            value = element.GetValueOnInput();
             return this.View;
 
         }
@@ -140,7 +140,7 @@ namespace RPSSeleniumProperties.Interactables
         public T Write(string text, IWebDriver driver)
         {
             var element = this.GetElements(driver, new string[] { "input" });
-            var style = element[0].GetAttribute("style");
+            var style = element[0].GetAttributeOnElemen("style");
             //new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] input")));
             if (string.IsNullOrEmpty(style))
             {
@@ -148,8 +148,8 @@ namespace RPSSeleniumProperties.Interactables
             }
             var element2 = this.GetElement(driver, new string[] { "input:nth-of-type(2)" });
             //element2.Clear();
-            element2.SendKeys(Keys.Control + "a");
-            element2.SendKeys(text+Keys.Tab);
+            element2.ClearOnInput();//Keys.Control + "a");
+            element2.WriteAndTabOnInput(text);
             
             return this.View;
         }
@@ -176,7 +176,7 @@ namespace RPSSeleniumProperties.Interactables
         public T Read(IWebDriver driver, out string value)
         {
             var element = this.GetElement(driver, new string[] { "input" });
-            value = element.GetAttribute("value");
+            value = element.GetValueOnInput();
             return this.View;
 
         }
@@ -192,7 +192,7 @@ namespace RPSSeleniumProperties.Interactables
         public T Write(string text, IWebDriver driver)
         {
             var element = this.GetElements(driver, new string[] { "input" });
-            var style = element[0].GetAttribute("style");
+            var style = element[0].GetAttributeOnElemen("style");
             //new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] input")));
             if (string.IsNullOrEmpty(style))
             {
@@ -200,8 +200,8 @@ namespace RPSSeleniumProperties.Interactables
             }
             var element2 = this.GetElement(driver, new string[] { "input:nth-of-type(2)" });
             //element2.Clear();
-            element2.SendKeys(Keys.Control + "a");
-            element2.SendKeys(text + Keys.Tab);
+            element2.ClearOnInput();
+            element2.WriteAndTabOnInput(text);
 
             return this.View;
         }

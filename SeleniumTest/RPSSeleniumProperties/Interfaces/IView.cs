@@ -10,6 +10,7 @@ namespace RPSSeleniumProperties.Interfaces
         string Name { get; }
         IWebDriver WebDriver { get; }
         IViewModel ViewModel { get; }
+        IScreen Screen { get; }
         
 }
 }

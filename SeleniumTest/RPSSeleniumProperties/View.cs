@@ -15,15 +15,15 @@ namespace RPSSeleniumProperties
         public View()
         {
             ViewModel = new ViewModel();
-            
+
         }
-      
-        public IWebDriver WebDriver { get; set; }        
+
+        public IWebDriver WebDriver { get; set; }
         public IViewModel ViewModel { get; set; }
 
         public string Name { get; set; }
 
-        
+        public virtual IScreen Screen{get;}            
 
     }
 

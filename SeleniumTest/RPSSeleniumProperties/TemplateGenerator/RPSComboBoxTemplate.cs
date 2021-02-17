@@ -50,7 +50,7 @@ namespace RPSSeleniumProperties.TemplateGenerator
         }
         public override List<string> GenerateObjectInitialization()
         {
-            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridComboBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridComboBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this.CurrentView);" };
         }
     }
     public class RPSGridEnumComboBoxTemplate : TemplateObject
@@ -66,7 +66,7 @@ namespace RPSSeleniumProperties.TemplateGenerator
         }
         public override List<string> GenerateObjectInitialization()
         {
-            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridEnumComboBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridEnumComboBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this.CurrentView);" };
         }
     }
 }

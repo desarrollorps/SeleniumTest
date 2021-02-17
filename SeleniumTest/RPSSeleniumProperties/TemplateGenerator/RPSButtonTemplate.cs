@@ -64,11 +64,11 @@ namespace RPSSeleniumProperties.TemplateGenerator
         {
             if (string.IsNullOrEmpty(NewViewType))
             {
-                return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridButton<{ViewType}>( \"{this.ID}\",\"{CssSelector}\",\"{XpathSelector}\",this);" };
+                return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridButton<{ViewType}>( \"{this.ID}\",\"{CssSelector}\",\"{XpathSelector}\",this.CurrentView);" };
             }
             else
             {
-                return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridButtonToView<{ViewType},{NewViewType}>(\"{this.ID}\",\"{CssSelector}\",\"{XpathSelector}\", this,{Constants.ScreenProperty}.{NewViewProperty});" };
+                return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridButtonToView<{ViewType},{NewViewType}>(\"{this.ID}\",\"{CssSelector}\",\"{XpathSelector}\", this.CurrentView,this.CurrentView.Screen.GetViewInstance<{NewViewType}>());" };
             }
         }
     }

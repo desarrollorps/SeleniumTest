@@ -29,7 +29,7 @@ namespace RPSSeleniumProperties.Interactables
         public T Read(int row,IWebDriver driver, out string value)
         {
             var element = this.GetElements(driver, new string[] { "input", "textarea" })[row];
-            value = element.GetAttribute("value");
+            value = element.GetValueOnInput();
             return this.View;
         }
 
@@ -45,10 +45,10 @@ namespace RPSSeleniumProperties.Interactables
             
             element.Click();
             var input = this.GetElements(driver, new string[] { "input"})[row];            
-            var inpt = BrowserElements.GetElement(driver,input);
+            var inpt = BrowserElements.GetElement(driver,input.Element);
             inpt.Click();
-            inpt.SendKeys(Keys.Control + "a");
-            inpt.SendKeys(text + Keys.Tab);
+            inpt.ClearOnInput();//SendKeys(Keys.Control + "a");
+            inpt.WriteAndTabOnInput(text);//.SendKeys(text + Keys.Tab);
             return this.View;
         }
     }
@@ -67,7 +67,7 @@ namespace RPSSeleniumProperties.Interactables
         public T Read(IWebDriver driver, out string value)
         {
             var element = this.GetElement(driver, new string[] { "a" });
-            value = element.GetAttribute("href");
+            value = element.GetAttributeOnElemen("href");
             return this.View;
 
         }
@@ -86,8 +86,8 @@ namespace RPSSeleniumProperties.Interactables
             //new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] input")));
             element.Click();
             var elementInput = this.GetElement(driver, new string[] { "input" });
-            elementInput.SendKeys(Keys.Control + "a");
-            elementInput.SendKeys(text + Keys.Tab);
+            elementInput.ClearOnInput();//.SendKeys(Keys.Control + "a");
+            elementInput.WriteAndTabOnInput(text);
             //BrowserElements.GetElementXPATH(driver, "//body").Click();
             return this.View;
         }
