@@ -25,48 +25,48 @@ namespace RPSSeleniumProperties
 
         public string CSSSelector { get; set; }
         public string XPathSelector { get; set; }
-        public virtual SeleniumWebElement GetElement( string afterelement)
+        public virtual SeleniumWebElement GetElement( string afterelement, string beforeelement = "")
         {
             var driver = this.WebDriver;
-            return GetElement(driver, afterelement);
+            return GetElement(driver, afterelement,beforeelement);
         }
-        public virtual SeleniumWebElement GetElement(IWebDriver driver,string afterelement)
+        public virtual SeleniumWebElement GetElement(IWebDriver driver,string afterelement, string beforeelement ="")
         {
             if (!string.IsNullOrEmpty(this.ID))
             {
-                return BrowserElements.GetElementCSS(driver,$"[id = '{this.ID}'] {afterelement}".Trim());
+                return BrowserElements.GetElementCSS(driver,$"{beforeelement} [id = '{this.ID}'] {afterelement}".Trim());
             }else if (!string.IsNullOrEmpty(this.CSSSelector))
             {
-                return BrowserElements.GetElementCSS(driver, $"{this.CSSSelector} {afterelement}".Trim());
+                return BrowserElements.GetElementCSS(driver, $"{beforeelement} {this.CSSSelector} {afterelement}".Trim());
             }
             else if (!string.IsNullOrEmpty(this.XPathSelector))
             {
-                return BrowserElements.GetElementXPATH(driver, $"{this.XPathSelector} {afterelement}".Trim());
+                return BrowserElements.GetElementXPATH(driver, $"{beforeelement} {this.XPathSelector} {afterelement}".Trim());
             }
             else
             {
                 return null;
             }
         }
-        public T Exists(string afterelement)
+        public T Exists(string afterelement, string beforeelement = "")
         {
             var driver = this.WebDriver;
-            return Exists(driver, afterelement);
+            return Exists(driver, afterelement, beforeelement);
         }
-        public T Exists(IWebDriver driver, string afterelement)
+        public T Exists(IWebDriver driver, string afterelement,string beforeelement = "")
         {
             SeleniumWebElement element;
             if (!string.IsNullOrEmpty(this.ID))
             {
-                 element = BrowserElements.GetExistElementCSS(driver, $"[id = '{this.ID}'] {afterelement}".Trim());
+                 element = BrowserElements.GetExistElementCSS(driver, $"{beforeelement} [id = '{this.ID}'] {afterelement}".Trim());
             }
             else if (!string.IsNullOrEmpty(this.CSSSelector))
             {
-                element = BrowserElements.GetExistElementCSS(driver, $"{this.CSSSelector} {afterelement}".Trim());
+                element = BrowserElements.GetExistElementCSS(driver, $"{beforeelement} {this.CSSSelector} {afterelement}".Trim());
             }
             else if (!string.IsNullOrEmpty(this.XPathSelector))
             {
-                element =  BrowserElements.GetExistElementXPATH(driver, $"{this.XPathSelector} {afterelement}".Trim());
+                element =  BrowserElements.GetExistElementXPATH(driver, $"{beforeelement} {this.XPathSelector} {afterelement}".Trim());
             }
             else
             {
@@ -75,19 +75,19 @@ namespace RPSSeleniumProperties
             return this.View;
 
         }
-        public virtual ReadOnlyCollection<SeleniumWebElement> GetElements(IWebDriver driver, string afterelement)
+        public virtual ReadOnlyCollection<SeleniumWebElement> GetElements(IWebDriver driver, string afterelement, string beforeelement = "")
         {
             if (!string.IsNullOrEmpty(this.ID))
             {
-                return BrowserElements.GetElementsCSS(driver, $"[id = '{this.ID}'] {afterelement}".Trim());
+                return BrowserElements.GetElementsCSS(driver, $"{beforeelement} [id = '{this.ID}'] {afterelement}".Trim());
             }
             else if (!string.IsNullOrEmpty(this.CSSSelector))
             {
-                return BrowserElements.GetElementsCSS(driver, $"{this.CSSSelector} {afterelement}".Trim());
+                return BrowserElements.GetElementsCSS(driver, $"{beforeelement} {this.CSSSelector} {afterelement}".Trim());
             }
             else if (!string.IsNullOrEmpty(this.XPathSelector))
             {
-                return BrowserElements.GetElementsXPATH(driver, $"{this.XPathSelector} {afterelement}".Trim());
+                return BrowserElements.GetElementsXPATH(driver, $"{beforeelement} {this.XPathSelector} {afterelement}".Trim());
             }
             else
             {
@@ -159,38 +159,38 @@ namespace RPSSeleniumProperties
                 return null;
             }
         }
-        public virtual string GetPseudoElement(IWebDriver driver, string afterelement,string pseudoelement)
+        public virtual string GetPseudoElement(IWebDriver driver, string afterelement,string pseudoelement, string beforeelement = "")
         {
             if(!string.IsNullOrEmpty(this.ID))
             {
-                return BrowserElements.GetPseudoElementContent(driver, $"[id = '{this.ID}'] {afterelement}".Trim(), pseudoelement);
+                return BrowserElements.GetPseudoElementContent(driver, $"{beforeelement} [id = '{this.ID}'] {afterelement}".Trim(), pseudoelement);
             }
             else if (!string.IsNullOrEmpty(this.CSSSelector))
             {
-                return BrowserElements.GetPseudoElementContent(driver, $"{this.CSSSelector} {afterelement}".Trim(), pseudoelement);
+                return BrowserElements.GetPseudoElementContent(driver, $"{beforeelement} {this.CSSSelector} {afterelement}".Trim(), pseudoelement);
             }
             else if (!string.IsNullOrEmpty(this.XPathSelector))
             {
-                return BrowserElements.GetPseudoElementContent(driver, $"{this.XPathSelector} {afterelement}".Trim(), pseudoelement);
+                return BrowserElements.GetPseudoElementContent(driver, $"{beforeelement} {this.XPathSelector} {afterelement}".Trim(), pseudoelement);
             }
             else
             {
                 return null;
             }
         }
-        public virtual List<string> GetPseudoElements(IWebDriver driver, string afterelement, string pseudoelement)
+        public virtual List<string> GetPseudoElements(IWebDriver driver, string afterelement, string pseudoelement, string beforeelement = "")
         {
             if (!string.IsNullOrEmpty(this.ID))
             {
-                return BrowserElements.GetPseudoElementsContent(driver, $"[id = '{this.ID}'] {afterelement}".Trim(), pseudoelement);
+                return BrowserElements.GetPseudoElementsContent(driver, $"{beforeelement} [id = '{this.ID}'] {afterelement}".Trim(), pseudoelement);
             }
             else if (!string.IsNullOrEmpty(this.CSSSelector))
             {
-                return BrowserElements.GetPseudoElementsContent(driver, $"{this.CSSSelector} {afterelement}".Trim(), pseudoelement);
+                return BrowserElements.GetPseudoElementsContent(driver, $"{beforeelement} {this.CSSSelector} {afterelement}".Trim(), pseudoelement);
             }
             else if (!string.IsNullOrEmpty(this.XPathSelector))
             {
-                return BrowserElements.GetPseudoElementsContent(driver, $"{this.XPathSelector} {afterelement}".Trim(), pseudoelement);
+                return BrowserElements.GetPseudoElementsContent(driver, $"{beforeelement} {this.XPathSelector} {afterelement}".Trim(), pseudoelement);
             }
             else
             {
@@ -308,6 +308,11 @@ namespace RPSSeleniumProperties
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             String contentValue = (String)js.ExecuteScript(script);
             return contentValue;
+        }
+        public static IWebElement GetParent(IWebDriver driver, IWebElement element)
+        {
+            return (IWebElement)((IJavaScriptExecutor)driver).ExecuteScript(
+                                   "return arguments[0].parentNode;", element);
         }
         public static List<string> GetPseudoElementsContent(IWebDriver driver, string cssSelector, string pseudoElement)
         {

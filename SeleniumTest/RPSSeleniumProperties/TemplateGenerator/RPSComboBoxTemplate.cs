@@ -20,6 +20,22 @@ namespace RPSSeleniumProperties.TemplateGenerator
             return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSComboBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
         }
     }
+    public class RPSCollectionComboBoxTemplate : TemplateObject
+    {
+        public RPSCollectionComboBoxTemplate() : base()
+        {
+
+        }
+        public override string GenerateObjectDefinition()
+        {
+            return $"public IRPSCollectionComboBox<{ViewType}> {this.ObjectName} {{ get; set; }}";
+
+        }
+        public override List<string> GenerateObjectInitialization()
+        {
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSCollectionComboBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this);" };
+        }
+    }
     public class RPSEnumComboBoxTemplate : TemplateObject
     {
         public RPSEnumComboBoxTemplate() : base()

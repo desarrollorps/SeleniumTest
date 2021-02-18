@@ -153,7 +153,53 @@ namespace RPSSeleniumProperties.Interactables
         {
             RPSGridTextBox<T> control = new RPSGridTextBox<T>();
             control.ID = id;
-            control.CSSSelector = cssSelector;
+            control.OriginalCssSelector = cssSelector;
+            control.XPathSelector = xpath;
+            control.View = view;
+            control.WebDriver = view.WebDriver;
+            var property = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.String, Required = required };
+            control.ViewModelProperty = property;
+
+            property.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(property);
+            return control;
+        }
+
+        public static IRPSGridTextBox<T> CreateRPSGridEmailTextBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
+        {
+            RPSGridEmailTextBox<T> control = new RPSGridEmailTextBox<T>();
+            control.ID = id;
+            control.OriginalCssSelector = cssSelector;
+            control.XPathSelector = xpath;
+            control.View = view;
+            control.WebDriver = view.WebDriver;
+            var property = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.String, Required = required };
+            control.ViewModelProperty = property;
+
+            property.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(property);
+            return control;
+        }
+        public static IRPSGridDurationTextBox<T> CreateRPSGridDurationTextBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
+        {
+            RPSGridDurationTextBox<T> control = new RPSGridDurationTextBox<T>();
+            control.ID = id;
+            control.OriginalCssSelector = cssSelector;
+            control.XPathSelector = xpath;
+            control.View = view;
+            control.WebDriver = view.WebDriver;
+            var property = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.String, Required = required };
+            control.ViewModelProperty = property;
+
+            property.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(property);
+            return control;
+        }
+        public static IRPSGridTextBox<T> CreateRPSGridFormattedTextBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
+        {
+            RPSGridFormattedTextBox<T> control = new RPSGridFormattedTextBox<T>();
+            control.ID = id;
+            control.OriginalCssSelector = cssSelector;
             control.XPathSelector = xpath;
             control.View = view;
             control.WebDriver = view.WebDriver;
@@ -184,7 +230,7 @@ namespace RPSSeleniumProperties.Interactables
         {
             RPSGridCheckbox<T> control = new RPSGridCheckbox<T>();
             control.ID = id;
-            control.CSSSelector = cssSelector;
+            control.OriginalCssSelector = cssSelector;
             control.XPathSelector = xpath;
             control.View = view;
             control.WebDriver = view.WebDriver;
@@ -226,6 +272,21 @@ namespace RPSSeleniumProperties.Interactables
             view.ViewModel.Properties.Add(property);
             return control;
         }
+        public static IRPSCollectionComboBox<T> CreateRPSCollectionComboBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
+        {
+            RPSCollectionComboBox<T> control = new RPSCollectionComboBox<T>();
+            control.ID = id;
+            control.CSSSelector = cssSelector;
+            control.XPathSelector = xpath;
+            control.View = view;
+            control.WebDriver = view.WebDriver;
+            var property = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.Lookup, Required = required };
+            control.ViewModelProperty = property;
+
+            property.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(property);
+            return control;
+        }
         public static IRPSComboBox<T> CreateRPSEnumComboBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
         {
             RPSEnumComboBox<T> control = new RPSEnumComboBox<T>();
@@ -245,7 +306,7 @@ namespace RPSSeleniumProperties.Interactables
         {
             RPSGridComboBox<T> control = new RPSGridComboBox<T>();
             control.ID = id;
-            control.CSSSelector = cssSelector;
+            control.OriginalCssSelector = cssSelector;
             control.XPathSelector = xpath;
             control.View = view;
             control.WebDriver = view.WebDriver;
@@ -260,7 +321,7 @@ namespace RPSSeleniumProperties.Interactables
         {
             RPSGridEnumComboBox<T> control = new RPSGridEnumComboBox<T>();
             control.ID = id;
-            control.CSSSelector = cssSelector;
+            control.OriginalCssSelector = cssSelector;
             control.XPathSelector = xpath;
             control.View = view;
             control.WebDriver = view.WebDriver;

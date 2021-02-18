@@ -14,4 +14,9 @@ namespace RPSSeleniumProperties.Interfaces.Interactables
         T Exists(int row,IWebDriver driver);
         T Exists(int row);
     }
+    public interface IRPSGridDurationTextBox<T> : IRPSGridTextBox<T> where T : class, IView
+    {
+        T SelectTimeType(int row,IWebDriver driver, int index);
+        T SelectTimeType(int row,int index);
+    }
 }

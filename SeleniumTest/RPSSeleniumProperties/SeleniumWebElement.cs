@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,10 @@ namespace RPSSeleniumProperties
         }
         public void WriteAndTabOnInput(string text)
         {
+            Element.SendKeys( text + Keys.Tab);
+        }
+        public void WriteAndTabOnStartInput(string text)
+        {
             Element.SendKeys(Keys.Home + text + Keys.Tab);
         }
         public void WriteOnInput(string text)
@@ -45,6 +50,10 @@ namespace RPSSeleniumProperties
         {
             Element.Clear();
         }
+        public void SelectTextOnInput()
+        {
+            Element.SendKeys(Keys.Control + "a");
+        }
         public string GetValueOnInput()
         {
             return Element.GetProperty("value");
@@ -52,6 +61,15 @@ namespace RPSSeleniumProperties
         public string GetAttributeOnElemen(string name)
         {
             return Element.GetAttribute(name);
+        }
+        
+        public static void ClickOnBlankPage(IWebDriver driver)
+        {
+            //Actions actions = new Actions(driver);
+            var element = driver.FindElement(By.CssSelector("input.rps-search-box-input"));
+            element.Click();
+            //actions.Click(element).Perform();
+          
         }
     }
 }

@@ -11,14 +11,14 @@ namespace RPSSeleniumProperties.Interactables
 {
     public class RPSGridCheckbox<T> : SeleniumInteractable<T>, IRPSGridCheckbox<T> where T : class, IView
     {
-
-
+        public string OriginalCssSelector { get; set; }
+        
 
         public T Check(int row,IWebDriver driver)
         {
-
-            var element = GetElements(driver, "label[class='rps-checkbox-label style-checkbox']")[row];
-            string content = GetPseudoElements(driver, "label[class='rps-checkbox-label style-checkbox']", ":before")[row];
+            CalculateCssSelector(row);
+            var element = GetElement(driver, "label[class='rps-checkbox-label style-checkbox']");
+            string content = GetPseudoElement(driver, "label[class='rps-checkbox-label style-checkbox']", ":before");
             if (string.IsNullOrEmpty(content) || content == "\"\"")
             {
                 element.Click();
@@ -41,8 +41,8 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Click(int row,IWebDriver driver)
         {
-
-            var element = GetElements(driver, "label[class='rps-checkbox-label style-checkbox']")[row];
+            CalculateCssSelector(row);
+            var element = GetElement(driver, "label[class='rps-checkbox-label style-checkbox']");
             element.Click();
 
             return this.View;
@@ -50,15 +50,17 @@ namespace RPSSeleniumProperties.Interactables
 
         public bool IsChecked(int row,IWebDriver driver)
         {
-            var element = GetElements(driver, "label[class='rps-checkbox-label style-checkbox']")[row];
-            string content = GetPseudoElements(driver, "label[class='rps-checkbox-label style-checkbox']", ":before")[row];
+            CalculateCssSelector(row);
+            var element = GetElement(driver, "label[class='rps-checkbox-label style-checkbox']");
+            string content = GetPseudoElement(driver, "label[class='rps-checkbox-label style-checkbox']", ":before");
             return !string.IsNullOrEmpty(content);
         }
 
         public T Uncheck(int row,IWebDriver driver)
         {
-            var element = GetElements(driver, "label[class='rps-checkbox-label style-checkbox']")[row];
-            string content = GetPseudoElements(driver, "label[class='rps-checkbox-label style-checkbox']", ":before")[row];
+            CalculateCssSelector(row);
+            var element = GetElement(driver, "label[class='rps-checkbox-label style-checkbox']");
+            string content = GetPseudoElement(driver, "label[class='rps-checkbox-label style-checkbox']", ":before");
             if ((!string.IsNullOrEmpty(content) || content == "\"\""))
             {
                 element.Click();
@@ -81,7 +83,8 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Exists(int row, IWebDriver driver)
         {
-            var elements = this.GetElements(driver, "label[class='rps-checkbox-label style-checkbox']")[row];
+            CalculateCssSelector(row);
+            var elements = this.GetElement(driver, "label[class='rps-checkbox-label style-checkbox']");
             return this.View;
         }
 
@@ -90,7 +93,12 @@ namespace RPSSeleniumProperties.Interactables
             var driver = this.WebDriver;
             return Exists(row, driver);
         }
+        public void CalculateCssSelector(int row)
+        {
+            this.CSSSelector = OriginalCssSelector.Replace($".ag-row[role='row']", $".ag-row[role='row'][row-index='{row}']");
+        }
+       
 
-      
+
     }
 }

@@ -236,6 +236,8 @@ namespace RPSSeleniumClassGenerator
                     return new RPSColorEditorTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name) };
                 case "RPS.UI.Model.LookupEditor, RPSUIModel":
                     return new RPSComboBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = required };
+                case "RPS.UI.Model.MultiLookupEditor, RPSUIModel":
+                    return new RPSCollectionComboBoxTemplate { ID = property.id, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = required };
                 case "RPS.UI.Model.EnumEditor, RPSUIModel":
                 case "RPS.UI.Model.OptionEditor, RPSUIModel":
                 case "RPS.UI.Model.TextComboEditor, RPSUIModel":
@@ -264,12 +266,21 @@ namespace RPSSeleniumClassGenerator
             string selector = "#" + gridID + " .ag-row[role='row'] [col-id='c" + property.vmProperty.Name + "']";
             switch (property.type)
             {
+                case "RPS.UI.Model.EmailEditor, RPSUIModel":
+                    return new RPSGridEmailTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
                 case "RPS.UI.Model.DecimalEditor, RPSUIModel":
-                case "RPS.UI.Model.TextEditor, RPSUIModel":
                 case "RPS.UI.Model.AmountEditor, RPSUIModel":
                 case "RPS.UI.Model.PriceEditor, RPSUIModel":
-                case "RPS.UI.Model.Integer, RPSUIModel":
+                case "RPS.UI.Model.QuantityEditor, RPSUIModel":
+                case "RPS.UI.Model.PercentageEditor, RPSUIModel":
+                case "RPS.UI.Model.IntegerEditor, RPSUIModel":
+                    return new RPSGridFormattedTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
+                case "RPS.UI.Model.TextEditor, RPSUIModel":
                 case "RPS.UI.Model.DateTimeEditor, RPSUIModel":
+                case "RPS.UI.Model.PasswordEditor, RPSUIModel":
+                case "RPS.UI.Model.LongEditor, RPSUIModel":
+                case "RPS.UI.Model.TimeEditor, RPSUIModel":
+                    
                     return new RPSGridTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
                 case "RPS.UI.Model.Button, RPSUIModel":
                     {
@@ -291,6 +302,8 @@ namespace RPSSeleniumClassGenerator
                 case "RPS.UI.Model.CheckBoxEditor, RPSUIModel":
                    
                  return new RPSGridCheckboxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                case "RPS.UI.Model.DurationEditor, RPSUIModel":
+                    return new RPSGridDurationTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
                 case "RPS.UI.Model.EntityDescriptor, RPSUIModel":
                 case "RPS.UI.Model.Label, RPSUIModel":
                 case "RPS.UI.Model.FormattedNumber, RPSUIModel":

@@ -81,8 +81,9 @@ namespace RPSSeleniumProperties.Interactables
         {
             if (!string.IsNullOrEmpty(ID))
             {
-                var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] div.rps-button-button.rps-editor-editor.k-button.k-button-icon")));
-                combo.Click();
+                var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] div.rps-button-button.rps-editor-editor.k-button.k-button-icon, [id='{this.ID}'] span.k-icon.k-i-arrow-60-down")));
+                var el = new SeleniumWebElement(combo);
+                el.Click();
                 var main = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(drv =>
                 {
@@ -96,14 +97,17 @@ namespace RPSSeleniumProperties.Interactables
                         return null;
                     }
                     
-                });                
-                main[index].Click();
-                
+                });
+                var it = main[index];
+                var seleniumit = new SeleniumWebElement(it);
+                seleniumit.Click();
+
             }
             else
             {
-                var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} div.rps-button-button.rps-editor-editor.k-button.k-button-icon")));
-                combo.Click();
+                var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} div.rps-button-button.rps-editor-editor.k-button.k-button-icon, {this.CSSSelector} span.k-icon.k-i-arrow-60-down")));
+                var el = new SeleniumWebElement(combo);
+                el.Click();
                 var main = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(drv =>
                 {
@@ -118,7 +122,9 @@ namespace RPSSeleniumProperties.Interactables
                     }
 
                 });
-                main[index].Click();
+                var it = main[index];
+                var seleniumit = new SeleniumWebElement(it);
+                seleniumit.Click();
             }
             return this.View;
         }
