@@ -8,12 +8,12 @@ using System.Text;
 
 namespace RPSSeleniumProperties.Interactables
 {
-    public class RPSGridTextBox<T> : RPSTextBox<T>, IRPSGridTextBox<T> where T : class, IView
+    public class RPSGridTextBox<T> : SeleniumInteractableOnGrid<T>, IRPSGridTextBox<T> where T : class, IView
     {
-        public string OriginalCssSelector { get; set; }
+        
         public T Exists(int row, IWebDriver driver)
         {
-            var elements = this.GetElements(driver, "div:first-child")[row];
+            var elements = this.GetElement(driver,row, "div:first-child");
             return this.View;
         }
 
@@ -30,7 +30,7 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Read(int row,IWebDriver driver, out string value)
         {
-            var element = this.GetElements(driver, new string[] { "input", "textarea" })[row];
+            var element = this.GetElement(driver,row, new string[] { "input", "textarea" });
             value = element.GetValueOnInput();
             return this.View;
         }
@@ -43,34 +43,21 @@ namespace RPSSeleniumProperties.Interactables
 
         public T Write(int row, string text, IWebDriver driver)
         {
-            var element = GetCurrentCellElement(driver, row);
+            var element = this.GetElement(driver,row, "");
 
             element.Click();
-            var input = this.GetElement(driver, new string[] { "input"});
+            var input = this.GetElement(driver,row, new string[] { "input"});
             //var inpt = BrowserElements.GetElement(driver,input.Element);
             input.Click();
             input.SelectTextOnInput();//SendKeys(Keys.Control + "a");
             input.WriteOnInput(text);//.SendKeys(text + Keys.Tab);
             SeleniumWebElement.ClickOnBlankPage(driver);
             return this.View;
-        }
-        private SeleniumWebElement GetCurrentCellElement(IWebDriver driver, int row)
-        {
-            CalculateCssSelector(row);
-            var element = this.GetElement(driver, "");
-
-
-            return element;
-        }
-        public void CalculateCssSelector(int row)
-        {
-            this.CSSSelector = OriginalCssSelector.Replace($".ag-row[role='row']", $".ag-row[role='row'][row-index='{row}']");
-        }
+        }       
+       
     }
-    public class RPSGridEmailTextBox<T> : RPSTextBox<T>, IRPSGridTextBox<T> where T : class, IView
-    {
-
-        public string OriginalCssSelector { get; set; }
+    public class RPSGridEmailTextBox<T> : SeleniumInteractableOnGrid<T>, IRPSGridTextBox<T> where T : class, IView
+    {        
 
 
         public T Read(int row,out string value)
@@ -81,7 +68,7 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Read(int row,IWebDriver driver, out string value)
         {
-            var element = this.GetElements(driver, new string[] { "a" })[row];
+            var element = this.GetElement(driver,row, new string[] { "a" });
             value = element.GetAttributeOnElemen("href");
             return this.View;
 
@@ -98,10 +85,10 @@ namespace RPSSeleniumProperties.Interactables
         public T Write(int row,string text, IWebDriver driver)
         {
             // var element = this.GetElements(driver, new string[] { "rps-editor div" })[row];
-            var element = GetCurrentCellElement(driver, row);
+            var element = this.GetElement(driver, row, "");
 
             element.Click();
-            var elementInput = this.GetElement(driver, new string[] { "input" });
+            var elementInput = this.GetElement(driver,row, new string[] { "input" });
             elementInput.SelectTextOnInput();//.SendKeys(Keys.Control + "a");
             elementInput.WriteOnInput(text);
             SeleniumWebElement.ClickOnBlankPage(driver);
@@ -111,34 +98,22 @@ namespace RPSSeleniumProperties.Interactables
 
         public T Exists(int row, IWebDriver driver)
         {
-            var elements = this.GetElements(driver, "rps-editor div")[row];
+            var elements = this.GetElement(driver,row, "rps-editor div");
             return this.View;
         }
         public T Exists(int row)
         {
             var driver = this.WebDriver;
             return this.Exists(row, driver);
-        }
-        private SeleniumWebElement GetCurrentCellElement(IWebDriver driver, int row)
-        {
-            CalculateCssSelector(row);
-            var element = this.GetElement(driver, "");
-
-
-            return element;
-        }
-        public void CalculateCssSelector(int row)
-        {
-            this.CSSSelector = OriginalCssSelector.Replace($".ag-row[role='row']", $".ag-row[role='row'][row-index='{row}']");
-        }
+        }        
 
     }
 
     
 
-    public class RPSGridFormattedTextBox<T> : RPSTextBox<T>, IRPSGridTextBox<T> where T : class, IView
+    public class RPSGridFormattedTextBox<T> : SeleniumInteractableOnGrid<T>, IRPSGridTextBox<T> where T : class, IView
     {
-        public string OriginalCssSelector { get; set; }
+        
         public T Read(int row,out string value)
         {
             var driver = this.WebDriver;
@@ -147,7 +122,7 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Read(int row, IWebDriver driver, out string value)
         {
-            var element = this.GetElements(driver, new string[] { "input" })[row];
+            var element = this.GetElement(driver,row, new string[] { "input" });
             value = element.GetValueOnInput();
             return this.View;
 
@@ -163,7 +138,7 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Write(int row,string text, IWebDriver driver)
         {
-            var element = GetCurrentCellElement(driver, row);
+            var element = this.GetElement(driver, row, "");
             //var element = elements[row];
             element.Click();
             //el elemento tiene dos input pero solo uno visible
@@ -174,7 +149,7 @@ namespace RPSSeleniumProperties.Interactables
                 element.Click();
             }*/
             //cogemos el otro
-            var element2 = this.GetElement(driver, new string[] { "input[data-role]" });
+            var element2 = this.GetElement(driver,row, new string[] { "input[data-role]" });
             //element2.Clear();
             element2.SelectTextOnInput();//Keys.Control + "a");
             element2.WriteOnInput(text);
@@ -184,31 +159,19 @@ namespace RPSSeleniumProperties.Interactables
 
         public T Exists(int row, IWebDriver driver)
         {
-            var element = this.GetElements(driver, new string[] { "input" })[row];
+            var element = this.GetElement(driver,row, new string[] { "input" });
             return this.View;
         }
         public T Exists(int row)
         {
             var driver = this.WebDriver;
-            return this.Exists(driver);
-        }
-        private SeleniumWebElement GetCurrentCellElement(IWebDriver driver, int row)
-        {
-            CalculateCssSelector(row);
-            var element = this.GetElement(driver, "");
-
-
-            return element;
-        }
-        public void CalculateCssSelector(int row)
-        {
-            this.CSSSelector = OriginalCssSelector.Replace($".ag-row[role='row']", $".ag-row[role='row'][row-index='{row}']");
-        }
+            return this.Exists(row,driver);
+        }     
     }
 
-    public class RPSGridDurationTextBox<T> : RPSFormattedTextBox<T>, IRPSGridDurationTextBox<T> where T : class, IView
+    public class RPSGridDurationTextBox<T> : SeleniumInteractableOnGrid<T>, IRPSGridDurationTextBox<T> where T : class, IView
     {
-        public string OriginalCssSelector { get; set; }
+       
         public T Read(int row,out string value)
         {
             var driver = this.WebDriver;
@@ -217,7 +180,7 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Read(int row,IWebDriver driver, out string value)
         {
-            var element = this.GetElements(driver, new string[] { "input" })[row];
+            var element = this.GetElement(driver,row, new string[] { "input" });
             value = element.GetValueOnInput();
             return this.View;
 
@@ -234,9 +197,9 @@ namespace RPSSeleniumProperties.Interactables
         public T Write(int row,string text, IWebDriver driver)
         {
 
-            var element = GetCurrentCellElement(driver, row);
+            var element = this.GetElement(driver, row, "");
             element.Click();
-            var element2 = this.GetElement(driver, new string[] { "input:nth-of-type(2)" });
+            var element2 = this.GetElement(driver,row, new string[] { "input:nth-of-type(2)" });
             //element2.Clear();
             element2.ClearOnInput();
             element2.WriteOnInput(text);
@@ -247,7 +210,7 @@ namespace RPSSeleniumProperties.Interactables
 
         public T Exists(int row, IWebDriver driver)
         {
-            var element = this.GetElements(driver, new string[] { "input" })[row];
+            var element = this.GetElement(driver,row, new string[] { "input" });
             return this.View;
         }
         public T Exists(int row)
@@ -259,7 +222,7 @@ namespace RPSSeleniumProperties.Interactables
         public T SelectTimeType(int row,IWebDriver driver, int index)
         {
            
-                var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElements(By.CssSelector($"{this.CSSSelector} span.k-i-arrow-60-down")))[row];
+                var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector.Replace(SeleniumInteractableOnGridConstants.RowIndexPatter,this.GetRowIndexText(row))} span.k-i-arrow-60-down")));
             var seleniumCombo = new SeleniumWebElement(combo);
             seleniumCombo.Click();
                 var main = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
@@ -286,19 +249,7 @@ namespace RPSSeleniumProperties.Interactables
         {
             var driver = this.WebDriver;
             return SelectTimeType(row,driver, index);
-        }
-        private SeleniumWebElement GetCurrentCellElement(IWebDriver driver, int row)
-        {
-            CalculateCssSelector(row);
-            var element = this.GetElement(driver, "");
-            
-            
-            return element;
-        }
-        public void CalculateCssSelector(int row)
-        {
-            this.CSSSelector = OriginalCssSelector.Replace($".ag-row[role='row']", $".ag-row[role='row'][row-index='{row}']");
-        }
+        }       
 
     }
     

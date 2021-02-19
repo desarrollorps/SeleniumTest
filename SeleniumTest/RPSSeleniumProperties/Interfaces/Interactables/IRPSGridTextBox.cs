@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RPSSeleniumProperties.Interfaces.Interactables
 {
-    public interface IRPSGridTextBox<T>:IRPSTextBox<T> where T : class, IView
+    public interface IRPSGridTextBox<T> where T : class, IView
     {
         T Write(int row,string text);
         T Write(int row,string text, IWebDriver driver);

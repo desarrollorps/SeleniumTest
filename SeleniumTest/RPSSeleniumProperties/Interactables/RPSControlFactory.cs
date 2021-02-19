@@ -153,7 +153,7 @@ namespace RPSSeleniumProperties.Interactables
         {
             RPSGridTextBox<T> control = new RPSGridTextBox<T>();
             control.ID = id;
-            control.OriginalCssSelector = cssSelector;
+            control.CSSSelector = cssSelector;
             control.XPathSelector = xpath;
             control.View = view;
             control.WebDriver = view.WebDriver;
@@ -169,7 +169,7 @@ namespace RPSSeleniumProperties.Interactables
         {
             RPSGridEmailTextBox<T> control = new RPSGridEmailTextBox<T>();
             control.ID = id;
-            control.OriginalCssSelector = cssSelector;
+            control.CSSSelector = cssSelector;
             control.XPathSelector = xpath;
             control.View = view;
             control.WebDriver = view.WebDriver;
@@ -184,7 +184,7 @@ namespace RPSSeleniumProperties.Interactables
         {
             RPSGridDurationTextBox<T> control = new RPSGridDurationTextBox<T>();
             control.ID = id;
-            control.OriginalCssSelector = cssSelector;
+            control.CSSSelector = cssSelector;
             control.XPathSelector = xpath;
             control.View = view;
             control.WebDriver = view.WebDriver;
@@ -199,7 +199,7 @@ namespace RPSSeleniumProperties.Interactables
         {
             RPSGridFormattedTextBox<T> control = new RPSGridFormattedTextBox<T>();
             control.ID = id;
-            control.OriginalCssSelector = cssSelector;
+            control.CSSSelector = cssSelector;
             control.XPathSelector = xpath;
             control.View = view;
             control.WebDriver = view.WebDriver;
@@ -230,7 +230,7 @@ namespace RPSSeleniumProperties.Interactables
         {
             RPSGridCheckbox<T> control = new RPSGridCheckbox<T>();
             control.ID = id;
-            control.OriginalCssSelector = cssSelector;
+            control.CSSSelector = cssSelector;
             control.XPathSelector = xpath;
             control.View = view;
             control.WebDriver = view.WebDriver;
@@ -306,7 +306,7 @@ namespace RPSSeleniumProperties.Interactables
         {
             RPSGridComboBox<T> control = new RPSGridComboBox<T>();
             control.ID = id;
-            control.OriginalCssSelector = cssSelector;
+            control.CSSSelector = cssSelector;
             control.XPathSelector = xpath;
             control.View = view;
             control.WebDriver = view.WebDriver;
@@ -321,7 +321,7 @@ namespace RPSSeleniumProperties.Interactables
         {
             RPSGridEnumComboBox<T> control = new RPSGridEnumComboBox<T>();
             control.ID = id;
-            control.OriginalCssSelector = cssSelector;
+            control.CSSSelector = cssSelector;
             control.XPathSelector = xpath;
             control.View = view;
             control.WebDriver = view.WebDriver;

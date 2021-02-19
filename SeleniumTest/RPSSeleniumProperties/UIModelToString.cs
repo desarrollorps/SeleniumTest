@@ -10,6 +10,7 @@ using RPSSeleniumProperties.Interactables;
 using RPSSeleniumProperties.TemplateGenerator.templates.UnitTest;
 using System.IO;
 using System.Threading.Tasks;
+using RPSSeleniumProperties;
 
 namespace RPSSeleniumClassGenerator
 {
@@ -263,7 +264,7 @@ namespace RPSSeleniumClassGenerator
         }
         public  TemplateObject EditorToGridTemplate(string gridID,PropertyEditor property, ComunicatorView view, RPSSeleniumProperties.TemplateGenerator.templates.Grids.CollectionEditorVM model)
         {
-            string selector = "#" + gridID + " .ag-row[role='row'] [col-id='c" + property.vmProperty.Name + "']";
+            string selector = $"#{gridID} .ag-row[role='row']{SeleniumInteractableOnGridConstants.RowIndexPatter} [col-id='c{property.vmProperty.Name }']";
             switch (property.type)
             {
                 case "RPS.UI.Model.EmailEditor, RPSUIModel":
@@ -461,7 +462,7 @@ namespace RPSSeleniumClassGenerator
             string viewtype = view.type;
            /* if  (viewtype == "RPS.UI.Model.QueryViewDefinition, RPSUIModel")
             {*/
-                var te = new View();
+                var te = new RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance.View();
                 te.Model = new ViewVM();
                 te.Model.Service = Service;
                 te.Model.Package = Package;

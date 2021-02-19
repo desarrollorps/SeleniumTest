@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RPSSeleniumProperties.Interactables
 {
-    public class RPSGridComboBox<T> : SeleniumInteractable<T>, IRPSGridComboBox<T> where T : class, IView
+    public class RPSGridComboBox<T> : SeleniumInteractableOnGrid<T>, IRPSGridComboBox<T> where T : class, IView
     {
 
         public string OriginalCssSelector { get; set; }
@@ -26,12 +26,12 @@ namespace RPSSeleniumProperties.Interactables
         {
 
 
-            var element = GetCurrentCellElement(driver, row);
+            var element = this.GetElement(driver,row, "");
             //var element = elements[row];
             element.Click();
 
 
-            var elementi = this.GetElement(driver, new string[] { "input" });
+            var elementi = this.GetElement(driver,row, new string[] { "input" });
             elementi.Click();
             elementi.ClearOnInput();
             elementi.TabOnInput(); ;
@@ -48,7 +48,7 @@ namespace RPSSeleniumProperties.Interactables
         public string GetSelected(int row,IWebDriver driver)
         {
 
-            var a = GetElements(driver, "a")[row];
+            var a = GetElement(driver,row, "a");
             var str = a.Text;
             return str;
 
@@ -64,7 +64,7 @@ namespace RPSSeleniumProperties.Interactables
             try
             {
                 
-                var a = GetElements(driver, "a")[row];
+                var a = GetElement(driver,row, "a");
                 if (a != null)
                 {
                     return true;
@@ -87,11 +87,11 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Select(int row, IWebDriver driver, int index)
         {
-            var element = GetCurrentCellElement(driver, row);
+            var element = this.GetElement(driver, row, "");
             //var element = elements[row];
             element.Click();
             //var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} k-icon.k-i-arrow-60-down")));
-            var comboarrow = this.GetElement(driver, " span.k-icon.k-i-arrow-60-down");
+            var comboarrow = this.GetElement(driver,row, " span.k-icon.k-i-arrow-60-down");
                 comboarrow.Click();
                 var main = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
                 Until(drv =>
@@ -130,11 +130,11 @@ namespace RPSSeleniumProperties.Interactables
         public T Write(int row,string text, IWebDriver driver)
         {
 
-            var cell = this.GetCurrentCellElement(driver, row);
+            var cell = this.GetElement(driver, row, "");
             cell.Click();
 
 
-                var element = this.GetElement(driver, new string[] { "input" });
+                var element = this.GetElement(driver,row, new string[] { "input" });
                  element.Click();
                 element.ClearOnInput();
                 element.WriteOnInput(text);
@@ -144,7 +144,7 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Exists(int row, IWebDriver driver)
         {
-            var cell = this.GetElements(driver, "")[row];
+            var cell = this.GetElement(driver,row, "");
             return this.View;
         }
         public T Exists(int row)
@@ -152,21 +152,10 @@ namespace RPSSeleniumProperties.Interactables
             var driver = this.WebDriver;
             return this.Exists(row,driver);
         }
-        private SeleniumWebElement GetCurrentCellElement(IWebDriver driver, int row)
-        {
-            CalculateCssSelector(row);
-            var element = this.GetElement(driver, "");
-
-
-            return element;
-        }
-        public void CalculateCssSelector(int row)
-        {
-            this.CSSSelector = OriginalCssSelector.Replace($".ag-row[role='row']", $".ag-row[role='row'][row-index='{row}']");
-        }
+        
     }
 
-    public class RPSGridEnumComboBox<T> : SeleniumInteractable<T>, IRPSGridComboBox<T> where T : class, IView
+    public class RPSGridEnumComboBox<T> : SeleniumInteractableOnGrid<T>, IRPSGridComboBox<T> where T : class, IView
     {
 
         public string OriginalCssSelector { get; set; }
@@ -182,12 +171,12 @@ namespace RPSSeleniumProperties.Interactables
         {
 
 
-            var element = GetCurrentCellElement(driver, row);
+            var element = this.GetElement(driver, row, "");
             //var element = elements[row];
             element.Click();
 
 
-            var elementi = this.GetElement(driver, new string[] { "input" });
+            var elementi = this.GetElement(driver,row, new string[] { "input" });
             elementi.Click();
             elementi.ClearOnInput();
             elementi.TabOnInput();
@@ -205,9 +194,9 @@ namespace RPSSeleniumProperties.Interactables
         }
         public string GetSelected(int row,IWebDriver driver)
         {
-            var cell = this.GetElements(driver, "")[row];
+            var cell = this.GetElement(driver,row, "");
             cell.Click();
-            var a = GetElement(driver, "input");
+            var a = GetElement(driver,row, "input");
             var str = a.GetValueOnInput();
             return str;
 
@@ -222,9 +211,9 @@ namespace RPSSeleniumProperties.Interactables
         {
             try
             {
-                var cell = this.GetElements(driver, "")[row];
+                var cell = this.GetElement(driver,row, "");
                 cell.Click();
-                var a = GetElement(driver, "input");
+                var a = GetElement(driver,row, "input");
                 var str = a.GetValueOnInput();
                 if (!string.IsNullOrEmpty(str))
                 {
@@ -248,11 +237,11 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Select(int row,IWebDriver driver, int index)
         {
-            var element = GetCurrentCellElement(driver, row);
+            var element = this.GetElement(driver, row, "");
             //var element = elements[row];
             element.Click();
             //var combo = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector} k-icon.k-i-arrow-60-down")));
-            var comboarrow = this.GetElement(driver, " span.k-icon.k-i-arrow-60-down");
+            var comboarrow = this.GetElement(driver,row, " span.k-icon.k-i-arrow-60-down");
             comboarrow.Click();
             var main = new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).
             Until(drv =>
@@ -287,11 +276,11 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Write(int row,string text, IWebDriver driver)
         {
-            var cell = this.GetCurrentCellElement(driver, row);// new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"{this.CSSSelector}")));
+            var cell = this.GetElement(driver, row, "");
             cell.Click();
 
 
-            var element = this.GetElement(driver, new string[] { "input" });
+            var element = this.GetElement(driver,row, new string[] { "input" });
             element.Click();
             element.ClearOnInput();
             element.WriteOnInput(text);
@@ -301,26 +290,14 @@ namespace RPSSeleniumProperties.Interactables
         }
         public T Exists(int row,IWebDriver driver)
         {
-            var cell = this.GetElements(driver, "")[row];
+            var cell = this.GetElement(driver,row, "");
             return this.View;
         }
         public T Exists(int row)
         {
             var driver = this.WebDriver;
             return this.Exists(row,driver);
-        }
-        private SeleniumWebElement GetCurrentCellElement(IWebDriver driver, int row)
-        {
-            CalculateCssSelector(row);
-            var element = this.GetElement(driver, "");
-
-
-            return element;
-        }
-        public void CalculateCssSelector(int row)
-        {
-            this.CSSSelector = OriginalCssSelector.Replace($".ag-row[role='row']", $".ag-row[role='row'][row-index='{row}']");
-        }
+        }       
 
     }
 }
