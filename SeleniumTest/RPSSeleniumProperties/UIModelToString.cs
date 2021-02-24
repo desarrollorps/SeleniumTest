@@ -52,6 +52,7 @@ namespace RPSSeleniumClassGenerator
         {
             if (model.UIComponents.Any(d => d.VMs.Any(v => v.MainModel != null)))
             {
+                
                 DirectoryInfo d = new DirectoryInfo(destfolder);
                 string fullpath = Path.Combine(destfolder, "UnitTest", model.Customer, model.Package, model.Service, $"{model.Name }.cs");
                 if (!File.Exists(fullpath))
@@ -65,6 +66,7 @@ namespace RPSSeleniumClassGenerator
                     /*if (model.UIComponents.Any(d => d.type.Contains("RPS.UI.Model.MainEntityViewDefinition")))
                     {*/
                     CRUDUnitTestVM vm = new CRUDUnitTestVM();
+                    vm.MainViewType = model.UIComponents[0].Name;
                     vm.FileNameNoExtension = model.Name;
                     vm.UsingToSeleniumGeneratedClasses = $"SeleniumGeneratedClasses.{model.Customer}.{model.Package}.Services.{model.Service}";
                     vm.Namespace = $"UnitTest.{model.Customer}.{model.Package}.Services.{model.Service}";
@@ -265,56 +267,67 @@ namespace RPSSeleniumClassGenerator
         public  TemplateObject EditorToGridTemplate(string gridID,PropertyEditor property, ComunicatorView view, RPSSeleniumProperties.TemplateGenerator.templates.Grids.CollectionEditorVM model)
         {
             string selector = $"#{gridID} .ag-row[role='row']{SeleniumInteractableOnGridConstants.RowIndexPatter} [col-id='c{property.vmProperty.Name }']";
-            switch (property.type)
+            if (property.vmProperty.IsMultiLine && property.type == "RPS.UI.Model.TextEditor, RPSUIModel")
             {
-                case "RPS.UI.Model.EmailEditor, RPSUIModel":
-                    return new RPSGridEmailTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
-                case "RPS.UI.Model.DecimalEditor, RPSUIModel":
-                case "RPS.UI.Model.AmountEditor, RPSUIModel":
-                case "RPS.UI.Model.PriceEditor, RPSUIModel":
-                case "RPS.UI.Model.QuantityEditor, RPSUIModel":
-                case "RPS.UI.Model.PercentageEditor, RPSUIModel":
-                case "RPS.UI.Model.IntegerEditor, RPSUIModel":
-                    return new RPSGridFormattedTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
-                case "RPS.UI.Model.TextEditor, RPSUIModel":
-                case "RPS.UI.Model.DateTimeEditor, RPSUIModel":
-                case "RPS.UI.Model.PasswordEditor, RPSUIModel":
-                case "RPS.UI.Model.LongEditor, RPSUIModel":
-                case "RPS.UI.Model.TimeEditor, RPSUIModel":
-                    
-                    return new RPSGridTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
-                case "RPS.UI.Model.Button, RPSUIModel":
-                    {
-                        if (property.vmProperty == null || property.vmProperty.VMToNavigate == null)
+                return new RPSGridMemoTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
+                
+            }
+            else
+            {
+                switch (property.type)
+                {
+                    case "RPS.UI.Model.EmailEditor, RPSUIModel":
+                        return new RPSGridEmailTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
+                    case "RPS.UI.Model.DecimalEditor, RPSUIModel":
+                    case "RPS.UI.Model.AmountEditor, RPSUIModel":
+                    case "RPS.UI.Model.PriceEditor, RPSUIModel":
+                    case "RPS.UI.Model.QuantityEditor, RPSUIModel":
+                    case "RPS.UI.Model.PercentageEditor, RPSUIModel":
+                    case "RPS.UI.Model.IntegerEditor, RPSUIModel":
+                        return new RPSGridFormattedTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };                    
+                        
+                    case "RPS.UI.Model.TextEditor, RPSUIModel":
+                    case "RPS.UI.Model.DateTimeEditor, RPSUIModel":
+                    case "RPS.UI.Model.PasswordEditor, RPSUIModel":
+                    case "RPS.UI.Model.LongEditor, RPSUIModel":
+                    case "RPS.UI.Model.TimeEditor, RPSUIModel":
+
+                        return new RPSGridTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
+
+
+                    case "RPS.UI.Model.Button, RPSUIModel":
                         {
-                            return new RPSGridButtonTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name) };
+                            if (property.vmProperty == null || property.vmProperty.VMToNavigate == null)
+                            {
+                                return new RPSGridButtonTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name) };
+                            }
+                            else
+                            {
+                                return new RPSGridButtonTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), NewViewProperty = property.vmProperty.VMToNavigate.View.Name, NewViewType = property.vmProperty.VMToNavigate.View.Name };
+                            }
                         }
-                        else
-                        {
-                            return new RPSGridButtonTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), NewViewProperty = property.vmProperty.VMToNavigate.View.Name, NewViewType = property.vmProperty.VMToNavigate.View.Name };
-                        }
-                    }
-                case "RPS.UI.Model.LookupEditor, RPSUIModel":
-                    return new RPSGridComboBoxTemplate { CssSelector =selector, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
-                case "RPS.UI.Model.EnumEditor, RPSUIModel":
-                case "RPS.UI.Model.OptionEditor, RPSUIModel":
-                case "RPS.UI.Model.TextComboEditor, RPSUIModel":
-                    return new RPSGridEnumComboBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
-                case "RPS.UI.Model.CheckBoxEditor, RPSUIModel":
-                   
-                 return new RPSGridCheckboxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
-                case "RPS.UI.Model.DurationEditor, RPSUIModel":
-                    return new RPSGridDurationTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
-                case "RPS.UI.Model.EntityDescriptor, RPSUIModel":
-                case "RPS.UI.Model.Label, RPSUIModel":
-                case "RPS.UI.Model.FormattedNumber, RPSUIModel":
-                case "RPS.UI.Model.IconEditor, RPSUIModel":
-                case "RPS.UI.Model.LookupDescriptor, RPSUIModel":
-                case "RPS.UI.Model.ImageEditor, RPSUIModel":
-                case "RPS.UI.Model.EntityStateEditor, RPSUIModel":
-                    return new IgnoredObjectTemplate();
-                default:
-                    return null;
+                    case "RPS.UI.Model.LookupEditor, RPSUIModel":
+                        return new RPSGridComboBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                    case "RPS.UI.Model.EnumEditor, RPSUIModel":
+                    case "RPS.UI.Model.OptionEditor, RPSUIModel":
+                    case "RPS.UI.Model.TextComboEditor, RPSUIModel":
+                        return new RPSGridEnumComboBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                    case "RPS.UI.Model.CheckBoxEditor, RPSUIModel":
+
+                        return new RPSGridCheckboxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = property.Name, Required = property.vmProperty.IsRequired };
+                    case "RPS.UI.Model.DurationEditor, RPSUIModel":
+                        return new RPSGridDurationTextBoxTemplate { CssSelector = selector, ViewType = view.Name, ObjectName = model.GetControlName(property.Name), Required = property.vmProperty.IsRequired };
+                    case "RPS.UI.Model.EntityDescriptor, RPSUIModel":
+                    case "RPS.UI.Model.Label, RPSUIModel":
+                    case "RPS.UI.Model.FormattedNumber, RPSUIModel":
+                    case "RPS.UI.Model.IconEditor, RPSUIModel":
+                    case "RPS.UI.Model.LookupDescriptor, RPSUIModel":
+                    case "RPS.UI.Model.ImageEditor, RPSUIModel":
+                    case "RPS.UI.Model.EntityStateEditor, RPSUIModel":
+                        return new IgnoredObjectTemplate();
+                    default:
+                        return null;
+                }
             }
         }
         public  List<TemplateObject> AddDefaultTemplateControls(ComunicatorView view)

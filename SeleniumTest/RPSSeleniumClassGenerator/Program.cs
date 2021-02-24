@@ -29,7 +29,7 @@ namespace RPSSeleniumClassGenerator
             services.OrderBy(d=>d).ToList().ForEach(d => Console.WriteLine(d));
             Dictionary<string, TimeSpan> duration = new Dictionary<string, TimeSpan>();
             SeleniumConfigToStrign configfile = new SeleniumConfigToStrign();
-            configfile.GenerateCS(Data.To);
+            configfile.GenerateCS(Data.To,Data.BaseUrl,Data.User,Data.Password,Data.CodCompany);
             
 
             downloader.DownloadModels();

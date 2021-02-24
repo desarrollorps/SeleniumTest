@@ -29,6 +29,12 @@ namespace RPSSeleniumProperties
                 Retry.Execute(() => { Element.Click(); }, new TimeSpan(0, 0, maxtime), new TimeSpan(0, 0, poolseconds));
             }
         }
+        public void MouseEnter(IWebDriver driver)
+        {
+            Actions actions = new Actions(driver);
+           
+            actions.MoveToElement(Element).Perform();
+        }
         public string Text { get { return Element.Text; } }
         public void TabOnInput()
         {

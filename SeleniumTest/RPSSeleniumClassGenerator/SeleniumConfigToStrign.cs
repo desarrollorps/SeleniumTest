@@ -10,7 +10,7 @@ namespace RPSSeleniumClassGenerator
 {
     public class SeleniumConfigToStrign
     {
-        public void GenerateCS(string path)
+        public void GenerateCS(string path, string url, string username, string password, string codcompany)
         {
             DirectoryInfo d = new DirectoryInfo(path);
             string fullpath = Path.Combine(d.FullName, "SeleniumConfig.cs");
@@ -19,7 +19,7 @@ namespace RPSSeleniumClassGenerator
                 Console.WriteLine("-------------------");
                 Console.WriteLine("Generating SeleniumConfig.cs");
                 Console.WriteLine("-------------------");
-                SeleniumConfigVM vm = new SeleniumConfigVM() { Namespace = d.Name };
+                SeleniumConfigVM vm = new SeleniumConfigVM() { Namespace = d.Name, CodCompany = codcompany, Password = password, User = username, Url = url };
                 SeleniumConfig file = new SeleniumConfig();
                 file.Model = vm;
                 var test = file.TransformText();

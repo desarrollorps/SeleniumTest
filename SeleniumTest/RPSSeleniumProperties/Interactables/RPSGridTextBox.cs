@@ -252,7 +252,69 @@ namespace RPSSeleniumProperties.Interactables
         }       
 
     }
-    
+
+    public class RPSGridMemoTextBox<T> : SeleniumInteractableOnGrid<T>, IRPSGridTextBox<T> where T : class, IView
+    {
+
+        public T Read(int row, out string value)
+        {
+            var driver = this.WebDriver;
+            return Read(row, driver, out value);
+
+        }
+        public T Read(int row, IWebDriver driver, out string value)
+        {
+            var element = this.GetElement(driver, row, new string[] { "div.rps-read-only-editor-container-in-grid" });
+            value = element.Text;
+            return this.View;
+
+        }
+
+        public T Write(int row, string text)
+        {
+
+            var driver = this.WebDriver;
+            this.Write(row, text, driver);
+            return this.View;
+
+        }
+        public T Write(int row, string text, IWebDriver driver)
+        {
+            var element = this.GetElement(driver, row, "div.rps-read-only-editor-container-in-grid");
+            //var element = elements[row];
+            element.Click();
+            var button = this.GetElement(driver, row, "div.rps-grid-hover-button");
+            button.Click();
+            //el elemento tiene dos input pero solo uno visible
+            /*var style = element.GetAttributeOnElemen("style");
+            //new WebDriverWait(driver, new TimeSpan(0, 0, RPSEnvironment.DefaultWaitSeconds)).Until(drv => drv.FindElement(By.CssSelector($"[id='{this.ID}'] input")));
+            if (string.IsNullOrEmpty(style))
+            {
+                element.Click();
+            }*/
+            //cogemos el otro
+            var element2 = BrowserElements.GetElementCSS(driver, "[id='read-only-editor-window'] div[contenteditable='true']");
+            //element2.Clear();
+            element2.Click();
+            element2.SelectTextOnInput();//Keys.Control + "a");
+            element2.WriteOnInput(text);
+            var accept = BrowserElements.GetElementCSS(driver, "[id='read-only-editor-window'] div.rps-button-button.rps-editor-editor.k-button[type='button']");
+            accept.Click();
+            return this.View;
+        }
+
+        public T Exists(int row, IWebDriver driver)
+        {
+            var element = this.GetElement(driver, row, new string[] { "div.rps-read-only-editor-container-in-grid" });
+            return this.View;
+        }
+        public T Exists(int row)
+        {
+            var driver = this.WebDriver;
+            return this.Exists(row, driver);
+        }
+    }
+
 
 
 }

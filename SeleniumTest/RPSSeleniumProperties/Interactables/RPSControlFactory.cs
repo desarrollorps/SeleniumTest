@@ -210,6 +210,21 @@ namespace RPSSeleniumProperties.Interactables
             view.ViewModel.Properties.Add(property);
             return control;
         }
+        public static IRPSGridTextBox<T> CreateRPSGridMemoTextBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
+        {
+            RPSGridMemoTextBox<T> control = new RPSGridMemoTextBox<T>();
+            control.ID = id;
+            control.CSSSelector = cssSelector;
+            control.XPathSelector = xpath;
+            control.View = view;
+            control.WebDriver = view.WebDriver;
+            var property = new ViewModelProperty { Type = Interfaces.viewmodels.ViewModelPropertyType.String, Required = required };
+            control.ViewModelProperty = property;
+
+            property.ViewModel = view.ViewModel;
+            view.ViewModel.Properties.Add(property);
+            return control;
+        }
         public static IRPSCheckbox<T> CreateRPSCheckBox<T>(string id, string cssSelector, string xpath, bool required, T view) where T : class, IView
         {
             RPSCheckbox<T> control = new RPSCheckbox<T>();

@@ -42,7 +42,7 @@ namespace RPSSeleniumClassGenerator
             return fullfilepath;
         }
         
-        public void Init()
+        public bool Init()
         {
             string baseUrl = this.BaseURL;
             if (clientHandler == null)
@@ -59,6 +59,8 @@ namespace RPSSeleniumClassGenerator
                 client.BaseAddress = new Uri(baseUrl);
                 Login(client);
             }
+            return loggedIn;
+            
         }
         public void End()
         {
@@ -142,6 +144,7 @@ namespace RPSSeleniumClassGenerator
                 }
             }
         }
+        bool loggedIn = false;
         private bool Login(HttpClient client)
         {
             string loginData = JsonConvert.SerializeObject(
@@ -161,10 +164,12 @@ namespace RPSSeleniumClassGenerator
             var response = client.PostAsync("api/Security/Session/action/RPSLogOn", content).Result;
             if (response.IsSuccessStatusCode)
             {
+                loggedIn = true;
                 return true;
             }
             else
             {
+                loggedIn = false;
                 return false;
             }
         }
@@ -173,6 +178,7 @@ namespace RPSSeleniumClassGenerator
             StringContent content = new StringContent(
             "", System.Text.Encoding.UTF8, "application/json");
             var response = client.PostAsync("api/Security/Session/action/LogOff", content).Result;
+            loggedIn = false;
             if (response.IsSuccessStatusCode)
             {
                 return true;

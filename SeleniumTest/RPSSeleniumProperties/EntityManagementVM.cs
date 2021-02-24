@@ -365,6 +365,7 @@ namespace RPSUIModelParser
             public string Name { get; set; }
             public Link ChildLink { get; set; }
             public State TargetState { get; set; }
+            public bool IsMultiLine { get; set; }
         public bool IsRequired { get; set; }
             [JsonIgnore]
             public ComunicatorViewModel VM { get; set; }

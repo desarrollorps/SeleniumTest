@@ -69,6 +69,22 @@ namespace RPSSeleniumProperties.TemplateGenerator
             return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridTextBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this.CurrentView);" };
         }
     }
+    public class RPSGridMemoTextBoxTemplate : TemplateObject
+    {
+        public RPSGridMemoTextBoxTemplate() : base()
+        {
+
+        }
+        public override string GenerateObjectDefinition()
+        {
+            return $"public IRPSGridTextBox<{ViewType}> {this.ObjectName} {{ get; set; }}";
+
+        }
+        public override List<string> GenerateObjectInitialization()
+        {
+            return new List<string> { $"{this.ObjectName} = RPSControlFactory.CreateRPSGridMemoTextBox<{ViewType}>(\"{ID}\",\"{CssSelector}\",\"{XpathSelector}\",{(Required ? "true" : "false")}, this.CurrentView);" };
+        }
+    }
     public class RPSFormattedTextBoxTemplate : TemplateObject
     {
         public RPSFormattedTextBoxTemplate() : base()

@@ -5,18 +5,25 @@ namespace <#= Model.Namespace #>
     public sealed class SeleniumConfig
     {
         public static SeleniumConfig Current = new SeleniumConfig();        
-        public string rpsurl = "http://localhost/RPSNextService/";
-        public string user = "admin";
-        public string password = "admin";
-        public string company = "001";
-        public bool Visible = true;
+        public string rpsurl = "<#= Model.Url #>";
+        public string user = "<#= Model.User #>";
+        public string password = "<#= Model.Password #>";
+        public string company = "<#= Model.CodCompany #>";
+        
         public SeleniumConfig()
         {            
             RPSEnvironment.RPSBaseURL = rpsurl;
             RPSEnvironment.DefaultUser = user;
             RPSEnvironment.DefaultPassword = password;
             RPSEnvironment.DefaultCodCompany = company;
-            RPSEnvironment.Visible = Visible;
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                RPSEnvironment.Visible = true;
+            }
+            else
+            {
+                RPSEnvironment.Visible = false;
+            }
         }
         ~SeleniumConfig()
         {

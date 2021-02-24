@@ -32,23 +32,52 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.SeleniumConfig
             
             #line default
             #line hidden
-            this.Write(@"
-{
-    public sealed class SeleniumConfig
-    {
-        public static SeleniumConfig Current = new SeleniumConfig();        
-        public string rpsurl = ""http://localhost/RPSNextService/"";
-        public string user = ""admin"";
-        public string password = ""admin"";
-        public string company = ""001"";
-        public bool Visible = true;
+            this.Write("\r\n{\r\n    public sealed class SeleniumConfig\r\n    {\r\n        public static Seleniu" +
+                    "mConfig Current = new SeleniumConfig();        \r\n        public string rpsurl = " +
+                    "\"");
+            
+            #line 8 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Url));
+            
+            #line default
+            #line hidden
+            this.Write("\";\r\n        public string user = \"");
+            
+            #line 9 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.User));
+            
+            #line default
+            #line hidden
+            this.Write("\";\r\n        public string password = \"");
+            
+            #line 10 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Password));
+            
+            #line default
+            #line hidden
+            this.Write("\";\r\n        public string company = \"");
+            
+            #line 11 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.CodCompany));
+            
+            #line default
+            #line hidden
+            this.Write(@""";
+        
         public SeleniumConfig()
         {            
             RPSEnvironment.RPSBaseURL = rpsurl;
             RPSEnvironment.DefaultUser = user;
             RPSEnvironment.DefaultPassword = password;
             RPSEnvironment.DefaultCodCompany = company;
-            RPSEnvironment.Visible = Visible;
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                RPSEnvironment.Visible = true;
+            }
+            else
+            {
+                RPSEnvironment.Visible = false;
+            }
         }
         ~SeleniumConfig()
         {

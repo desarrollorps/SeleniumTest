@@ -10,8 +10,9 @@ namespace <#= Model.Namespace #>
         public void New_UT()
         {
             var config = SeleniumConfig.Current;
-            using (var screen = new <#= Model.FileNameNoExtension #>())
+            using (var screen = new <#= Model.UsingToSeleniumGeneratedClasses #>.<#= Model.FileNameNoExtension #>.<#= Model.FileNameNoExtension #>())
             {
+                // screen.NavigateToScreen<<#= Model.MainViewType #>>();
                 throw new NotImplementedException();
             }
             
@@ -23,8 +24,9 @@ namespace <#= Model.Namespace #>
         public void Update_UT()
         {
             var config = SeleniumConfig.Current;
-            using (var screen = new <#= Model.FileNameNoExtension #>())
+            using (var screen = new <#= Model.UsingToSeleniumGeneratedClasses #>.<#= Model.FileNameNoExtension #>.<#= Model.FileNameNoExtension #>())
             {
+                // screen.NavigateToScreen<<#= Model.MainViewType #>>();
                 throw new NotImplementedException();
             }
 
@@ -36,8 +38,9 @@ namespace <#= Model.Namespace #>
         public void Delete_UT()
         {
             var config = SeleniumConfig.Current;
-            using (var screen = new <#= Model.FileNameNoExtension #>())
+            using (var screen = new <#= Model.UsingToSeleniumGeneratedClasses #>.<#= Model.FileNameNoExtension #>.<#= Model.FileNameNoExtension #>())
             {
+                // screen.NavigateToScreen<<#= Model.MainViewType #>>();
                 throw new NotImplementedException();
             }
         }
