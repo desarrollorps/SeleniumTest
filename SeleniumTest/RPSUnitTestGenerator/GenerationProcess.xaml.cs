@@ -86,6 +86,7 @@ namespace RPSUnitTestGenerator
 
                 WriteMessage("Generacion terminadad Ok");
                 errorList = ErrorManagement.Errors.ToList();
+                ErrorManagement.ToFile(@"U:\classgenerator.txt");
                 FilterErrorList(tbFilter.Text);
             });
         }

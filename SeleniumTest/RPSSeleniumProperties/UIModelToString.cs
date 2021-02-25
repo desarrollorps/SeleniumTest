@@ -258,6 +258,12 @@ namespace RPSSeleniumClassGenerator
                 case "RPS.UI.Model.IconEditor, RPSUIModel":
                 case "RPS.UI.Model.LookupDescriptor, RPSUIModel":
                 case "RPS.UI.Model.ImageEditor, RPSUIModel":
+                case "RPS.UI.Model.AddressEditor, RPSUIModel":
+                case "RPS.UI.Model.Wizards.WizardStepTemplate, RPSUIModel":
+                case "RPS.UI.Model.Wizards.WizardEditor, RPSUIModel":
+                case "RPS.UI.Model.AttachedDocumentsEditor, RPSUIModel":
+                case "RPS.UI.Model.FileUploader, RPSUIModel":
+                case "RPS.UI.Model.CustomEditor, RPSUIModel":
                     return new IgnoredObjectTemplate();
                 
                 default: 
@@ -324,6 +330,10 @@ namespace RPSSeleniumClassGenerator
                     case "RPS.UI.Model.LookupDescriptor, RPSUIModel":
                     case "RPS.UI.Model.ImageEditor, RPSUIModel":
                     case "RPS.UI.Model.EntityStateEditor, RPSUIModel":
+                    case "RPS.UI.Model.AddressEditor, RPSUIModel":
+                    case "RPS.UI.Model.ColorEditor, RPSUIModel":
+                    case "RPS.UI.Model.AttachedDocumentsEditor, RPSUIModel":
+                    case "RPS.UI.Model.CustomEditor, RPSUIModel":
                         return new IgnoredObjectTemplate();
                     default:
                         return null;
