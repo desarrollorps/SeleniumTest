@@ -9,12 +9,15 @@ namespace <#= Model.Namespace #>
         [Fact]        
         public void New_UT()
         {
+            /*
             var config = SeleniumConfig.Current;
             using (var screen = new <#= Model.UsingToSeleniumGeneratedClasses #>.<#= Model.FileNameNoExtension #>.<#= Model.FileNameNoExtension #>())
             {
-                // screen.NavigateToScreen<<#= Model.MainViewType #>>();
-                throw new NotImplementedException();
+                screen.NavigateToScreen<<#= Model.MainViewType #>>();
+                
             }
+            */
+            throw new NotImplementedException();
             
         }
     }
@@ -23,12 +26,15 @@ namespace <#= Model.Namespace #>
         [Fact]        
         public void Update_UT()
         {
+            /*
             var config = SeleniumConfig.Current;
             using (var screen = new <#= Model.UsingToSeleniumGeneratedClasses #>.<#= Model.FileNameNoExtension #>.<#= Model.FileNameNoExtension #>())
             {
-                // screen.NavigateToScreen<<#= Model.MainViewType #>>();
-                throw new NotImplementedException();
+                screen.NavigateToScreen<<#= Model.MainViewType #>>();
+                
             }
+            */
+            throw new NotImplementedException();
 
         }
     }
@@ -37,12 +43,15 @@ namespace <#= Model.Namespace #>
         [Fact]        
         public void Delete_UT()
         {
+            /*
             var config = SeleniumConfig.Current;
             using (var screen = new <#= Model.UsingToSeleniumGeneratedClasses #>.<#= Model.FileNameNoExtension #>.<#= Model.FileNameNoExtension #>())
             {
-                // screen.NavigateToScreen<<#= Model.MainViewType #>>();
-                throw new NotImplementedException();
+                screen.NavigateToScreen<<#= Model.MainViewType #>>();
+                
             }
+            */
+            throw new NotImplementedException();
         }
     }
 }
