@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using RPSSeleniumProperties.Constants;
 using RPSSeleniumProperties.Interactables;
 using RPSSeleniumProperties.Interfaces;
 using System;
@@ -15,9 +16,9 @@ namespace RPSSeleniumProperties
        
         public Loggin()
         {
-            User = new RPSTextBox<Loggin>() { CSSSelector = "[id='4641df06-8908-4cf1-a249-5f42988b5b83']" };
-            Password = new RPSTextBox<Loggin>() { CSSSelector = "[id='54213cb3-3cbd-40dc-a533-e7a8809b64ca']" };
-            Login = new RPSButton<Loggin>() { ID = "8bf1080a-f56a-45f4-8771-2647825f082a" };
+            User = new RPSTextBox<Loggin>() { CSSSelector = $"[id='{Identifiers.UserLoginTextBox}']" };
+            Password = new RPSTextBox<Loggin>() { CSSSelector = $"[id='{Identifiers.PasswordLoginTextBox}']" };
+            Login = new RPSButton<Loggin>() { ID = Identifiers.IniciarSessionLoginButton};
             
         }
     }
