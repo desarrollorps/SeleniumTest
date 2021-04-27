@@ -8,8 +8,8 @@ namespace RPSSeleniumProperties.Constants
 {
     public static class Identifiers
     {
-        public const string UserLoginTextBox = "e6f3c1a3-f073-4f1f-7fe0-5e4175dea227";
-        public const string PasswordLoginTextBox = "94556ad1-9bb2-c6c5-9613-a80228220aac";
-        public const string IniciarSessionLoginButton = "eefee218-43c0-d916-80c7-7b94a0620aa6";
+        public const string UserLoginTextBox = "4641df06-8908-4cf1-a249-5f42988b5b83";
+        public const string PasswordLoginTextBox = "54213cb3-3cbd-40dc-a533-e7a8809b64ca";
+        public const string IniciarSessionLoginButton = "8bf1080a-f56a-45f4-8771-2647825f082a";
     }
 }
