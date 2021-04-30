@@ -23,7 +23,7 @@ namespace RPSSeleniumProperties.Interactables
             var elements = GetElements(driver, "rps-descriptor-view a h3,h4");
             foreach(var el in elements)
             {
-                if(el.Text.ToUpper() == text)
+                if(el.Text.ToUpper() == text.ToUpper())
                 {
                     el.Click();
                     return this.NewView;
