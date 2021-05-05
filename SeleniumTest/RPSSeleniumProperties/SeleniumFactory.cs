@@ -28,8 +28,11 @@ namespace SeleniumHelper
                     options.AddArgument("--whitelisted-ips");
                     options.AddArgument("--window-size=1420,1080");
                     options.AddArgument("--disable-gpu");
+                    options.AddArgument("--verbose");
+                    options.AddArgument("--disable-dev-shm-usage");
+
                 /*}*/
-                
+
                 // options.AddArgument("--no-sandbox");
                 if (!string.IsNullOrEmpty(SeleniumFactoryConfig.ChromeDriverPath))
                 {
