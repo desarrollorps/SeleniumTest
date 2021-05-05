@@ -19,15 +19,16 @@ namespace SeleniumHelper
             if (type == DriverType.Chrome)
             {
                 var options = new ChromeOptions();
-                if (!RPSSeleniumProperties.RPSEnvironment.Visible)
-                {
+                /*if (!RPSSeleniumProperties.RPSEnvironment.Visible)
+                {*/
                     options.AddArgument("--headless");
                     options.AddArgument("--no-sandbox");
                     //options.AddArgument("--disable-dev-shm-usage");
                     options.AddArgument("--allowed-ips='0.0.0.0'");
+                    options.AddArgument("--whitelisted-ips");
                     options.AddArgument("--window-size=1420,1080");
                     options.AddArgument("--disable-gpu");
-                }
+                /*}*/
                 
                 // options.AddArgument("--no-sandbox");
                 if (!string.IsNullOrEmpty(SeleniumFactoryConfig.ChromeDriverPath))
