@@ -32,7 +32,7 @@ namespace SeleniumHelper
                     options.AddArgument("--disable-dev-shm-usage");
 
                 /*}*/
-
+                System.Environment.SetEnvironmentVariable("webdriver.chrome.whitelistedIps", "");
                 // options.AddArgument("--no-sandbox");
                 if (!string.IsNullOrEmpty(SeleniumFactoryConfig.ChromeDriverPath))
                 {
