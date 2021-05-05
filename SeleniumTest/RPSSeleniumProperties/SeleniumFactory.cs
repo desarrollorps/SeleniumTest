@@ -25,7 +25,7 @@ namespace SeleniumHelper
                 }
                 options.AddArgument("--no-sandbox");
                 options.AddArgument("--disable-dev-shm-usage");
-                options.AddArgument("--whitelisted-ips='0.0.0.0'");
+                options.AddArgument("--whitelisted-ips=''");
                 // options.AddArgument("--no-sandbox");
                 if (!string.IsNullOrEmpty(SeleniumFactoryConfig.ChromeDriverPath))
                 {
