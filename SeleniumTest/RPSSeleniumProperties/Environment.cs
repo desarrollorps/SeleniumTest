@@ -8,7 +8,7 @@ namespace RPSSeleniumProperties
     {
         static RPSEnvironment()
         {
-            DefaultWaitSeconds = 60;
+            DefaultWaitSeconds = 90;
             Visible = true;
         }
 

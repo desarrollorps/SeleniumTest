@@ -34,8 +34,13 @@ namespace RPSSeleniumProperties
             Actions actions = new Actions(driver);
            
             actions.MoveToElement(Element).Perform();
+        }        
+        public string Text { get 
+            {
+                return this.Element.GetAttribute("innerText");
+                
+            } 
         }
-        public string Text { get { return Element.Text; } }
         public void TabOnInput()
         {
             Element.SendKeys(Keys.Tab);

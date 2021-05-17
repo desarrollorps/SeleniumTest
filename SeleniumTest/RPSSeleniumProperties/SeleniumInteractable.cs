@@ -246,6 +246,7 @@ namespace RPSSeleniumProperties
             //drv => drv.FindElement(By.XPath(xpath)));
             return new SeleniumWebElement(w);
         }
+       
         public static ReadOnlyCollection<SeleniumWebElement> GetElementsCSS(IWebDriver driver, string cssselector)
         {
             var col = new WebDriverWait(driver,

@@ -32,66 +32,72 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.SeleniumConfig
             
             #line default
             #line hidden
-            this.Write("\r\n{\r\n    public sealed class SeleniumConfig\r\n    {\r\n        public static Seleniu" +
-                    "mConfig Current = new SeleniumConfig();        \r\n        public string rpsurl = " +
-                    "\"");
+            this.Write(@"
+{
+    [Collection(""BaseTest"")]
+    public class BaseTest : IDisposable
+    {
+        public void Dispose()
+        {
+           
+        }
+    }
+
+    public sealed class SeleniumConfig
+    {
+        public static SeleniumConfig Current = new SeleniumConfig();        
+        public string rpsurl = """);
             
-            #line 8 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
+            #line 17 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Url));
             
             #line default
             #line hidden
             this.Write("\";\r\n        public string user = \"");
             
-            #line 9 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
+            #line 18 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.User));
             
             #line default
             #line hidden
             this.Write("\";\r\n        public string password = \"");
             
-            #line 10 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
+            #line 19 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Password));
             
             #line default
             #line hidden
             this.Write("\";\r\n        public string company = \"");
             
-            #line 11 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
+            #line 20 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.CodCompany));
             
             #line default
             #line hidden
-            this.Write(@""";
-        
-        public SeleniumConfig()
-        {            
-            RPSEnvironment.RPSBaseURL = rpsurl;
-            RPSEnvironment.DefaultUser = user;
-            RPSEnvironment.DefaultPassword = password;
-            RPSEnvironment.DefaultCodCompany = company;
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                RPSEnvironment.Visible = true;
-            }
-            else
-            {
-                RPSEnvironment.Visible = false;
-            }
-        }
-        ~SeleniumConfig()
-        {
-            Dispose();
-        }
-
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-
-            // Run at end
-        }
-    }
-}");
+            this.Write("\";\r\n        \r\n        public SeleniumConfig()\r\n        {            \r\n           " +
+                    " RPSEnvironment.RPSBaseURL = rpsurl;\r\n            RPSEnvironment.DefaultUser = u" +
+                    "ser;\r\n            RPSEnvironment.DefaultPassword = password;\r\n            RPSEnv" +
+                    "ironment.DefaultCodCompany = company;\r\n            if (System.Diagnostics.Debugg" +
+                    "er.IsAttached)\r\n            {\r\n                RPSEnvironment.Visible = true;\r\n " +
+                    "           }\r\n            else\r\n            {\r\n                RPSEnvironment.Vi" +
+                    "sible = false;\r\n            }\r\n             /*Launch a query to start environmen" +
+                    "t*/\r\n            RPSHealthCheck();\r\n        }\r\n\r\n        public void RPSHealthCh" +
+                    "eck()\r\n        {\r\n            \r\n            using (var client = new HttpClient()" +
+                    ")\r\n            {\r\n                var webRequest = new HttpRequestMessage(HttpMe" +
+                    "thod.Get, rpsurl + \"status\");\r\n                client.Timeout = new TimeSpan(0, " +
+                    "5, 0);\r\n\r\n                var response = client.Send(webRequest);\r\n             " +
+                    "   if (response.IsSuccessStatusCode)\r\n                {\r\n                    usi" +
+                    "ng (var reader = new StreamReader(response.Content.ReadAsStream()))\r\n           " +
+                    "         {\r\n                        string text = reader.ReadToEnd();\r\n         " +
+                    "               if (!text.Contains(\"\\\"IsRunning\\\":true\"))\r\n                      " +
+                    "  {\r\n                            throw new Exception($\"Sorry, RPS at {rpsurl} do" +
+                    "es not have the expected status:{text}\");\r\n                        }\r\n          " +
+                    "          }\r\n\r\n                }\r\n                else\r\n                {\r\n\r\n   " +
+                    "                 throw new Exception($\"Sorry, RPS at {rpsurl} is not ready statu" +
+                    "scode:{response.StatusCode}\");\r\n                }\r\n            }\r\n\r\n            " +
+                    "\r\n        }\r\n\r\n        ~SeleniumConfig()\r\n        {\r\n            Dispose();\r\n   " +
+                    "     }\r\n\r\n        public void Dispose()\r\n        {\r\n            GC.SuppressFinal" +
+                    "ize(this);\r\n\r\n            // Run at end\r\n        }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

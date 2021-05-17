@@ -60,9 +60,9 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.UnitTest
             
             #line default
             #line hidden
-            this.Write("_New\r\n    {\r\n        [Fact]        \r\n        public void New_UT()\r\n        {\r\n   " +
-                    "         /*\r\n            var config = SeleniumConfig.Current;\r\n            using" +
-                    " (var screen = new ");
+            this.Write("_New: BaseTest\r\n    {\r\n        [Fact]        \r\n        public void New_UT()\r\n    " +
+                    "    {\r\n            /*\r\n            var config = SeleniumConfig.Current;\r\n       " +
+                    "     using (var screen = new ");
             
             #line 14 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\UnitTest\CRUDUnitTest.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UsingToSeleniumGeneratedClasses));
@@ -98,9 +98,9 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.UnitTest
             
             #line default
             #line hidden
-            this.Write("_Update\r\n    {\r\n        [Fact]        \r\n        public void Update_UT()\r\n        " +
-                    "{\r\n            /*\r\n            var config = SeleniumConfig.Current;\r\n           " +
-                    " using (var screen = new ");
+            this.Write("_Update: BaseTest\r\n    {\r\n        [Fact]        \r\n        public void Update_UT()" +
+                    "\r\n        {\r\n            /*\r\n            var config = SeleniumConfig.Current;\r\n " +
+                    "           using (var screen = new ");
             
             #line 31 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\UnitTest\CRUDUnitTest.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UsingToSeleniumGeneratedClasses));
@@ -136,9 +136,9 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.UnitTest
             
             #line default
             #line hidden
-            this.Write("_Delete\r\n    {\r\n        [Fact]        \r\n        public void Delete_UT()\r\n        " +
-                    "{\r\n            /*\r\n            var config = SeleniumConfig.Current;\r\n           " +
-                    " using (var screen = new ");
+            this.Write("_Delete: BaseTest\r\n    {\r\n        [Fact]        \r\n        public void Delete_UT()" +
+                    "\r\n        {\r\n            /*\r\n            var config = SeleniumConfig.Current;\r\n " +
+                    "           using (var screen = new ");
             
             #line 48 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\UnitTest\CRUDUnitTest.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UsingToSeleniumGeneratedClasses));

@@ -2,6 +2,15 @@
 using System;
 namespace <#= Model.Namespace #>
 {
+    [Collection("BaseTest")]
+    public class BaseTest : IDisposable
+    {
+        public void Dispose()
+        {
+           
+        }
+    }
+
     public sealed class SeleniumConfig
     {
         public static SeleniumConfig Current = new SeleniumConfig();        
@@ -24,7 +33,41 @@ namespace <#= Model.Namespace #>
             {
                 RPSEnvironment.Visible = false;
             }
+             /*Launch a query to start environment*/
+            RPSHealthCheck();
         }
+
+        public void RPSHealthCheck()
+        {
+            
+            using (var client = new HttpClient())
+            {
+                var webRequest = new HttpRequestMessage(HttpMethod.Get, rpsurl + "status");
+                client.Timeout = new TimeSpan(0, 5, 0);
+
+                var response = client.Send(webRequest);
+                if (response.IsSuccessStatusCode)
+                {
+                    using (var reader = new StreamReader(response.Content.ReadAsStream()))
+                    {
+                        string text = reader.ReadToEnd();
+                        if (!text.Contains("\"IsRunning\":true"))
+                        {
+                            throw new Exception($"Sorry, RPS at {rpsurl} does not have the expected status:{text}");
+                        }
+                    }
+
+                }
+                else
+                {
+
+                    throw new Exception($"Sorry, RPS at {rpsurl} is not ready statuscode:{response.StatusCode}");
+                }
+            }
+
+            
+        }
+
         ~SeleniumConfig()
         {
             Dispose();

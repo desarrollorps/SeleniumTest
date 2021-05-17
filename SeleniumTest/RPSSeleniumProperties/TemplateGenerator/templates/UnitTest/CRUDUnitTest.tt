@@ -4,7 +4,7 @@ using System;
 using <#= Model.UsingToSeleniumGeneratedClasses #>.<#= Model.FileNameNoExtension #> ;
 namespace <#= Model.Namespace #>
 {
-    public class <#= Model.FileNameNoExtension #>_New
+    public class <#= Model.FileNameNoExtension #>_New: BaseTest
     {
         [Fact]        
         public void New_UT()
@@ -21,7 +21,7 @@ namespace <#= Model.Namespace #>
             
         }
     }
-    public class <#= Model.FileNameNoExtension #>_Update
+    public class <#= Model.FileNameNoExtension #>_Update: BaseTest
     {
         [Fact]        
         public void Update_UT()
@@ -38,7 +38,7 @@ namespace <#= Model.Namespace #>
 
         }
     }
-    public class <#= Model.FileNameNoExtension #>_Delete
+    public class <#= Model.FileNameNoExtension #>_Delete: BaseTest
     {
         [Fact]        
         public void Delete_UT()

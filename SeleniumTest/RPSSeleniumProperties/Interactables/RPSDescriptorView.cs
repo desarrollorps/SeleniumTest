@@ -23,13 +23,15 @@ namespace RPSSeleniumProperties.Interactables
             var elements = GetElements(driver, "rps-descriptor-view a h3,h4");
             foreach(var el in elements)
             {
-                if(el.Text.ToUpper() == text.ToUpper())
+                
+                var txt = el.Text;
+                if (txt.ToUpper().Trim() == text.ToUpper().Trim())
                 {
                     el.Click();
                     return this.NewView;
                 }
             }
-            return null;
+            throw new Exception($"No element found in descriptor view for '{text}'");
             
         }
 

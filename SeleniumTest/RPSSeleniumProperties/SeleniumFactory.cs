@@ -26,13 +26,13 @@ namespace SeleniumHelper
                     //options.AddArgument("--disable-dev-shm-usage");
                     options.AddArgument("--allowed-ips='0.0.0.0'");
                     options.AddArgument("--whitelisted-ips");
-                    options.AddArgument("--window-size=1420,1080");
-                    options.AddArgument("--disable-gpu");
+                    //options.AddArgument("--window-size=1420,1080");
+                   // options.AddArgument("--disable-gpu");
                     options.AddArgument("--verbose");
-                    options.AddArgument("--disable-dev-shm-usage");
+                    //options.AddArgument("--disable-dev-shm-usage");
 
                 /*}*/
-                System.Environment.SetEnvironmentVariable("webdriver.chrome.whitelistedIps", "");
+                //System.Environment.SetEnvironmentVariable("webdriver.chrome.whitelistedIps", "");
                 // options.AddArgument("--no-sandbox");
                 if (!string.IsNullOrEmpty(SeleniumFactoryConfig.ChromeDriverPath))
                 {
