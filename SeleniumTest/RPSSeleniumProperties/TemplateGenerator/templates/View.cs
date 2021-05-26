@@ -24,6 +24,11 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.EntityMaintenance
         public string GetControlName(string name)
         {
             name = String.Concat(name.Where(c => !Char.IsWhiteSpace(c)));
+            List<string> invalidcharacters = new List<string> { "`", "'","´" };
+            foreach ( var c in invalidcharacters)
+            {
+                name = name.Replace(c,"" );
+            }
             List<string> invalidstrings = new List<string> { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "Screen" };
             if (invalidstrings.Any(d=>name.StartsWith(d)))
             {
