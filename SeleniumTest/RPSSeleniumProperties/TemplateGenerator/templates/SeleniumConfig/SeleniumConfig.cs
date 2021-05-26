@@ -25,9 +25,10 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.SeleniumConfig
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using RPSSeleniumProperties;\r\nusing System;\r\nnamespace ");
+            this.Write("using RPSSeleniumProperties;\r\nusing System;\r\nusing System.IO;\r\nusing System.Net.H" +
+                    "ttp;\r\nusing Xunit;\r\nnamespace ");
             
-            #line 3 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
+            #line 6 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Namespace));
             
             #line default
@@ -48,28 +49,28 @@ namespace RPSSeleniumProperties.TemplateGenerator.templates.SeleniumConfig
         public static SeleniumConfig Current = new SeleniumConfig();        
         public string rpsurl = """);
             
-            #line 17 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
+            #line 20 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Url));
             
             #line default
             #line hidden
             this.Write("\";\r\n        public string user = \"");
             
-            #line 18 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
+            #line 21 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.User));
             
             #line default
             #line hidden
             this.Write("\";\r\n        public string password = \"");
             
-            #line 19 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
+            #line 22 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Password));
             
             #line default
             #line hidden
             this.Write("\";\r\n        public string company = \"");
             
-            #line 20 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
+            #line 23 "D:\BasoaCustomizationsGitHub\SeleniumTest\SeleniumTest\RPSSeleniumProperties\TemplateGenerator\templates\SeleniumConfig\SeleniumConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.CodCompany));
             
             #line default
